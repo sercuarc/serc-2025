@@ -1,0 +1,26 @@
+{
+	"editor.formatOnSave": true,
+	"html.format.wrapAttributes": "auto",
+	"html.format.wrapLineLength": 0,
+	"phpsab.standard": "WordPress",
+	"phpsab.snifferArguments": [ "--ignore=build/*" ],
+	"[css]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.insertSpaces": false,
+		"editor.tabSize": 2
+	},
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features",
+		"editor.insertSpaces": false,
+		"editor.tabSize": 2
+	},
+	"[php]": {
+		"editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+		"editor.insertSpaces": false,
+		"editor.tabSize": 2
+	},
+	"search.exclude": {
+		"**.min.css": true,
+		"**.min.js": true
+	}
+}

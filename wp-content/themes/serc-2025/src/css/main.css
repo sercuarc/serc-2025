@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+a {
+  @apply text-blue-500 hover:text-orange-500;
+}
