@@ -1,24 +1,29 @@
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
-import path from "path";
 
-const themeDir = path.resolve(__dirname, "wp-content/themes/serc-2025");
+const root = "wp-content/themes/serc-2025/src";
 
 export default defineConfig({
+  root,
+  server: {
+    host: true,
+    origin: "http://localhost:5173",
+    cors: true,
+  },
   plugins: [tailwindcss()],
   build: {
-    outDir: `${themeDir}/dist/`,
+    outDir: `../dist`,
     emptyOutDir: true,
     manifest: "manifest.json",
     rollupOptions: {
       input: {
-        main: `${themeDir}/src/js/main.js`,
+        main: `/js/main.js`,
       },
     },
   },
   resolve: {
     alias: {
-      "@": `${themeDir}/src`,
+      "@": root,
     },
   },
 });

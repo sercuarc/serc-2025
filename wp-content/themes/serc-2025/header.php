@@ -7,9 +7,9 @@
 	<?php wp_head(); ?>
 </head>
 
-<body class="m-4">
+<body class="m-4 bg-slate-100 text-slate-800">
 
-	<nav class="bg-gray-200 p-4 mb-8">
+	<nav class="bg-white p-4 mb-8">
 		<ul>
 			<li><a href="/">Home</a></li>
 			<li><a href="/2025">Archive</a></li>

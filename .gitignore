@@ -5,6 +5,7 @@ ddev-wp-setup-script
 log
 node_modules
 vendor
+dist
 
 # IGNORE WORDPRESS CORE FILES
 wp-admin

@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@source "../../**/*.php";
+@source "../../**/*.js";
 
 a {
   @apply text-blue-500 hover:text-orange-500;
