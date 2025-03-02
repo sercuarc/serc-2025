@@ -3,5 +3,5 @@
 @source "../../**/*.js";
 
 a {
-  @apply text-blue-500 hover:text-orange-500;
+  @apply text-red-700 hover:text-red-900;
 }

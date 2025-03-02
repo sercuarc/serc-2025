@@ -7,18 +7,13 @@
 	<?php wp_head(); ?>
 </head>
 
-<body class="m-4 bg-slate-100 text-slate-800">
+<body class="m-8 text-slate-800">
 
-	<nav class="bg-white p-4 mb-8">
-		<ul>
+	<nav class="bg-gray-100 rounded-lg p-4 mb-8">
+		<ul class="flex gap-8 font-bold">
 			<li><a href="/">Home</a></li>
 			<li><a href="/2025">Archive</a></li>
 			<li><a href="/sample-page">Sample Page</a></li>
-			<li>
-				<form action="/">
-					<input type="text" name="s" placeholder="Search" />
-					<button type="submit" style="display: none">Submit</button>
-				</form>
-			</li>
+			<li><a href="/search">Search SERC</a></li>
 		</ul>
 	</nav>

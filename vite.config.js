@@ -18,6 +18,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: `/js/main.js`,
+        search: `/js/search.js`,
       },
     },
   },
