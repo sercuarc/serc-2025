@@ -12,6 +12,7 @@
 
 require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 
+require_once get_template_directory() . '/functions/admin.php';
 require_once get_template_directory() . '/functions/assets.php';
 require_once get_template_directory() . '/functions/routes.php';
 require_once get_template_directory() . '/functions/api.php';
