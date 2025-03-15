@@ -7,16 +7,20 @@
 
 <?php
 
+require_once 'SercHelpers.php';
+
 function serc_get_posts()
 {
 	$posts = array_map(function ($post) {
+		$excerpt = $post->post_excerpt;
 		return [
-			'author' => get_the_author_meta('display_name', $post->post_author),
 			'content' => str_replace(["\n", "\r"], '', strip_tags($post->post_content)),
-			'date' => get_the_date('Y-m-d', $post->ID),
+			'date_formatted' => get_the_date('F j, Y', $post->ID),
+			'date_unix' => get_the_date('U', $post->ID),
 			'excerpt' => $post->post_excerpt,
 			'id' => 'wp-' . $post->post_type . '-' . $post->ID,
 			'post_type' => $post->post_type,
+			'thumbnail' => get_the_post_thumbnail_url($post->ID),
 			'title' => $post->post_title,
 			'url' => get_permalink($post->ID),
 		];
@@ -29,22 +33,36 @@ function serc_get_events()
 {
 	$posts = array_map(function ($post) {
 
-		$start_date = get_post_meta($post->ID, '_EventStartDate', true);
-		$end_date = get_post_meta($post->ID, '_EventEndDate', true);
+		// check if event is all day
+		$isAllDay = get_post_meta($post->ID, '_EventAllDay', true);
+		$start_date_unix = date('U', strtotime(get_post_meta($post->ID, '_EventStartDate', true)));
+		$end_date_unix = date('U', strtotime(get_post_meta($post->ID, '_EventEndDate', true)));
+		$date_formatted = SercHelpers::formatEventDates($start_date_unix, $end_date_unix, $isAllDay);
+		$excerpt = $post->post_excerpt;
+		$venue = tribe_get_venue($post->ID);
 
 		return [
 			'content' => str_replace(["\n", "\r"], '', strip_tags($post->post_content)),
-			'date' => get_the_date('Y-m-d', $post->ID),
-			'start_date' => date('Y-m-d H:i', strtotime($start_date)),
-			'end_date' => date('Y-m-d H:i', strtotime($end_date)),
+			'date_formatted' => $date_formatted,
+			'end_date_unix' => $end_date_unix,
 			'excerpt' => $post->post_excerpt,
 			'id' => 'wp-' . $post->post_type . '-' . $post->ID,
+			'location' => ! $venue ? null : [
+				'address' => tribe_get_address($post->ID),
+				'city' => tribe_get_city($post->ID),
+				'coordinates' => tribe_get_coordinates($post->ID),
+				'country' => tribe_get_country($post->ID),
+				'stateprovince' => tribe_get_stateprovince($post->ID),
+				'zip' => tribe_get_zip($post->ID),
+			],
 			'post_type' => $post->post_type,
+			'start_date_unix' => $start_date_unix,
+			'thumbnail' => get_the_post_thumbnail_url($post->ID),
 			'title' => $post->post_title,
 			'url' => get_permalink($post->ID),
-			'venue' => tribe_get_venue($post->ID),
+			'venue' => $venue,
 		];
-	}, get_posts(['numberposts' => -1, 'post_type' => 'tribe_events']));
+	}, tribe_get_events(['posts_per_page' => -1, 'eventDisplay' => 'all']));
 
 	return new WP_REST_Response($posts, 200);
 }
