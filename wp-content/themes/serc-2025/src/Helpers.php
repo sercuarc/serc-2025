@@ -4,7 +4,11 @@
  * SERC Theme Helpers
  */
 
-class SercHelpers
+namespace Serc2025;
+
+use DateTime;
+
+class Helpers
 {
 	public static function formatEventDates($start_date, $end_date, $isAllDay)
 	{

@@ -7,7 +7,7 @@
 
 <?php
 
-require_once 'SercHelpers.php';
+use Serc2025\Helpers;
 
 function serc_get_posts()
 {
@@ -37,7 +37,7 @@ function serc_get_events()
 		$isAllDay = get_post_meta($post->ID, '_EventAllDay', true);
 		$start_date_unix = date('U', strtotime(get_post_meta($post->ID, '_EventStartDate', true)));
 		$end_date_unix = date('U', strtotime(get_post_meta($post->ID, '_EventEndDate', true)));
-		$date_formatted = SercHelpers::formatEventDates($start_date_unix, $end_date_unix, $isAllDay);
+		$date_formatted = Helpers::formatEventDates($start_date_unix, $end_date_unix, $isAllDay);
 		$excerpt = $post->post_excerpt;
 		$venue = tribe_get_venue($post->ID);
 

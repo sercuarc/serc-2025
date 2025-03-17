@@ -4,7 +4,7 @@
  * Theme Routes
  * 
  * Author: Kirk Pettinga (Studio Lekker)
- * Since: 1.0
+ * Since: 0.1.0
  */
 
 function serc_custom_routes()

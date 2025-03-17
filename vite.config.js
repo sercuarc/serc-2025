@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 
-const root = "wp-content/themes/serc-2025/src";
+const root = "wp-content/themes/serc-2025/vite";
 
 export default defineConfig({
   root,
