@@ -1,0 +1,63 @@
+@utility border-subtle {
+  border-color: var(--color-warm-neutral-200);
+}
+@utility border-normal {
+  border-color: var(--color-warm-neutral-300);
+}
+@utility border-strong {
+  border-color: var(--color-warm-neutral-400);
+}
+@utility text-h1 {
+  @apply font-oswald;
+  font-size: 4rem;
+  line-height: 1.25;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+@utility text-h2 {
+  @apply font-oswald;
+  font-size: 3rem;
+  line-height: 1.333;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+@utility text-h3 {
+  @apply font-inter;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.125;
+}
+@utility text-h4 {
+  @apply font-inter;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+@utility text-h5 {
+  @apply font-inter;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+@utility text-h6 {
+  @apply font-inter;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+@utility text-title-1 {
+  @apply font-oswald;
+  font-size: 2.5rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+@utility text-title-2 {
+  @apply font-oswald;
+  font-size: 2rem;
+  line-height: 1.5;
+  text-transform: uppercase;
+  font-weight: 600;
+}

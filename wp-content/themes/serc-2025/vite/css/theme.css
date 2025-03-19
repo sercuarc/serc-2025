@@ -137,8 +137,8 @@
   --color-info-light: var(--color-blue-100);
 
   --color-light-main: var(--color-white);
-  --color-light-secondary: var(--color-warm-neutral-50);
-  --color-light-tertiary: var(--color-warm-neutral-100);
+  --color-light-secondary: #fbf9f9;
+  --color-light-tertiary: $f5f3f3;
 
   --color-dark-main: var(--color-gray-950);
   --color-dark-secondary: var(--color-gray-900);
@@ -155,14 +155,4 @@
   --color-dark-surface-normal: var(--color-warm-neutral-100);
   --color-dark-surface-subtle: var(--color-warm-neutral-200);
   --color-dark-surface-disabled: var(--color-warm-neutral-300);
-}
-
-@utility border-subtle {
-  border-color: var(--color-warm-neutral-200);
-}
-@utility border-normal {
-  border-color: var(--color-warm-neutral-300);
-}
-@utility border-strong {
-  border-color: var(--color-warm-neutral-400);
 }
