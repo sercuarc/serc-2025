@@ -9,10 +9,6 @@
 
 <main class="container flex flex-col gap-20">
 
-	<pre>
-		<?php var_dump($_SERVER); ?>
-	</pre>
-
 	<section id="text-fields" class="flex flex-col gap-8">
 		<h1 class="text-title-2 text-gray-300">Text Fields </h1>
 		<div class="flex items-start gap-12 ">
@@ -21,13 +17,11 @@
 				<input type="text" name="example" id="example" value="Default Field" />
 				<span class="hint">.field.field-text</span>
 			</div>
-			<div class="field field-text has-error w-full ">
-				<label class="label" for="example">Error Field</label>
+			<div class="field field-text has-error w-full">
+				<label class="label" for="example">Error Field 1</label>
 				<div class="relative">
 					<input type="text" name="example" id="example" value="Error Field">
-					<svg class="icon">
-						<?php echo serc_svg('exclamation-circle'); ?>
-					</svg>
+					<?php serc_svg("exclamation-circle"); ?>
 				</div>
 				<span class="hint">.field.field-text.has-error</span>
 			</div>
@@ -35,7 +29,7 @@
 				<label class="label" for="example">Disabled Field</label>
 				<div class="relative">
 					<input disabled type="text" name="example" id="example" value="Disabled Field">
-					<svg class="icon"><?php echo serc_svg('lock'); ?></svg>
+					<?php serc_svg("lock"); ?>
 				</div>
 				<span class="hint">.field.field-text.is-disabled</span>
 			</div>
@@ -55,7 +49,7 @@
 				<label class="label" for="example">.has-error textarea</label>
 				<div class="relative">
 					<textarea name="example" id="example">Error Textarea</textarea>
-					<svg class="icon"><?php echo serc_svg('exclamation-circle'); ?></svg>
+					<?php serc_svg("exclamation-circle"); ?>
 				</div>
 				<span class="hint">Hint or error message</span>
 			</div>
@@ -63,7 +57,7 @@
 				<label class="label" for="example">.is-disabled textarea</label>
 				<div class="relative">
 					<textarea disabled name="example" id="example">Disabled Textarea</textarea>
-					<svg class="icon"><?php echo serc_svg('lock'); ?></svg>
+					<?php serc_svg("lock"); ?>
 				</div>
 				<span class="hint">Hint or error message</span>
 			</div>
@@ -90,7 +84,7 @@
 						<option value="2">Option 2</option>
 						<option value="3">Option 3</option>
 					</select>
-					<svg class="icon"><?php echo serc_svg('exclamation-circle'); ?></svg>
+					<?php serc_svg("exclamation-circle"); ?>
 				</div>
 				<span class="hint">Hint or error message</span>
 			</div>
@@ -102,7 +96,7 @@
 						<option value="2">Option 2</option>
 						<option value="3">Option 3</option>
 					</select>
-					<svg class="icon"><?php echo serc_svg('lock'); ?></svg>
+					<?php serc_svg("lock"); ?>
 				</div>
 				<span class="hint">Hint or error message</span>
 			</div>
@@ -147,8 +141,8 @@
 		<div class="flex items-start gap-12">
 			<div class="field field-toggle">
 				<input type="checkbox" name="default-toggle " id="default-toggle">
-				<label class="label" for="default-toggle">Default Toggle</label>
-				<span class="icon"><?php echo serc_svg('check'); ?> </span>
+				<label class="label" for="default-toggle">Default Toggle </label>
+				<?php serc_svg("check"); ?>
 			</div>
 		</div>
 	</section>

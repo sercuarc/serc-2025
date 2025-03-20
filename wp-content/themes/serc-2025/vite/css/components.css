@@ -26,8 +26,8 @@
     }
     .label {
       @apply relative leading-[1] flex gap-2 items-center cursor-pointer
-      before:size-4 hover:before:bg-light-secondary before:shadow-[inset_0_0_0_1px_var(--border-normal)] 
-      after:absolute after:size-[10px] after:opacity-0 after:bg-brand after:top-[3px] after:left-[3px];
+      before:size-4 before:shrink-0 before:grow-0 hover:before:bg-light-secondary before:shadow-[inset_0_0_0_1px_var(--border-normal)] 
+      after:absolute after:top-1/2 after:-translate-y-1/2 after:left-[3px] after:size-[10px] after:shrink-0 after:grow-0 after:opacity-0 after:bg-brand;
     }
     input:focus + .label {
       @apply focus-ring;
