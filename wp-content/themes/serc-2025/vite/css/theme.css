@@ -7,6 +7,9 @@
   --font-heading: var(--font-oswald);
   --font-sans: var(--font-inter);
 
+  --container-*: initial;
+  --container-width: 1230px;
+
   --color-*: initial;
   --color-red-50: #fdf3f3;
   --color-red-100: #fbe9e8;
@@ -127,7 +130,7 @@
   --color-success: var(--color-mint-600);
   --color-success-light: var(--color-mint-100);
 
-  --color-error: var(--color-red-800);
+  --color-error: var(--color-red-600);
   --color-error-light: var(--color-orange-100);
 
   --color-alert: var(--color-yellow-600);
@@ -138,7 +141,7 @@
 
   --color-light-main: var(--color-white);
   --color-light-secondary: #fbf9f9;
-  --color-light-tertiary: $f5f3f3;
+  --color-light-tertiary: #f5f3f3;
 
   --color-dark-main: var(--color-gray-950);
   --color-dark-secondary: var(--color-gray-900);

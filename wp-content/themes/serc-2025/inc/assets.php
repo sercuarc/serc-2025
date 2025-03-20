@@ -9,8 +9,8 @@ function enqueue_serc_scripts_styles()
 	$is_dev = strpos($_SERVER['HTTP_HOST'], 'ddev.site') !== false;
 
 	if ($is_dev) {
-		echo '<script type="module" src="http://localhost:5173/@vite/client"></script>';
-		echo '<script type="module" src="http://localhost:5173/js/main.js"></script>';
+		echo '<script type="module" src="' . preg_replace('/:\d+$/', '', $_SERVER['DDEV_PRIMARY_URL']) . ':5173/@vite/client"></script>';
+		echo '<script type="module" src="' . preg_replace('/:\d+$/', '', $_SERVER['DDEV_PRIMARY_URL']) . ':5173/js/main.js"></script>';
 	} else {
 		$theme_uri = get_template_directory_uri();
 		$dist_uri = $theme_uri . '/dist';

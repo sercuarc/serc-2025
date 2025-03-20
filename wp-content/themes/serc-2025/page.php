@@ -7,21 +7,127 @@
 
 <?php get_header(); ?>
 
-<main class="flex flex-col gap-12">
+<main class="container flex flex-col gap-20">
+
+	<section id="text-fields" class="flex flex-col gap-8">
+		<h1 class="text-title-2 text-gray-300">Text Fields </h1>
+		<div class="flex items-start gap-12 ">
+			<div class="field field-text w-full">
+				<label class="label" for="example">Default Input</label>
+				<input type="text" name="example" id="example" value="Example input field" />
+				<span class="hint">Hint or error message</span>
+			</div>
+			<div class="field field-text has-error w-full">
+				<label class="label" for="example">.has-error input </label>
+				<div class="relative">
+					<input type="text" name="example" id="example" value="Error field">
+					<svg class="icon">
+						<?php echo serc_svg('exclamation-circle'); ?>
+					</svg>
+				</div>
+				<span class="hint">Hint or error message</span>
+			</div>
+			<div class="field field-text is-disabled w-full">
+				<label class="label" for="example">.is-disabled input</label>
+				<div class="relative">
+					<input type="text" name="example" id="example" value="Disabled Field">
+					<svg class="icon"><?php echo serc_svg('lock'); ?></svg>
+				</div>
+				<span class="hint">Hint or error message</span>
+			</div>
+		</div>
+		<div class="flex items-start gap-12">
+			<div class="field field-text w-full">
+				<label class="label" for="example">Default Textarea</label>
+				<textarea name="example" id="example">Example textarea field</textarea>
+				<span class="hint">Hint or error message</span>
+			</div>
+			<div class="field field-text has-error w-full">
+				<label class="label" for="example">.has-error textarea</label>
+				<div class="relative">
+					<textarea name="example" id="example">Error field</textarea>
+					<svg class="icon"><?php echo serc_svg('exclamation-circle'); ?></svg>
+				</div>
+				<span class="hint">Hint or error message</span>
+			</div>
+			<div class="field field-text is-disabled w-full">
+				<label class="label" for="example">.is-disabled textarea</label>
+				<div class="relative">
+					<textarea name="example" id="example">Disabled Field</textarea>
+					<svg class="icon"><?php echo serc_svg('lock'); ?></svg>
+				</div>
+				<span class="hint">Hint or error message</span>
+			</div>
+		</div>
+	</section>
+
+	<section id="select-fields" class="flex flex-col gap-8">
+		<h1 class="text-title-2 text-gray-300">Select Fields</h1>
+		<div class="flex items-start gap-12 ">
+			<div class="field field-select w-full">
+				<label class="label" for="example">Default Select</label>
+				<select name="example" id="example">
+					<option value="1">Option 1</option>
+					<option value="2">Option 2</option>
+					<option value="3">Option 3</option>
+				</select>
+				<span class="hint">Hint or error message</span>
+			</div>
+			<div class="field field-select has-error w-full">
+				<label class="label" for="example">.has-error Select</label>
+				<div class="relative">
+					<select name="example" id="example">
+						<option value="1">Option 1</option>
+						<option value="2">Option 2</option>
+						<option value="3">Option 3</option>
+					</select>
+					<svg class="icon"><?php echo serc_svg('exclamation-circle'); ?></svg>
+				</div>
+				<span class="hint">Hint or error message</span>
+			</div>
+			<div class="field field-select is-disabled w-full">
+				<label class="label" for="example">.is-disabled Select </label>
+				<div class="relative">
+					<select name="example" id="example">
+						<option value="1">Option 1</option>
+						<option value="2">Option 2</option>
+						<option value="3">Option 3</option>
+					</select>
+					<svg class="icon"><?php echo serc_svg('lock'); ?></svg>
+				</div>
+				<span class="hint">Hint or error message</span>
+			</div>
+		</div>
+		<div class="flex items-start gap-12">
+			<div class="field field-checkbox">
+				<input type="checkbox" name="example-checkbox" id="example-checkbox">
+				<label class="label" for="example-checkbox">Default Checkbox</label>
+			</div>
+			<div class="field field-radio">
+				<input type="radio" name="example-radio" id="example-radio">
+				<label class="label" for="example-radio">Default Radio</label>
+			</div>
+		</div>
+	</section>
 
 	<section id="Buttons" class="flex flex-col gap-8">
-		<h1 class="text-title-2 text-warm-neutral-300">Buttons</h1>
-		<div class="flex gap-4">
+		<h1 class="text-title-2 text-gray-300">Buttons</h1>
+		<div class="flex items-start gap-4">
 			<button class="btn btn-primary">.btn.btn-primary</button>
-			<button class="btn btn-primary btn-lg">.btn.btn-lg</button>
-		</div>
-		<div class="flex gap-4">
 			<button class="btn btn-secondary">.btn.btn-secondary</button>
-			<button class="btn btn-secondary btn-lg">.btn.btn-secondary.btn-lg</button>
+			<button class="btn btn-outline">.btn.btn-outline</button>
 		</div>
-		<div class="flex gap-4 bg-dark-main p-4">
-			<button class="btn btn-tertiary">.btn.btn-tertiary</button>
-			<button class="btn btn-tertiary btn-lg">.btn.btn-tertiary.btn-lg</button>
+		<div class="flex items-start gap-4">
+			<button class="btn btn-primary btn-lg">.btn.btn-primary.btn-lg</button>
+			<button class="btn btn-secondary btn-lg">.btn.btn-secondary.btn-lg</button>
+			<button class="btn btn-outline btn-lg">.btn.btn-outline.btn-lg</button>
+		</div>
+		<div class="flex items-start flex-wrap gap-4 bg-dark-tertiary p-4">
+			<h1 class="text-h5 text-gray-100 w-full">Inverted Buttons </h1>
+			<button class="btn btn-inverted">.btn.btn-inverted</button>
+			<button class="btn btn-inverted-outline">.btn.btn-inverted-outline</button>
+			<button class="btn btn-inverted btn-lg">.btn.btn-inverted.btn-lg</button>
+			<button class="btn btn-inverted-outline btn-lg">.btn.btn-inverted-outline.btn-lg</button>
 		</div>
 	</section>
 
@@ -48,6 +154,20 @@
 		<p class="body-base"><code class="bg-gray-100 mr-1">body-base</code>This is a <strong>base body text</strong> paragraph. Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
 		<p class="body-sm"><code class="bg-gray-100 mr-1">body-sm</code>This is a <strong>small body text</strong> paragraph. Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+		<div class="wysiwyg bg-gray-50 p-8">
+			<pre><code>.wysiwyg</code></pre>
+			<h1>Heading 1</h1>
+			<h2>Heading 2</h2>
+			<h3>Heading 3</h3>
+			<h4>Heading 4</h4>
+			<h5>Heading 5</h5>
+			<h6>Heading 6</h6>
+			<p>This is a <strong>WYSIWYG</strong> paragraph. It has <a href="#">a link</a> in it. Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			<p>
+			<blockquote>This is a <strong>blockquote</strong> paragraph.</blockquote>
+			</p>
+		</div>
 
 	</section>
 

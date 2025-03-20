@@ -1,17 +1,119 @@
+.container {
+  @apply w-full max-w-[calc(var(--container-width)+3rem)] mx-auto px-4 lg:px-6;
+}
+
+.field {
+  @apply flex gap-2;
+  .label {
+    @apply font-medium text-sm text-light-surface-strong;
+  }
+  &.has-error {
+    .label {
+      @apply text-error;
+    }
+  }
+  &.is-disabled {
+    @apply pointer-events-none;
+  }
+}
+
+.field-checkbox,
+.field-radio {
+  input[type="checkbox"],
+  input[type="radio"] {
+    @apply hidden;
+  }
+  .label {
+    @apply relative leading-[1] flex gap-2 items-center cursor-pointer
+      before:size-4 hover:before:bg-light-secondary before:shadow-[inset_0_0_0_1px_var(--color-warm-neutral-400)] 
+      after:absolute after:size-[10px] after:opacity-0 after:bg-brand after:top-[3px] after:left-[3px];
+  }
+  input:checked + .label {
+    @apply after:opacity-100;
+  }
+}
+.field-radio {
+  .label {
+    @apply before:rounded-full after:rounded-full;
+  }
+}
+
+.field-text,
+.field-select {
+  @apply flex-col relative;
+
+  .label {
+    @apply w-full;
+  }
+  input,
+  textarea,
+  select {
+    @apply w-full border-0 outline-0 py-[1.1em] px-[0.5em] shadow-[0_0_0_1px_var(--color-warm-neutral-400)] focus:shadow-[0_0_0_2px_var(--color-light-surface-strong)] bg-white hover:bg-light-secondary text-dark-main font-normal transition-all;
+  }
+  select {
+    @apply appearance-none cursor-pointer bg-no-repeat;
+    background-image: url("/wp-content/themes/serc-2025/assets/icons/chevron-down.svg");
+    background-size: 1em;
+    background-position: right 0.75rem top 50%;
+  }
+  .hint {
+    @apply block w-full text-neutral-600 text-xs;
+  }
+  .icon {
+    @apply hidden absolute text-dark-main size-4 right-2 top-5;
+  }
+  &.has-error {
+    .icon {
+      @apply block;
+    }
+    .hint,
+    .icon {
+      @apply text-error;
+    }
+    input,
+    textarea,
+    select {
+      @apply shadow-[0_0_0_2px_var(--color-error)];
+    }
+    select ~ .icon {
+      @apply right-10;
+    }
+  }
+  &.is-disabled {
+    .icon {
+      @apply block;
+    }
+    input,
+    textarea,
+    select {
+      @apply bg-light-tertiary text-dark-main shadow-[0_0_0_1px_var(--color-warm-neutral-400)];
+    }
+    select ~ .icon {
+      @apply right-10;
+    }
+  }
+}
+
 .btn {
-  @apply py-[0.5em] px-[1.25em] cursor-pointer transition-all appearance-none;
+  @apply font-medium py-[0.6em] px-[1.25em] cursor-pointer transition-all appearance-none active:shadow-md;
 }
 .btn-primary {
   @apply bg-brand hover:bg-brand-hover active:bg-brand-dark text-white border-0;
 }
+.btn-inverted {
+  @apply bg-white hover:bg-light-secondary active:bg-light-tertiary text-dark-main border-0;
+}
 .btn-secondary {
   @apply bg-white hover:bg-light-secondary active:bg-light-tertiary text-brand border border-brand;
 }
-.btn-tertiary {
-  @apply bg-transparent hover:bg-light-secondary active:bg-light-tertiary text-white border border-white;
+.btn-outline {
+  @apply bg-transparent hover:bg-dark-main/5 active:bg-dark-main/5 text-dark-main border border-dark-main;
+}
+.btn-inverted-outline {
+  @apply bg-transparent hover:bg-white/5 active:bg-white/5 text-white border border-white;
 }
 .btn-lg {
-  @apply text-2xl;
+  @apply text-xl;
 }
 
 .body-lg {
@@ -25,7 +127,7 @@
 }
 
 .wysiwyg {
-  @apply text-base;
+  @apply text-base flex flex-col gap-6;
 
   a {
     @apply text-brand hover:underline;
@@ -49,6 +151,9 @@
     @apply text-h6;
   }
   blockquote {
-    @apply text-h5 m-8;
+    @apply font-normal text-h5 m-8 border-l-4 border-warm-neutral-300 pl-4;
+  }
+  code {
+    @apply bg-warm-neutral-200 rounded inline-block px-2 py-1;
   }
 }

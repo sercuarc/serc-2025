@@ -10,7 +10,7 @@
 	<?php wp_head(); ?>
 </head>
 
-<body class="m-8 text-slate-800">
+<body class="text-dark-main selection:bg-red-200 selection:text-dark-main">
 
 	<nav class="bg-gray-100 rounded-lg p-4 mb-8">
 		<ul class="flex gap-8 font-bold">
