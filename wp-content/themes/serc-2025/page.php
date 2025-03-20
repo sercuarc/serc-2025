@@ -9,6 +9,8 @@
 
 <main class="container flex flex-col gap-20">
 
+	<div class="h-[20vh] flex items-center justify-center bg-light-tertiary">hero</div>
+
 	<section id="text-fields" class="flex flex-col gap-8">
 		<h1 class="text-title-2 text-gray-300">Text Fields </h1>
 		<div class="flex items-start gap-12 ">
