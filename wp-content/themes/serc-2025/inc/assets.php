@@ -7,6 +7,7 @@
 function enqueue_serc_scripts_styles()
 {
 	$is_dev = strpos($_SERVER['HTTP_HOST'], 'ddev.site') !== false;
+	// wp_get_environment_type() === 'development' && ! is_wp_error(wp_remote_get(FM_HMR_HOST))
 
 	if ($is_dev) {
 		echo '<script type="module" src="' . preg_replace('/:\d+$/', '', $_SERVER['DDEV_PRIMARY_URL']) . ':5173/@vite/client"></script>';
