@@ -20,6 +20,7 @@ require_once get_template_directory() . '/inc/api.php';
 require_once get_template_directory() . '/inc/assets.php';
 require_once get_template_directory() . '/inc/comments.php';
 require_once get_template_directory() . '/inc/custom.php';
+require_once get_template_directory() . '/inc/menus.php';
 require_once get_template_directory() . '/inc/routes.php';
 require_once get_template_directory() . '/inc/post-types.php';
 require_once get_template_directory() . '/inc/search-api.php';

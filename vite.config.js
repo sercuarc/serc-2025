@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
+import IconSpritePlugin from "./wp-content/themes/serc-2025/vite/plugins/vite-plugin-icon-sprite";
 
 const root = "wp-content/themes/serc-2025/vite";
 
@@ -22,7 +23,14 @@ export default defineConfig({
       origin: /https?:\/\/([A-Za-z0-9\-\.]+)?(\.ddev\.site)(?::\d+)?$/,
     },
   },
-  plugins: [tailwindcss()],
+  plugins: [
+    tailwindcss(),
+    IconSpritePlugin(
+      "wp-content/themes/serc-2025/assets/icons",
+      "wp-content/themes/serc-2025/assets/icons",
+      "icon-sprite.svg"
+    ),
+  ],
   build: {
     outDir: `../dist`,
     emptyOutDir: true,

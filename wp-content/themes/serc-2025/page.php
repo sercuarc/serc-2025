@@ -9,6 +9,10 @@
 
 <main class="container flex flex-col gap-20">
 
+	<pre>
+		<?php var_dump($_SERVER); ?>
+	</pre>
+
 	<section id="text-fields" class="flex flex-col gap-8">
 		<h1 class="text-title-2 text-gray-300">Text Fields </h1>
 		<div class="flex items-start gap-12 ">

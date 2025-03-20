@@ -4,6 +4,13 @@
  * Theme Customizations
  */
 
+/**
+ * Modifies the WordPress login page to display the SERC logo.
+ *
+ * Specifically, this function adds a <style> block to the login page
+ * that sets the background image of the "WordPress" logo to the SERC
+ * logo, and sets the size of the logo to 270x190px.
+ */
 function custom_login_logo()
 {
 	echo '<style type="text/css">
@@ -16,3 +23,15 @@ function custom_login_logo()
 	</style>';
 }
 add_action('login_head', 'custom_login_logo');
+
+/**
+ * Customize the sections in the WordPress Customizer.
+ *
+ * @param WP_Customize_Manager $wp_customize The WP_Customize_Manager instance.
+ */
+function serc_set_customizer_sections($wp_customize)
+{
+	$wp_customize->remove_section('static_front_page');
+	$wp_customize->remove_section('custom_css');
+}
+add_action('customize_register', 'serc_set_customizer_sections', 15);
