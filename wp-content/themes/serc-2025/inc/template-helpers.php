@@ -8,6 +8,7 @@
 function serc_svg($name)
 {
 	$icons = [
+		'check' => '<svg id="check" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.7 14.025L0 8.325L1.425 6.9L5.7 11.175L14.875 2L16.3 3.425L5.7 14.025Z" fill="currentColor"/></svg>',
 		'check-circle' => '<svg id="check-circle" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8Z" fill="currentColor" /><path d="M4.5 7.5L7.5 10.5L11.5 5" stroke="white" stroke-width="2" /</svg>',
 		'chevron-down' => '<svg id="chevron-down" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.792969 5.20706L2.20718 3.79285L8.00008 9.58574L13.793 3.79285L15.2072 5.20706L8.00008 12.4142L0.792969 5.20706Z" fill="currentColor" /></svg>',
 		'chevron-up' => '<svg id="chevron-up" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.792969 11L2.20718 12.4142L8.00008 6.62129L13.793 12.4142L15.2072 11L8.00008 3.79286L0.792969 11Z" fill="currentColor" /></svg>',

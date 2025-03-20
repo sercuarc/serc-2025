@@ -13,39 +13,44 @@
 		<h1 class="text-title-2 text-gray-300">Text Fields </h1>
 		<div class="flex items-start gap-12 ">
 			<div class="field field-text w-full">
-				<label class="label" for="example">Default Input</label>
-				<input type="text" name="example" id="example" value="Example input field" />
-				<span class="hint">Hint or error message</span>
+				<label class="label" for="example">Default Field</label>
+				<input type="text" name="example" id="example" value="Default Field" />
+				<span class="hint">.field.field-text</span>
 			</div>
-			<div class="field field-text has-error w-full">
-				<label class="label" for="example">.has-error input </label>
+			<div class="field field-text has-error w-full ">
+				<label class="label" for="example">Error Field</label>
 				<div class="relative">
-					<input type="text" name="example" id="example" value="Error field">
+					<input type="text" name="example" id="example" value="Error Field">
 					<svg class="icon">
 						<?php echo serc_svg('exclamation-circle'); ?>
 					</svg>
 				</div>
-				<span class="hint">Hint or error message</span>
+				<span class="hint">.field.field-text.has-error</span>
 			</div>
 			<div class="field field-text is-disabled w-full">
-				<label class="label" for="example">.is-disabled input</label>
+				<label class="label" for="example">Disabled Field</label>
 				<div class="relative">
-					<input type="text" name="example" id="example" value="Disabled Field">
+					<input disabled type="text" name="example" id="example" value="Disabled Field">
 					<svg class="icon"><?php echo serc_svg('lock'); ?></svg>
 				</div>
-				<span class="hint">Hint or error message</span>
+				<span class="hint">.field.field-text.is-disabled</span>
 			</div>
+		</div>
+		<div class="field field-text field-text-lg w-full">
+			<label class="label" for="example">Large Input</label>
+			<input type="text" name="example" id="example" value="Large input field" />
+			<span class="hint">.field.field-text.field-text-lg</span>
 		</div>
 		<div class="flex items-start gap-12">
 			<div class="field field-text w-full">
 				<label class="label" for="example">Default Textarea</label>
-				<textarea name="example" id="example">Example textarea field</textarea>
+				<textarea name="example" id="example">Default Textarea</textarea>
 				<span class="hint">Hint or error message</span>
 			</div>
 			<div class="field field-text has-error w-full">
 				<label class="label" for="example">.has-error textarea</label>
 				<div class="relative">
-					<textarea name="example" id="example">Error field</textarea>
+					<textarea name="example" id="example">Error Textarea</textarea>
 					<svg class="icon"><?php echo serc_svg('exclamation-circle'); ?></svg>
 				</div>
 				<span class="hint">Hint or error message</span>
@@ -53,7 +58,7 @@
 			<div class="field field-text is-disabled w-full">
 				<label class="label" for="example">.is-disabled textarea</label>
 				<div class="relative">
-					<textarea name="example" id="example">Disabled Field</textarea>
+					<textarea disabled name="example" id="example">Disabled Textarea</textarea>
 					<svg class="icon"><?php echo serc_svg('lock'); ?></svg>
 				</div>
 				<span class="hint">Hint or error message</span>
@@ -85,10 +90,10 @@
 				</div>
 				<span class="hint">Hint or error message</span>
 			</div>
-			<div class="field field-select is-disabled w-full">
+			<div class="field field-select is-disabled w-full ">
 				<label class="label" for="example">.is-disabled Select </label>
 				<div class="relative">
-					<select name="example" id="example">
+					<select disabled name="example" id="example">
 						<option value="1">Option 1</option>
 						<option value="2">Option 2</option>
 						<option value="3">Option 3</option>
@@ -98,14 +103,48 @@
 				<span class="hint">Hint or error message</span>
 			</div>
 		</div>
+		<div>
+			<div class="field field-select field-select-sm inline-flex">
+				<label class="label" for="example">Small Select</label>
+				<select name="example" id="example">
+					<option value="1">Small Option 1</option>
+					<option value="2">Small Option 2</option>
+					<option value="3">Small Option 3</option>
+				</select>
+				<span class="hint">Hint or error message</span>
+			</div>
+		</div>
 		<div class="flex items-start gap-12">
 			<div class="field field-checkbox">
-				<input type="checkbox" name="example-checkbox" id="example-checkbox">
-				<label class="label" for="example-checkbox">Default Checkbox</label>
+				<input type="checkbox" name="default-checkbox" id="default-checkbox">
+				<label class="label" for="default-checkbox">Default Checkbox</label>
 			</div>
 			<div class="field field-radio">
-				<input type="radio" name="example-radio" id="example-radio">
-				<label class="label" for="example-radio">Default Radio</label>
+				<input type="radio" name="default-radio" id="default-radio">
+				<label class="label" for="default-radio">Default Radio</label>
+			</div>
+			<div class="field field-checkbox has-error">
+				<input type="checkbox" name="error-checkbox" id="error-checkbox">
+				<label class="label" for="error-checkbox">Error Checkbox</label>
+			</div>
+			<div class="field field-radio has-error">
+				<input type="radio" name="error-radio" id="error-radio">
+				<label class="label" for="error-radio">Error Radio</label>
+			</div>
+			<div class="field field-checkbox is-disabled">
+				<input disabled type="checkbox" name="disabled-checkbox" id="disabled-checkbox">
+				<label class="label" for="disabled-checkbox">Disabled Checkbox</label>
+			</div>
+			<div class="field field-radio is-disabled">
+				<input disabled type="radio" name="disabled-radio" id="disabled-radio">
+				<label class="label" for="disabled-radio">Disabled Radio</label>
+			</div>
+		</div>
+		<div class="flex items-start gap-12">
+			<div class="field field-toggle">
+				<input type="checkbox" name="default-toggle " id="default-toggle">
+				<label class="label" for="default-toggle">Default Toggle</label>
+				<span class="icon"><?php echo serc_svg('check'); ?> </span>
 			</div>
 		</div>
 	</section>

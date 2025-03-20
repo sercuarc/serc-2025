@@ -5,3 +5,9 @@
 
 @source "../../**/*.php";
 @source "../../**/*.js";
+
+@layer base {
+  * {
+    @apply focus:focus-ring;
+  }
+}

@@ -158,4 +158,8 @@
   --color-dark-surface-normal: var(--color-warm-neutral-100);
   --color-dark-surface-subtle: var(--color-warm-neutral-200);
   --color-dark-surface-disabled: var(--color-warm-neutral-300);
+
+  --border-subtle: var(--color-warm-neutral-200);
+  --border-normal: var(--color-warm-neutral-400);
+  --border-strong: var(--color-warm-neutral-950);
 }

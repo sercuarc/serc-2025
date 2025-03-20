@@ -1,11 +1,14 @@
+@utility focus-ring {
+  @apply outline-2 outline-offset-2 outline-dark-main/30;
+}
 @utility border-subtle {
-  border-color: var(--color-warm-neutral-200);
+  border-color: var(--border-subtle);
 }
 @utility border-normal {
-  border-color: var(--color-warm-neutral-300);
+  border-color: var(--border-normal);
 }
 @utility border-strong {
-  border-color: var(--color-warm-neutral-400);
+  border-color: var(--border-strong);
 }
 @utility text-h1 {
   @apply font-oswald;

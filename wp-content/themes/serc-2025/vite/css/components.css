@@ -1,159 +1,216 @@
-.container {
-  @apply w-full max-w-[calc(var(--container-width)+3rem)] mx-auto px-4 lg:px-6;
-}
-
-.field {
-  @apply flex gap-2;
-  .label {
-    @apply font-medium text-sm text-light-surface-strong;
+@layer components {
+  .container {
+    @apply w-full max-w-[calc(var(--container-width)+3rem)] mx-auto px-4 lg:px-6;
   }
-  &.has-error {
+
+  .field {
+    @apply flex gap-2;
     .label {
-      @apply text-error;
+      @apply font-medium text-sm text-light-surface-strong;
+    }
+    &.has-error {
+      .label {
+        @apply text-error;
+      }
+    }
+    &.is-disabled {
+      @apply pointer-events-none;
     }
   }
-  &.is-disabled {
-    @apply pointer-events-none;
-  }
-}
 
-.field-checkbox,
-.field-radio {
-  input[type="checkbox"],
-  input[type="radio"] {
-    @apply hidden;
-  }
-  .label {
-    @apply relative leading-[1] flex gap-2 items-center cursor-pointer
-      before:size-4 hover:before:bg-light-secondary before:shadow-[inset_0_0_0_1px_var(--color-warm-neutral-400)] 
+  .field-checkbox,
+  .field-radio {
+    input[type="checkbox"],
+    input[type="radio"] {
+      @apply sr-only;
+    }
+    .label {
+      @apply relative leading-[1] flex gap-2 items-center cursor-pointer
+      before:size-4 hover:before:bg-light-secondary before:shadow-[inset_0_0_0_1px_var(--border-normal)] 
       after:absolute after:size-[10px] after:opacity-0 after:bg-brand after:top-[3px] after:left-[3px];
-  }
-  input:checked + .label {
-    @apply after:opacity-100;
-  }
-}
-.field-radio {
-  .label {
-    @apply before:rounded-full after:rounded-full;
-  }
-}
-
-.field-text,
-.field-select {
-  @apply flex-col relative;
-
-  .label {
-    @apply w-full;
-  }
-  input,
-  textarea,
-  select {
-    @apply w-full border-0 outline-0 py-[1.1em] px-[0.5em] shadow-[0_0_0_1px_var(--color-warm-neutral-400)] focus:shadow-[0_0_0_2px_var(--color-light-surface-strong)] bg-white hover:bg-light-secondary text-dark-main font-normal transition-all;
-  }
-  select {
-    @apply appearance-none cursor-pointer bg-no-repeat;
-    background-image: url("/wp-content/themes/serc-2025/assets/icons/chevron-down.svg");
-    background-size: 1em;
-    background-position: right 0.75rem top 50%;
-  }
-  .hint {
-    @apply block w-full text-neutral-600 text-xs;
-  }
-  .icon {
-    @apply hidden absolute text-dark-main size-4 right-2 top-5;
-  }
-  &.has-error {
-    .icon {
-      @apply block;
     }
-    .hint,
+    input:focus + .label {
+      @apply focus-ring;
+    }
+    input:checked + .label {
+      @apply after:opacity-100;
+    }
+    &.has-error {
+      .label {
+        @apply before:shadow-[inset_0_0_0_1px_var(--color-error)];
+      }
+      input:focus + .label {
+        @apply outline-error/30;
+      }
+    }
+    &.is-disabled {
+      .label {
+        @apply grayscale-100 opacity-50;
+      }
+    }
+  }
+
+  .field-radio {
+    .label {
+      @apply before:rounded-full after:rounded-full;
+    }
+  }
+
+  .field-toggle {
+    @apply relative;
+
+    input[type="checkbox"] {
+      @apply sr-only;
+    }
+    .label {
+      @apply bg-[#ededed] hover:bg-[#d9d9d9] active:shadow-sm font-medium rounded-2xl px-4 py-2 cursor-pointer transition-all;
+    }
     .icon {
-      @apply text-error;
+      @apply absolute top-1/2 -translate-y-1/2 left-3 size-4 transition-all scale-0 text-brand opacity-0;
+    }
+    input:focus + .label {
+      @apply focus-ring outline-[#ededed];
+    }
+    input:checked + .label {
+      @apply bg-[#e8e5e3] hover:bg-[#E3DDD8] text-brand pl-10;
+    }
+    input:checked:focus + .label {
+      @apply outline-[#e8e5e3];
+    }
+    input:checked ~ .icon {
+      @apply scale-100 opacity-100;
+    }
+  }
+
+  .field-text,
+  .field-select {
+    @apply flex flex-col relative;
+
+    .label {
+      @apply w-full;
     }
     input,
     textarea,
     select {
-      @apply shadow-[0_0_0_2px_var(--color-error)];
+      @apply w-full border-0 outline-0 focus:outline-offset-4 py-[1.1em] px-[0.5em] shadow-[0_0_0_1px_var(--border-normal)] focus:shadow-[0_0_0_2px_var(--border-strong)] bg-white hover:bg-light-secondary text-dark-main font-normal transition-all;
     }
-    select ~ .icon {
-      @apply right-10;
-    }
-  }
-  &.is-disabled {
-    .icon {
-      @apply block;
-    }
-    input,
-    textarea,
     select {
-      @apply bg-light-tertiary text-dark-main shadow-[0_0_0_1px_var(--color-warm-neutral-400)];
+      @apply appearance-none cursor-pointer bg-no-repeat pr-10;
+      background-image: url("/wp-content/themes/serc-2025/assets/icons/chevron-down.svg");
+      background-size: 1em;
+      background-position: right 0.75rem top 50%;
     }
-    select ~ .icon {
-      @apply right-10;
+    .hint {
+      @apply block w-full text-neutral-600 text-xs;
+    }
+    .icon {
+      @apply hidden absolute text-dark-main size-4 right-2 top-5;
+    }
+    &.has-error {
+      .icon {
+        @apply block;
+      }
+      .hint,
+      .icon {
+        @apply text-error;
+      }
+      input,
+      textarea,
+      select {
+        @apply focus:focus-ring focus:outline-error/30 focus:outline-offset-4 shadow-[0_0_0_2px_var(--color-error)];
+      }
+      select ~ .icon {
+        @apply right-10;
+      }
+    }
+    &.is-disabled {
+      .icon {
+        @apply block;
+      }
+      input,
+      textarea,
+      select {
+        @apply bg-light-tertiary text-dark-main shadow-[0_0_0_1px_var(--border-normal)];
+      }
+      select ~ .icon {
+        @apply right-10;
+      }
     }
   }
-}
 
-.btn {
-  @apply font-medium py-[0.6em] px-[1.25em] cursor-pointer transition-all appearance-none active:shadow-md;
-}
-.btn-primary {
-  @apply bg-brand hover:bg-brand-hover active:bg-brand-dark text-white border-0;
-}
-.btn-inverted {
-  @apply bg-white hover:bg-light-secondary active:bg-light-tertiary text-dark-main border-0;
-}
-.btn-secondary {
-  @apply bg-white hover:bg-light-secondary active:bg-light-tertiary text-brand border border-brand;
-}
-.btn-outline {
-  @apply bg-transparent hover:bg-dark-main/5 active:bg-dark-main/5 text-dark-main border border-dark-main;
-}
-.btn-inverted-outline {
-  @apply bg-transparent hover:bg-white/5 active:bg-white/5 text-white border border-white;
-}
-.btn-lg {
-  @apply text-xl;
-}
+  .field-text-lg {
+    input {
+      @apply text-[28px] leading-none py-[0.47em];
+    }
+  }
 
-.body-lg {
-  @apply text-xl;
-}
-.body-base {
-  @apply text-base;
-}
-.body-sm {
-  @apply text-sm;
-}
+  .field-select-sm {
+    select {
+      @apply py-[0.4em];
+    }
+  }
 
-.wysiwyg {
-  @apply text-base flex flex-col gap-6;
+  .btn {
+    @apply font-medium py-[0.6em] px-[1.25em] cursor-pointer transition-all appearance-none active:shadow-md;
+  }
+  .btn-primary {
+    @apply bg-brand hover:bg-brand-hover active:bg-brand-dark focus:outline-brand/30 text-white border-0;
+  }
+  .btn-secondary {
+    @apply bg-white hover:bg-light-secondary active:bg-light-tertiary focus:outline-brand/30 text-brand border border-brand;
+  }
+  .btn-outline {
+    @apply bg-transparent hover:bg-dark-main/5 active:bg-dark-main/5 text-dark-main border border-dark-main;
+  }
+  .btn-inverted {
+    @apply bg-white hover:bg-light-secondary active:bg-light-tertiary focus:outline-white/50 text-dark-main border-0;
+  }
+  .btn-inverted-outline {
+    @apply bg-transparent hover:bg-white/5 active:bg-white/5 focus:outline-white/50 text-white border border-white;
+  }
+  .btn-lg {
+    @apply text-xl;
+  }
 
-  a {
-    @apply text-brand hover:underline;
+  .body-lg {
+    @apply text-xl;
   }
-  h1 {
-    @apply text-h1;
+  .body-base {
+    @apply text-base;
   }
-  h2 {
-    @apply text-h2;
+  .body-sm {
+    @apply text-sm;
   }
-  h3 {
-    @apply text-h3;
-  }
-  h4 {
-    @apply text-h4;
-  }
-  h5 {
-    @apply text-h5;
-  }
-  h6 {
-    @apply text-h6;
-  }
-  blockquote {
-    @apply font-normal text-h5 m-8 border-l-4 border-warm-neutral-300 pl-4;
-  }
-  code {
-    @apply bg-warm-neutral-200 rounded inline-block px-2 py-1;
+
+  .wysiwyg {
+    @apply text-base flex flex-col gap-6;
+
+    a {
+      @apply text-brand hover:underline;
+    }
+    h1 {
+      @apply text-h1;
+    }
+    h2 {
+      @apply text-h2;
+    }
+    h3 {
+      @apply text-h3;
+    }
+    h4 {
+      @apply text-h4;
+    }
+    h5 {
+      @apply text-h5;
+    }
+    h6 {
+      @apply text-h6;
+    }
+    blockquote {
+      @apply font-normal text-h5 m-8 border-l-4 border-warm-neutral-300 pl-4;
+    }
+    code {
+      @apply bg-warm-neutral-200 rounded inline-block px-2 py-1;
+    }
   }
 }
