@@ -1,3 +1,6 @@
+@utility container {
+  @apply w-full max-w-[calc(var(--container-width)+3rem)] mx-auto px-4 lg:px-6;
+}
 @utility focus-ring {
   @apply outline-2 outline-offset-2 outline-dark-main/30;
 }
@@ -48,7 +51,6 @@
   font-weight: 600;
   line-height: 1.5;
 }
-
 @utility text-title-1 {
   @apply font-oswald;
   font-size: 2.5rem;
@@ -56,11 +58,19 @@
   text-transform: uppercase;
   font-weight: 500;
 }
-
 @utility text-title-2 {
   @apply font-oswald;
   font-size: 2rem;
   line-height: 1.5;
   text-transform: uppercase;
   font-weight: 600;
+}
+@utility body-lg {
+  @apply text-xl;
+}
+@utility body-base {
+  @apply text-base;
+}
+@utility body-sm {
+  @apply text-sm;
 }

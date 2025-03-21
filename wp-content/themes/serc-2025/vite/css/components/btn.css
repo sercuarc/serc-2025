@@ -1,0 +1,23 @@
+@layer components {
+  .btn {
+    @apply font-medium py-[0.6em] px-[1.25em] cursor-pointer transition-all appearance-none active:shadow-md;
+  }
+  .btn-primary {
+    @apply bg-brand hover:bg-brand-hover active:bg-brand-dark focus:outline-brand/30 text-white border-0;
+  }
+  .btn-secondary {
+    @apply bg-white hover:bg-light-secondary active:bg-light-tertiary focus:outline-brand/30 text-brand border border-brand;
+  }
+  .btn-outline {
+    @apply bg-transparent hover:bg-dark-main/5 active:bg-dark-main/5 text-dark-main border border-dark-main;
+  }
+  .btn-inverted {
+    @apply bg-white hover:bg-light-secondary active:bg-light-tertiary focus:outline-white/50 text-dark-main border-0;
+  }
+  .btn-inverted-outline {
+    @apply bg-transparent hover:bg-white/5 active:bg-white/5 focus:outline-white/50 text-white border border-white;
+  }
+  .btn-lg {
+    @apply text-xl;
+  }
+}

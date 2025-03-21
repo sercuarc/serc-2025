@@ -1,0 +1,31 @@
+.wysiwyg {
+  @apply text-base flex flex-col gap-6;
+
+  a {
+    @apply text-brand hover:underline;
+  }
+  h1 {
+    @apply text-h1;
+  }
+  h2 {
+    @apply text-h2;
+  }
+  h3 {
+    @apply text-h3;
+  }
+  h4 {
+    @apply text-h4;
+  }
+  h5 {
+    @apply text-h5;
+  }
+  h6 {
+    @apply text-h6;
+  }
+  blockquote {
+    @apply font-normal text-h5 m-8 border-l-4 border-warm-neutral-300 pl-4;
+  }
+  code {
+    @apply bg-warm-neutral-200 rounded inline-block px-2 py-1;
+  }
+}
