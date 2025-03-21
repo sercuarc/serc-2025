@@ -10,6 +10,6 @@
 	<?php wp_head(); ?>
 </head>
 
-<body class="text-dark-main selection:bg-red-200 selection:text-dark-main">
+<body class="text-dark-main selection:bg-red-200 selection:text-dark-main overflow-hidden" style="-webkit-font-smoothing: antialiased;">
 
 	<?php get_template_part('components/navigation'); ?>

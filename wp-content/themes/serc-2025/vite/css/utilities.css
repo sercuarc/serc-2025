@@ -1,8 +1,11 @@
 @utility container {
-  @apply w-full max-w-[calc(var(--container-width)+3rem)] mx-auto px-4 lg:px-6;
+  @apply w-full max-w-[calc(var(--container-width)+3rem)] mx-auto px-6;
+}
+@utility translate-center {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
 }
 @utility focus-ring {
-  @apply outline-2 outline-offset-2 outline-dark-main/30;
+  @apply outline-1 outline-dotted outline-offset-4 outline-dark-main/20;
 }
 @utility border-subtle {
   border-color: var(--border-subtle);
