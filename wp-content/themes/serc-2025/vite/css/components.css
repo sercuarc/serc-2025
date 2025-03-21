@@ -96,7 +96,7 @@
     }
     select {
       @apply appearance-none cursor-pointer bg-no-repeat pr-10;
-      background-image: url("/wp-content/themes/serc-2025/assets/icons/chevron-down.svg");
+      background-image: url("/wp-content/themes/serc-2025/icons/chevron-down.svg");
       background-size: 1em;
       background-position: right 0.75rem top 50%;
     }

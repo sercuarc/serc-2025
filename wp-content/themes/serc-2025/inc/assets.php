@@ -12,7 +12,7 @@ function enqueue_serc_scripts_styles()
 
 	if ($is_dev) {
 		echo '<script type="module" src="' . preg_replace('/:\d+$/', '', $_SERVER['DDEV_PRIMARY_URL']) . ':5173/@vite/client"></script>';
-		echo '<script type="module" src="' . preg_replace('/:\d+$/', '', $_SERVER['DDEV_PRIMARY_URL']) . ':5173/js/main.js"></script>';
+		echo '<script type="module" src="' . preg_replace('/:\d+$/', '', $_SERVER['DDEV_PRIMARY_URL']) . ':5173/vite/js/main.js"></script>';
 	} else {
 		$theme_uri = get_template_directory_uri();
 		$dist_uri = $theme_uri . '/dist';

@@ -13,33 +13,45 @@ export default function IconSpritePlugin(iconsSrc, spriteDest, spriteName) {
       if (!file.endsWith(".svg")) continue;
       let svgContent = await fs.readFile(path.join(iconsDir, file), "utf8");
       const id = file.replace(".svg", "");
-      svgContent = svgContent
-        .replace(/id="[^"]+"/, "") // Remove any existing id
-        .replace("<svg", `<symbol id="${id}"`) // Change <svg> to <symbol>
-        .replace("</svg>", "</symbol>");
-      symbols += svgContent + "\n";
+      // Extract viewBox using regex
+      const viewBoxMatch = svgContent.match(/viewBox="([^"]+)"/);
+      const viewBox = viewBoxMatch ? `viewBox="${viewBoxMatch[1]}"` : "";
+      // Create the symbol element with only id and viewBox attributes
+      const symbol = `<symbol id="${id}" ${viewBox} xmlns="http://www.w3.org/2000/svg">${svgContent.replace(
+        /<svg[^>]*>|<\/svg>/g,
+        ""
+      )}</symbol>`;
+
+      symbols += symbol + "\n";
     }
 
     // Write the SVG sprite to a file in the static folder
     const sprite = `<svg width="0" height="0" style="display: none">\n\n${symbols}</svg>`;
-    await fs.writeFile(
-      path.join(process.cwd(), spriteDest, spriteName),
-      sprite
-    );
+    const spritePath = path.join(process.cwd(), spriteDest, spriteName);
+
+    // Create new sprite
+    await fs.writeFile(spritePath, sprite);
+  }
+
+  async function handleIconUpdate(filePath) {
+    if (filePath.endsWith(".svg")) {
+      await generateIconSprite();
+    }
   }
 
   return {
     name: "icon-sprite-plugin",
     buildStart() {
-      // Generate during build
       return generateIconSprite();
     },
     configureServer(server) {
-      // Regenerate during development whenever an icon is added
-      server.watcher.add(path.join(process.cwd(), "static", "icons", "*.svg"));
-      server.watcher.on("change", async (changedPath) => {
-        if (changedPath.endsWith(".svg")) return generateIconSprite();
-      });
+      const iconsPath = path.join(process.cwd(), iconsSrc, "*.svg");
+
+      // Watch for new, changed, or deleted SVG files
+      server.watcher.add(iconsPath);
+      server.watcher.on("all", handleIconUpdate);
+      server.watcher.on("change", handleIconUpdate);
+      server.watcher.on("unlink", handleIconUpdate);
     },
   };
 }

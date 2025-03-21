@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 import IconSpritePlugin from "./wp-content/themes/serc-2025/vite/plugins/vite-plugin-icon-sprite";
 
-const root = "wp-content/themes/serc-2025/vite";
+const root = "wp-content/themes/serc-2025";
 
 export default defineConfig({
   root,
@@ -26,25 +26,25 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     IconSpritePlugin(
-      "wp-content/themes/serc-2025/assets/icons",
-      "wp-content/themes/serc-2025/assets/icons",
+      "wp-content/themes/serc-2025/icons",
+      "wp-content/themes/serc-2025/assets",
       "icon-sprite.svg"
     ),
   ],
   build: {
-    outDir: `../dist`,
+    outDir: `dist`,
     emptyOutDir: true,
     manifest: "manifest.json",
     rollupOptions: {
       input: {
-        main: `/js/main.js`,
-        search: `/js/search.js`,
+        main: `/vite/js/main.js`,
+        search: `/vite/js/search.js`,
       },
     },
   },
-  resolve: {
-    alias: {
-      "@": root,
-    },
-  },
+  // resolve: {
+  //   alias: {
+  //     "@": root,
+  //   },
+  // },
 });
