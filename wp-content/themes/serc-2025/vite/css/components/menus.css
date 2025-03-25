@@ -1,0 +1,16 @@
+.navigation-menu {
+  @apply absolute 
+  top-0 left-0 w-full bg-white px-6
+  transition-all opacity-0 pointer-events-none
+  -translate-x-12 lg:-translate-x-0
+  lg:-translate-y-12
+  duration-500;
+
+  &.sub-menu {
+    @apply flex flex-col lg:flex-row gap-8 lg:gap-16 lg:pl-[calc(231px+5.5rem)] lg:py-12;
+  }
+
+  &.is-active {
+    @apply translate-x-0 translate-y-0 opacity-100 pointer-events-auto;
+  }
+}

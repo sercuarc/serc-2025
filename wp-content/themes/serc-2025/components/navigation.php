@@ -1,25 +1,44 @@
-<?php $button_style = "gap-2 items-center font-medium hover:text-brand whitespace-nowrap cursor-pointer transition-colors"; ?>
-<?php $menu_item_style = "border-b-4 border-transparent hover:border-brand pb-6"; ?>
+<?php $button_style = "gap-2 items-center font-medium hover:text-brand focus:text-brand whitespace-nowrap cursor-pointer transition-colors"; ?>
+<?php $menu_item_style = "border-b-4 border-transparent hover:border-brand focus:border-brand focus:text-brand pt-2 pb-6 focus:outline-0"; ?>
+<?php $menu_items = [
+	"about" => ["label" => "About", "has_children" => "chevron-down"],
+	"research" => ["label" => "Research", "has_children" => "chevron-down"],
+	"events-news" => ["label" => "Events & News", "has_children" => "chevron-down"],
+	"resources-partners" => ["label" => "Resources & Partners", "has_children" => false],
+	"contact" => ["label" => "Contact", "has_children" => false],
+];
+?>
 
-<div data-navigation class="relative z-100 top-0 left-0 w-full">
-	<header data-navigation-header class="group/header bg-white border-b border-subtle relative">
-		<div class="flex items-center lg:items-end gap-6 xl:gap-16 px-6 xl:pr-12">
-			<button data-navigation-menu-toggle class="group relative lg:hidden my-5 <?php echo $button_style; ?>">
-				<span class="text-light-surface-subtle group-[.is-active]:opacity-0 group-[.is-active]:scale-0 transition-all"><?php serc_svg("menu", "size-6") ?></span>
-				<span class="text-light-surface-normal translate-center opacity-0 scale-0 group-[.is-active]:opacity-100 group-[.is-active]:scale-100 transition-all"><?php serc_svg("close", "size-6") ?></span>
-			</button>
+<div data-navigation class="group/navigation fixed z-50 top-0 left-0 w-full">
+	<header data-navigation-header class="group/header z-10 bg-white border-b border-subtle relative">
+		<div class="flex items-center lg:items-end gap-6 lg:gap-16 px-6 xl:pr-12">
+			<div class="relative lg:hidden my-5">
+				<button data-navigation-close
+					class="<?php echo $button_style; ?> translate-center opacity-0 scale-0 group-[.is-open]/navigation:opacity-100 group-[.is-open]/navigation:scale-100 transition-all text-light-surface-normal">
+					<?php echo serc_svg("close", "size-6") ?>
+				</button>
+				<a data-navigation-menu-toggle href="#menu-mobile"
+					class="<?php echo $button_style; ?> group-[.is-open]/navigation:opacity-0 group-[.is-open]/navigation:scale-0 group-[.is-open]/navigation:pointer-events-none transition-all text-light-surface-subtle">
+					<?php echo serc_svg("menu", "size-6") ?>
+				</a>
+			</div>
 			<a href="<?php echo home_url(); ?>" class="w-[152px] h-[40px] lg:w-[231px] lg:h-[62px] shrink-0 my-5">
 				<img src="<?php echo get_template_directory_uri() . "/assets/logo-horz-color.svg"; ?>" alt="SERC Logo" width="231" height="62" class="w-full h-full object-contain">
 			</a>
 			<nav class="w-full flex items-start gap-6 xl:gap-16">
-				<button class="<?php echo $button_style . ' ' . $menu_item_style; ?> hidden lg:flex">About <?php serc_svg("chevron-down", "size-4") ?></button>
-				<button class="<?php echo $button_style . ' ' . $menu_item_style; ?> hidden lg:flex">Research <?php serc_svg("chevron-down", "size-4") ?></button>
-				<button class="<?php echo $button_style . ' ' . $menu_item_style; ?> hidden lg:flex">Events &amp; News <?php serc_svg("chevron-down", "size-4") ?></button>
-				<button class="<?php echo $button_style . ' ' . $menu_item_style; ?> hidden lg:flex">Resources &amp; Partners</button>
-				<button class="<?php echo $button_style . ' ' . $menu_item_style; ?> hidden lg:flex">Contact</button>
+				<?php foreach ($menu_items as $id => $item) : ?>
+					<a <?php if ($item["has_children"]) : ?>data-navigation-menu-hover-toggle<?php endif; ?>
+						href="#menu-<?php echo $id; ?>"
+						class="group/menu-item hidden lg:flex <?php echo $button_style . ' ' . $menu_item_style; ?>">
+						<?php echo $item["label"]; ?>
+						<?php if ($item["has_children"]) : ?>
+							<?php echo serc_svg("chevron-down", "size-4 transition-all group-[.is-hovered]/menu-item:rotate-180") ?>
+						<?php endif; ?>
+					</a>
+				<?php endforeach; ?>
 				<button data-navigation-search-toggle class="<?php echo $button_style; ?> ml-auto flex gap-4">
 					<span class="hidden lg:inline">Search</span>
-					<?php serc_svg("search", "inline size-6 lg:size-5") ?>
+					<?php echo serc_svg("search", "inline size-6 lg:size-5") ?>
 				</button>
 			</nav>
 		</div>
@@ -29,27 +48,134 @@
 			opacity-0 pointer-events-none
 			group-[.is-searching]/header:opacity-100 group-[.is-searching]/header:pointer-events-auto
 		">
-			<span class="text-light-surface-subtle transition-transform translate-x-4 group-[.is-searching]/header:translate-x-0"><?php serc_svg("search", "size-6") ?></span>
+			<span class="text-light-surface-subtle transition-transform translate-x-4 group-[.is-searching]/header:translate-x-0"><?php echo serc_svg("search", "size-6") ?></span>
 			<label for="header-search-input" class="sr-only">Search topics, publications, and more</label>
-			<input data-navigation-search-input type="text" name="query" id="header-search-input" class="w-full text-xl leading-none border-0 bg-transparent transition-transform translate-x-4 group-[.is-searching]/header:translate-x-0" placeholder="Search topics, publications, and more">
+			<input data-navigation-search-input type="text" name="query" id="header-search-input" class="w-full text-xl leading-none border-0 outline-0 bg-transparent transition-transform translate-x-4 group-[.is-searching]/header:translate-x-0" placeholder="Enter search text">
 			<button type="button" data-navigation-search-toggle class="
 				<?php echo $button_style; ?> 
 				ml-auto text-light-surface-normal
 				transition-transform translate-x-6 group-[.is-searching]/header:translate-x-0
-				"><?php serc_svg("close", "size-6") ?></button>
+				"><?php echo serc_svg("close", "size-6") ?></button>
 			<button type="submit" class="sr-only">Submit</button>
 		</form>
 	</header>
-	<div>
-		<!-- dropdown menus here... -->
+	<div
+		data-navigation-menu-container
+		class="
+			absolute z-0 top-full left-0 w-full bg-white px-6 overflow-hidden transition-all
+			h-[calc(100dvh-81px)] lg:h-0 
+			pointer-events-none group-[.is-open]/navigation:pointer-events-auto
+			opacity-0 group-[.is-open]/navigation:opacity-100
+			-translate-x-12 lg:translate-x-0 group-[.is-open]/navigation:translate-x-0
+			lg:-translate-y-12 group-[.is-open]/navigation:translate-y-0
+			shadow-[0_16px_40px_16px_rgba(0,0,0,0.2)]
+			duration-500
+		">
+		<nav data-navigation-menu
+			id="menu-mobile"
+			class="navigation-menu pt-16">
+			<?php foreach ($menu_items as $id => $item) : ?>
+				<a data-navigation-menu-toggle href="#menu-<?php echo $id; ?>" class="flex items-center gap-2 text-lg w-full leading-none p-5 cursor-pointer ">
+					<?php echo $item["label"]; ?>
+					<?php if ($item["has_children"]) : ?>
+						<?php echo serc_svg("chevron-down", "inline text-brand size-4 -rotate-90 ml-auto") ?>
+					<?php endif; ?>
+				</a>
+			<?php endforeach; ?>
+		</nav>
+		<?php
+		$menus = [
+			[
+				"id" => "about",
+				"label" => "About",
+				"items" => [['label' => 'About SERC', 'url' => '#'], ['label' => 'People', 'url' => '#']],
+				"headline" => [
+					"label" => "",
+					"icon" => "",
+					"text" => "Discover how we can help your research efforts with our national network of experts."
+				],
+				"cta" => ["label" => "Learn More About What We Do", "url" => "#"],
+			],
+			[
+				"id" => "research",
+				"label" => "Research",
+				"items" => [['label' => 'Our Research', 'url' => '#'], ['label' => 'Publications', 'url' => '#']],
+				"headline" => [
+					"label" => "",
+					"icon" => "",
+					"text" => "Discover how our Research Roadmaps for our mission areas of Velocity, Security, and AI/Autonomy can impact the success or your organization's campaigns."
+				],
+				"cta" => ["label" => "View Our Research Roadmaps", "url" => "#"],
+			],
+			[
+				"id" => "events-news",
+				"label" => "Events & News",
+				"items" => [['label' => 'Events', 'url' => '#'], ['label' => 'SERC Research Review', 'url' => '#'], ['label' => 'AI4SE & SE4AI Workshop', 'url' => '#'], ['label' => 'News', 'url' => '#']],
+				"headline" => [
+					"label" => "Featured Event",
+					"icon" => "calendar",
+					"text" => "Upcoming Event: 2025 Pacific Operational Science & Technology (POST) Conference"
+				],
+				"cta" => ["label" => "View Our Events", "url" => "#"],
+			],
+		]; ?>
+		<?php foreach ($menus as $menu) : ?>
+			<nav data-navigation-menu
+				id="menu-<?php echo $menu["id"]; ?>"
+				class="navigation-menu sub-menu">
+				<div class="lg:min-w-80 shrink-0">
+					<a data-navigation-menu-toggle href="#menu-mobile" class="relative flex items-center gap-4 text-h4 leading-none p-5 cursor-pointer lg:hidden">
+						<?php echo serc_svg("chevron-left", "absolute top-1/2 -left-1 -translate-y-1/2 size-4"); ?>
+						<?php echo $menu["label"]; ?>
+					</a>
+					<div class="hidden lg:block text-h6 leading-none text-light-surface-subtle mt-2 mb-6">In This Section:</div>
+					<?php
+					foreach ($menu["items"] as $item) : ?>
+						<a
+							href="<?php echo $item["url"]; ?>"
+							class="
+							flex items-center gap-2 text-lg w-full leading-none p-5 cursor-pointer transition-colors outline-0
+							lg:border-l-2 lg:border-transparent hover:border-brand focus:border-brand
+							hover:text-brand focus:text-brand
+							hover:font-semibold focus:font-semibold
+							hover:bg-light-secondary focus:bg-light-secondary
+						">
+							<?php echo $item["label"]; ?>
+							<?php echo serc_svg("arrow-right", "inline text-brand size-4 lg:hidden") ?>
+						</a>
+					<?php endforeach; ?>
+				</div>
+				<div class="border-subtle lg:w-0 lg:h-full lg:border-l"></div>
+				<div class="flex flex-col gap-8 lg:pt-2 lg:max-w-[630px]">
+					<?php if ($menu["headline"]["label"]) : ?>
+						<div class="flex gap-1 items-center">
+							<?php if ($menu["headline"]["icon"]) : ?>
+								<?php echo serc_svg($menu["headline"]["icon"], "text-brand size-5") ?>
+							<?php endif; ?>
+							<span class="uppercase text-light-surface-muted"><?php echo $menu["headline"]["label"] ?></span>
+						</div>
+					<?php endif; ?>
+					<p class="text-xl lg:text-h4"><?php echo $menu["headline"]["text"] ?></p>
+					<p class="font-medium lg:text-xl">
+						<a href="<?php echo $menu["cta"]["url"]; ?>" class="hover:text-brand transition-colors">
+							<?php echo $menu["cta"]["label"]; ?>
+							<?php echo serc_svg("arrow-right", "inline text-brand size-4 ml-2") ?>
+						</a>
+					</p>
+				</div>
+			</nav>
+		<?php endforeach; ?>
 	</div>
 </div>
 
 <script type="text/javascript">
 	(function() {
+		const SELECTION_EVENT = navigator.maxTouchPoints > 0 ? 'touchend' : 'click';
+		const BREAKPOINT_LG = 1024;
+
 		class NavigationSearch {
 			constructor(navigation) {
-				if (!navigation) return;
+				if (!navigation) return console.error("No navigation found :(");
 				this.navigation = navigation;
 				this.header = this.navigation.querySelector('[data-navigation-header]');
 				this.searchInput = this.navigation.querySelector('[data-navigation-search-input]');
@@ -58,7 +184,7 @@
 			}
 			init() {
 				this.toggles.forEach(toggle => {
-					toggle.addEventListener('click', e => {
+					toggle.addEventListener(SELECTION_EVENT, e => {
 						e.preventDefault();
 						this.header.classList.toggle('is-searching')
 						setTimeout(() => {
@@ -70,20 +196,106 @@
 		}
 		new NavigationSearch(document.querySelector('[data-navigation]'));
 
+
+		/** ------------------------------------- */
+
+
 		class NavigationMenu {
 			constructor(navigation) {
-				if (!navigation) return;
+				if (!navigation) return console.error("No navigation found :(");
 				this.navigation = navigation;
-				this.toggles = this.navigation.querySelectorAll('[data-navigation-menu-toggle]');
+				this.navMenuContainer = this.navigation.querySelector('[data-navigation-menu-container]');
+				this.menuHoverToggles = this.navigation.querySelectorAll('[data-navigation-menu-hover-toggle]');
+				this.menuToggles = this.navigation.querySelectorAll('[data-navigation-menu-toggle], [data-navigation-mobile-toggle]');
+				this.closeBtn = this.navigation.querySelector('[data-navigation-close]');
+				this.menus = this.navigation.querySelectorAll('[data-navigation-menu]');
+				this.menuActionTimeout = 0
 				this.init();
 			}
 			init() {
-				this.toggles.forEach(toggle => {
-					toggle.addEventListener('click', e => {
+				this.menuToggles.forEach(menuToggle => {
+					menuToggle.addEventListener(SELECTION_EVENT, e => {
 						e.preventDefault();
-						toggle.classList.toggle('is-active');
+						this.menus.forEach(menu => {
+							if (menu.classList.contains('is-active')) {
+								this.closeMenu(menu);
+							}
+						})
+						if (!this.navIsOpen()) this.openNav();
+						this.openMenu(menuToggle.getAttribute('href'));
 					});
+				});
+				this.menuHoverToggles.forEach(hoverToggle => {
+					const selector = hoverToggle.getAttribute('href');
+					hoverToggle.addEventListener('click', e => e.preventDefault());
+					hoverToggle.addEventListener('mouseenter', e => {
+						const menu = this.__getMenu(selector);
+						hoverToggle.classList.add('is-hovered');
+						clearTimeout(this.menuActionTimeout);
+						this.openNav(menu.offsetHeight + 'px');
+						setTimeout(() => {
+							this.openMenu(menu);
+						}, 500)
+					})
+					hoverToggle.addEventListener('mouseleave', e => {
+						hoverToggle.classList.remove('is-hovered');
+						this.closeMenu(selector);
+						this.menuActionTimeout = setTimeout(() => {
+							this.closeNav()
+						}, 500)
+					})
 				})
+				this.closeBtn.addEventListener(SELECTION_EVENT, e => {
+					e.preventDefault();
+					this.menus.forEach(menu => {
+						this.closeMenu(menu);
+					})
+					this.closeNav();
+				})
+			}
+			navIsOpen() {
+				return this.navigation.classList.contains('is-open');
+			}
+			openNav(height) {
+				if (window.innerWidth >= BREAKPOINT_LG) {
+					this.navMenuContainer.style.height = height;
+				}
+				this.navigation.classList.add('is-open');
+			}
+			closeNav() {
+				this.navigation.classList.remove('is-open');
+				if (window.innerWidth >= BREAKPOINT_LG) {
+					this.navMenuContainer.style.height = '0px';
+				}
+			}
+			openMenu(menu) {
+				menu = this.__getMenu(menu);
+				if (!menu) return
+				menu.classList.add('is-active');
+			}
+			closeMenu(menu) {
+				menu = this.__getMenu(menu);
+				if (!menu) return
+				console.log('closeMenu', menu);
+				menu.classList.remove('is-active');
+			}
+			__getMenu(menu) {
+				let selector
+				if (typeof menu === 'string') {
+					if (menu[0] !== '#') {
+						selector = '#' + menu;
+					} else {
+						selector = menu;
+					}
+					menu = this.navigation.querySelector(selector);
+				}
+				if (menu instanceof Element === false) {
+					console.error("No menu found :(", {
+						menu,
+						selector
+					});
+				}
+				return menu;
 			}
 		}
 		new NavigationMenu(document.querySelector('[data-navigation]'));
