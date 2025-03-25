@@ -16,4 +16,10 @@
   * {
     @apply focus:focus-ring;
   }
+  a {
+    @apply cursor-pointer;
+  }
+  strong {
+    @apply font-semibold;
+  }
 }

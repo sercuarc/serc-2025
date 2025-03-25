@@ -72,7 +72,7 @@
   @apply text-xl;
 }
 @utility body-base {
-  @apply text-base;
+  @apply text-base leading-7;
 }
 @utility body-sm {
   @apply text-sm;

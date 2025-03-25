@@ -35,3 +35,9 @@ function serc_set_customizer_sections($wp_customize)
 	$wp_customize->remove_section('custom_css');
 }
 add_action('customize_register', 'serc_set_customizer_sections', 15);
+
+function serc_theme_support()
+{
+	add_theme_support('title-tag');
+}
+add_action('after_setup_theme', 'serc_theme_support');

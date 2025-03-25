@@ -134,6 +134,11 @@
     }
   }
 
+  .field-text-sm {
+    input {
+      @apply py-[0.47em];
+    }
+  }
   .field-text-lg {
     input {
       @apply text-[28px] leading-none py-[0.47em];
