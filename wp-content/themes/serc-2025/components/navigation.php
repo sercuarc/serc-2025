@@ -32,7 +32,7 @@
 						class="group/menu-item hidden lg:flex <?php echo $button_style . ' ' . $menu_item_style; ?>">
 						<?php echo $item["label"]; ?>
 						<?php if ($item["has_children"]) : ?>
-							<?php echo serc_svg("chevron-down", "size-4 transition-all group-[.is-hovered]/menu-item:rotate-180") ?>
+							<?php echo serc_svg("chevron-down", "size-4 transition-all group-[.is-active]/menu-item:rotate-180") ?>
 						<?php endif; ?>
 					</a>
 				<?php endforeach; ?>
@@ -150,7 +150,7 @@
 					<?php if ($menu["headline"]["label"]) : ?>
 						<div class="flex gap-1 items-center">
 							<?php if ($menu["headline"]["icon"]) : ?>
-								<?php echo serc_svg($menu["headline"]["icon"], "text-brand size-5") ?>
+								<?php echo serc_svg("calendar", "text-brand size-5") ?>
 							<?php endif; ?>
 							<span class="uppercase text-light-surface-muted"><?php echo $menu["headline"]["label"] ?></span>
 						</div>
@@ -210,9 +210,27 @@
 				this.closeBtn = this.navigation.querySelector('[data-navigation-close]');
 				this.menus = this.navigation.querySelectorAll('[data-navigation-menu]');
 				this.menuActionTimeout = 0
+				this._data = new Proxy({
+					activeMenu: '',
+				}, {
+					set: (target, prop, value) => {
+						if (prop === "activeMenu") {
+							this.onActiveMenuChange(value);
+						}
+						target[prop] = value;
+						return true;
+					},
+				});
 				this.init();
 			}
+			set activeMenu(value) {
+				this._data.activeMenu = value;
+			}
+			get activeMenu() {
+				return this._data.activeMenu;
+			}
 			init() {
+
 				this.menuToggles.forEach(menuToggle => {
 					menuToggle.addEventListener(SELECTION_EVENT, e => {
 						e.preventDefault();
@@ -225,33 +243,62 @@
 						this.openMenu(menuToggle.getAttribute('href'));
 					});
 				});
+
 				this.menuHoverToggles.forEach(hoverToggle => {
 					const selector = hoverToggle.getAttribute('href');
+
 					hoverToggle.addEventListener('click', e => e.preventDefault());
+
 					hoverToggle.addEventListener('mouseenter', e => {
-						const menu = this.__getMenu(selector);
-						hoverToggle.classList.add('is-hovered');
 						clearTimeout(this.menuActionTimeout);
+						hoverToggle.focus();
+						if (this.activeMenu !== selector) this.closeMenu(this.activeMenu);
+						this.activeMenu = selector;
+						const menu = this.__getMenu(selector);
 						this.openNav(menu.offsetHeight + 'px');
 						setTimeout(() => {
 							this.openMenu(menu);
 						}, 500)
-					})
+					});
+
 					hoverToggle.addEventListener('mouseleave', e => {
-						hoverToggle.classList.remove('is-hovered');
-						this.closeMenu(selector);
+						hoverToggle.blur();
 						this.menuActionTimeout = setTimeout(() => {
-							this.closeNav()
+							this.closeMenu(this.activeMenu);
+							this.closeNav();
 						}, 500)
-					})
+					});
+
 				})
+
+				this.navMenuContainer.addEventListener('mouseenter', e => {
+					clearTimeout(this.menuActionTimeout);
+				});
+
+				this.navMenuContainer.addEventListener('mouseleave', e => {
+					this.menuActionTimeout = setTimeout(() => {
+						this.closeNav()
+					}, 500)
+				});
+
 				this.closeBtn.addEventListener(SELECTION_EVENT, e => {
 					e.preventDefault();
 					this.menus.forEach(menu => {
 						this.closeMenu(menu);
 					})
 					this.closeNav();
-				})
+				});
+
+			}
+			onActiveMenuChange(activeMenuHash) {
+				const currentActive = this.navigation.querySelectorAll('[data-navigation-menu-hover-toggle].is-active');
+				const current = this.navigation.querySelector('[data-navigation-menu-hover-toggle][href="' + activeMenuHash + '"]');
+				if (!activeMenuHash || currentActive.length) {
+					currentActive.forEach(c => c.classList.remove('is-active', 'text-brand'));
+				}
+				if (current) {
+					current.classList.add('is-active', 'text-brand');
+				}
 			}
 			navIsOpen() {
 				return this.navigation.classList.contains('is-open');
@@ -263,6 +310,7 @@
 				this.navigation.classList.add('is-open');
 			}
 			closeNav() {
+				this.activeMenu = '';
 				this.navigation.classList.remove('is-open');
 				if (window.innerWidth >= BREAKPOINT_LG) {
 					this.navMenuContainer.style.height = '0px';
@@ -274,9 +322,9 @@
 				menu.classList.add('is-active');
 			}
 			closeMenu(menu) {
+				if (!menu) return
 				menu = this.__getMenu(menu);
 				if (!menu) return
-				console.log('closeMenu', menu);
 				menu.classList.remove('is-active');
 			}
 			__getMenu(menu) {

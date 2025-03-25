@@ -3,7 +3,7 @@
   top-0 left-0 w-full bg-white px-6
   transition-all opacity-0 pointer-events-none
   -translate-x-12 lg:-translate-x-0
-  lg:-translate-y-12
+  lg:-translate-y-4
   duration-500;
 
   &.sub-menu {
