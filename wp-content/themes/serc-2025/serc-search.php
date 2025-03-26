@@ -8,164 +8,91 @@
 
 <?php get_header(); ?>
 
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-<script>
-	document.addEventListener('alpine:init', () => {
-		console.log('Alpine initialized');
+<?php $search_query = get_query_var('query'); ?>
 
-		Alpine.data('searchApp', (initialQuery = "") => ({
-			status: "idle",
-			query: initialQuery,
-			sort: "relevance",
-			year: "all",
-			resultsQuery: "",
-			results: null,
+<?php $filters = [
+	'events-news' => 'Events / News',
+	'media' => 'Media',
+	'people' => 'People',
+	'publications' => 'Publications',
+	'resources' => 'Resources',
+]; ?>
 
-			init() {
-				console.log('Search App initialized');
-			},
+<main>
 
-			truncate(str) {
-				const words = str.split(' ');
-				return words.slice(0, 30).join(' ') + (words.length > 10 ? ' ...' : '');
-			},
-
-			formatDate(dateString) {
-				const d = new Date(dateString);
-				return d.toLocaleDateString('en-US', {
-					year: 'numeric',
-					month: 'long',
-					day: 'numeric'
-				});
-			},
-
-			handleSortChange(e) {
-				if (this.query.length > 0) {
-					this.handleSubmit(null, this.$refs.form)
-				}
-			},
-
-			async handleSubmit(e, form) {
-				this.status = "loading";
-				const formData = new FormData(form || e.target);
-
-				const params = new URLSearchParams(formData);
-				const queryString = params.toString();
-
-				const res = await fetch('/wp-json/serc-2025/v1/search?' + queryString);
-				const json = await res.json()
-
-				this.resultsQuery = formData.get('query');
-				this.results = json;
-				this.status = "idle";
-			}
-		}))
-
-	});
-</script>
-
-<div x-data="searchApp('<?php echo get_query_var('query'); ?>')" class="flex flex-col gap-8">
-
-	<form x-ref="form" data-search-form method="get" action="/search" x-on:submit.prevent="handleSubmit" class="flex flex-col gap-8">
-
-		<div class="relative flex flex-wrap items-center gap-8 bg-gray-100 p-4 rounded-lg">
-			<div data-search-field class="w-full max-w-96 relative bg-white border border-gray-500 rounded-lg overflow-hidden">
-				<label for="query" class="sr-only">Search topics, publications, and more</label>
-				<input type="text" x-model="query" id="query" name="query" placeholder="Search topics, publications, and more" class="block p-4 text-lg w-full h-full" />
-				<button class="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg p-2 hover:bg-gray-300 cursor-pointer" type="submit" aria-label="Search">
-					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6">
-						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-						<g id="SVGRepo_iconCarrier">
-							<path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-						</g>
-					</svg>
-				</button>
+	<div class="hero bg-light-tertiary py-20">
+		<form class="container flex flex-col gap-6">
+			<h1 class="text-title-1">Search<?php echo $search_query ? " Results" : ""; ?></h1>
+			<div class="flex gap-2 mt-4">
+				<div class="field field-text field-text-lg w-full">
+					<label for="query" class="sr-only">Search for topics, publications, and more</label>
+					<input type="text" id="query" name="query" value="<?php echo $search_query; ?>" placeholder="Search for topics, publications, and more">
+					<button type="button"
+						class="
+							absolute top-1/2 -translate-y-1/2 right-4 
+							text-gray-300 hover:text-gray-500 
+							cursor-pointer transition-all
+							<?php echo $search_query ? "scale-100 opacity-100" : "scale-0 opacity-0"; ?>
+						">
+						<?php echo serc_svg("close", "size-6") ?>
+					</button>
+				</div>
+				<button type="submit" class="btn btn-primary btn-lg">Search</button>
 			</div>
-			<!-- Data field -->
-			<div data-filter-date class="flex items-center gap-4 w-full max-w-72">
-				<strong class="whitespace-nowrap">Year</strong>
-				<select name="year" x-model="year" class="w-full bg-white border border-gray-500 rounded-lg block p-4 text-lg">
-					<option value="all">All</option>
-					<?php
-					// make list of year options going back 20 years
-					$year = date('Y');
-					for ($i = $year; $i >= $year - 20; $i--) {
-						echo '<option value="' . $i . '">' . $i . '</option>';
-					}
-					?>
-				</select>
+			<div class="grid grid-cols-1 lg:grid-cols-3">
+				<div class="lg:col-span-2">
+					<p class="text-sm font-medium text-dark-secondary">Filter by Media Type</p>
+					<div class="flex flex-wrap gap-2 mt-4">
+						<?php foreach ($filters as $id => $label) : ?>
+							<div class="field field-toggle">
+								<input type="checkbox" id="filter-<?php echo $id; ?>" name="<?php echo $id; ?>" value="1" class="sr-only">
+								<label for="filter-<?php echo $id; ?>" class="label"><?php echo $label; ?></label>
+								<?php echo serc_svg('check'); ?>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
+				<div class="col-span-1 flex flex-col md:flex-row gap-4 lg:gap-10">
+					<div class="field field-select field-select-sm w-full gap-y-4">
+						<label class="label" for="example">Year</label>
+						<select name="example" id="example">
+							<?php
+							$year = date('Y');
+							for ($i = 0; $i < 20; $i++) {
+								echo "<option value=\"$year\">$year</option>";
+								$year--;
+							}
+							?>
+						</select>
+					</div>
+					<div class="field field-select field-select-sm w-full gap-y-4">
+						<label class="label" for="example">Sort by</label>
+						<select name="example" id="example">
+							<option value="relevant">Most Relevant</option>
+							<option value="relevant">Most Recent</option>
+						</select>
+					</div>
+				</div>
 			</div>
-			<!-- Sorting Field -->
-			<div data-sort class="flex items-center gap-4 w-full max-w-72">
-				<strong class="whitespace-nowrap">Sort By</strong>
-				<select name="sort" x-model="sort" class="w-full bg-white border border-gray-500 rounded-lg block p-4 text-lg"
-					@change.prevent="handleSortChange">
-					<option value="relevance">Most relevant</option>
-					<option value="date">Date</option>
-					<option value="title">Title</option>
-				</select>
-			</div>
-			<!-- Content Type Filters -->
-			<div data-filter-content-type class="lg:absolute top-full mt-8 col-span-2 flex flex-col gap-4">
-				<p class="text-xl font-bold">Filter by Content Type:</p>
-				<ul class="flex flex-col gap-2">
-					<li>
-						<input type="checkbox" id="content_type_events_news" name="content_type[]" value="events_news">
-						<label for="content_type_events_news">Events/News</label>
-					</li>
-					<li>
-						<input type="checkbox" id="content_type_media" name="content_type[]" value="media">
-						<label for="content_type_media">Media</label>
-					</li>
-					<li>
-						<input type="checkbox" id="content_type_people" name="content_type[]" value="people">
-						<label for="content_type_people">People</label>
-					</li>
-					<li>
-						<input type="checkbox" id="content_type_publications" name="content_type[]" value="publications">
-						<label for="content_type_publications">Publications</label>
-					</li>
-					<li>
-						<input type="checkbox" id="content_type_resources" name="content_type[]" value="resources">
-						<label for="content_type_resources">Resources</label>
-					</li>
-				</ul>
-			</div>
-		</div>
-
-	</form>
-
-	<div class="grid grid-cols-12 gap-12">
-
-		<h2 class="text-3xl col-span-12 lg:col-span-9 lg:col-start-4">
-			<template x-if="status === 'loading'">
-				<span class="text-red-700">Searching...</span>
-			</template>
-			<template x-if="status === 'idle' && resultsQuery && results?.hits?.length">
-				<span>Found <strong x-text="results.estimatedTotalHits"></strong> results for: "<strong x-text="resultsQuery"></strong>"</span>
-			</template>
-			<template x-if="status === 'idle' && !results?.hits?.length">
-				<span>No Results</span>
-			</template>
-		</h2>
-
-		<template x-if="results?.hits?.length">
-			<template x-for="hit in results.hits">
-				<article class="flex flex-col gap-4 rounded-lg col-span-12 lg:col-span-9 xl:col-span-6 lg:col-start-4 xl:col-start-4">
-					<p class="text-sm font-bold flex gap-4">
-						<span class="opacity-50" x-text="hit.type"></span>
-						<span x-text="formatDate(hit.publication_date)"></span>
-					</p>
-					<h2 class="text-xl" x-text="hit.title"></h2>
-					<p x-text="truncate(hit.abstract)" class="text-base leading-relaxed"></p>
-					<p><a x-bind:href="hit.file_s3" class="font-bold text-xl">Read More ></a></p>
-				</article>
-			</template>
-		</template>
-
-
+		</form>
 	</div>
-</div>
+
+	<div class="container py-14">
+		<p class="text-h5 font-normal">Showing 1-10 of 17 results that include <strong><?php echo $search_query; ?></strong></p>
+		<div class="field field-checkbox mt-4">
+			<input type="checkbox" name="exact" id="exact-checkbox">
+			<label class="label" for="exact-checkbox">Show only exact matches for “<?php echo $search_query; ?>”</label>
+		</div>
+		<div class="mt-10">
+			<article class="py-8 border-t border-subtle">
+				<h4 class="text-h4 max-w-[var(--breakpoint-lg)] "><a href="#" class="hover:text-brand focus:text-brand outline-0 transition-colors">Trusted Artificial Intelligence Systems Engineering Challenge</a></h4>
+				<p class="text-h6 text-light-surface-subtle mt-6 max-w-[var(--breakpoint-lg)] ">By Dr. Peter Beling, Mr. Thomas McDermott, Dr. Stephen Adams</p>
+				<p class="body-base mt-4 max-w-[var(--breakpoint-lg)] ">The Trusted AI Challenge for Armaments SE is a novel approach to improving the performance of AI-enabled systems. Rather than focusing on improving AI models, this challenge asks student teams to develop SE methods to build and operate systems that provide trustworthy behaviors using components that are less trustworthy. Over the years, engineers have...</p>
+				<p class="uppercase font-light mt-4">Resource Type <span class="mx-2">|</span> MMM DD, YYYY</p>
+			</article>
+		</div>
+	</div>
+
+</main>
 
 <?php get_footer(); ?>

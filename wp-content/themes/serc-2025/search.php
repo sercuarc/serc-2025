@@ -3,6 +3,7 @@
 /**
  * Template Name: Search
  * Description: Default Wordpress search. Reroutes to custom search.
+ * See {theme}/serc-search.php
  */
 ?>
 
