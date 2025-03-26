@@ -9,7 +9,7 @@
 ];
 ?>
 
-<div data-navigation class="group/navigation fixed z-50 top-0 left-0 w-full">
+<div data-navigation class="group/navigation fixed z-50 top-0 group-[.customize-support]/body:top-[46px] md:group-[.customize-support]/body:top-8 left-0 w-full">
 	<header data-navigation-header class="group/header z-10 bg-white border-b border-subtle relative">
 		<div class="flex items-center lg:items-end gap-6 lg:gap-16 px-6 xl:pr-12">
 			<div class="relative lg:hidden my-5">

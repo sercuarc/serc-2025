@@ -11,6 +11,6 @@
 	<?php wp_head(); ?>
 </head>
 
-<body class="text-dark-main selection:bg-red-200 selection:text-dark-main overflow-x-hidden pt-[81px] lg:pt-[102px]" style="-webkit-font-smoothing: antialiased;">
+<body class="group/body text-dark-main selection:bg-red-200 selection:text-dark-main overflow-x-hidden pt-[81px] lg:pt-[102px]" style="-webkit-font-smoothing: antialiased;">
 
 	<?php get_template_part('components/navigation'); ?>
