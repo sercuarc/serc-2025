@@ -1,0 +1,22 @@
+.tab {
+  @apply text-light-surface-normal hover:bg-light-secondary focus:bg-light-secondary outline-0
+  text-base lg:text-lg font-normal 
+  px-4 lg:px-12 py-3 lg:py-4 border-b-2 border-subtle whitespace-nowrap
+  transition-all cursor-pointer;
+
+  &.is-active {
+    @apply text-light-surface-strong font-semibold border-b-4 border-brand;
+  }
+}
+
+.tab-content-wrapper {
+  @apply relative;
+}
+
+.tab-content {
+  @apply absolute opacity-0 pointer-events-none;
+
+  &.is-active {
+    @apply relative opacity-100 pointer-events-auto;
+  }
+}
