@@ -17,63 +17,44 @@
   border-color: var(--border-strong);
 }
 @utility text-h1 {
-  @apply font-oswald;
-  font-size: 4rem;
-  line-height: 1.25;
-  font-weight: 500;
-  text-transform: uppercase;
+  @apply font-oswald text-5xl lg:text-[4rem] leading-[1.25] font-medium uppercase;
 }
 @utility text-h2 {
-  @apply font-oswald;
-  font-size: 3rem;
-  line-height: 1.333;
-  font-weight: 500;
-  text-transform: uppercase;
+  @apply font-oswald text-4xl lg:text-5xl leading-[1.333] uppercase font-medium;
 }
 @utility text-h3 {
-  @apply font-inter;
-  font-size: 2rem;
-  font-weight: 500;
-  line-height: 1.125;
+  @apply font-inter text-[1.75rem] lg:text-[2rem] leading-[1.125] font-medium;
 }
 @utility text-h4 {
-  @apply font-inter;
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1.5;
+  @apply font-inter text-2xl leading-[1.5] font-medium;
 }
 @utility text-h5 {
-  @apply font-inter;
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.4;
+  @apply font-inter text-xl leading-[1.4] font-semibold;
 }
 @utility text-h6 {
-  @apply font-inter;
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.5;
+  @apply font-inter text-base leading-[1.5] font-semibold;
 }
 @utility text-title-1 {
-  @apply font-oswald;
-  font-size: 2.5rem;
-  line-height: 1.4;
-  text-transform: uppercase;
-  font-weight: 500;
+  @apply font-oswald text-[2rem] lg:text-[2.5rem] leading-[1.4] uppercase font-medium;
 }
 @utility text-title-2 {
-  @apply font-oswald;
-  font-size: 2rem;
-  line-height: 1.5;
-  text-transform: uppercase;
-  font-weight: 600;
+  @apply font-oswald text-2xl lg:text-[2rem] leading-[1.5] uppercase font-semibold;
 }
 @utility body-lg {
-  @apply text-xl;
+  @apply text-lg lg:text-xl leading-7 lg:leading-8;
 }
 @utility body-base {
-  @apply text-base leading-7;
+  @apply text-base leading-6;
 }
 @utility body-sm {
-  @apply text-sm;
+  @apply text-sm leading-5;
+}
+@utility label-lg {
+  @apply text-lg lg:text-xl font-medium leading-none;
+}
+@utility label-base {
+  @apply text-base font-normal leading-none;
+}
+@utility label-sm {
+  @apply text-sm font-medium leading-none;
 }
