@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: People Landing
+ * People Archive
  */
 ?>
 
