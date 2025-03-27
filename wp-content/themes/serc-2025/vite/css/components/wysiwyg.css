@@ -1,26 +1,29 @@
 .wysiwyg {
-  @apply text-base flex flex-col gap-6;
+  @apply text-base leading-[1.6];
 
   a {
     @apply text-brand hover:underline;
   }
   h1 {
-    @apply text-h1;
+    @apply text-h1 mt-6 lg:mt-8;
   }
   h2 {
-    @apply text-h2;
+    @apply text-h2 mt-6 lg:mt-8;
   }
   h3 {
-    @apply text-h3;
+    @apply text-h3 mt-6 lg:mt-8;
   }
   h4 {
-    @apply text-h4;
+    @apply text-h4 mt-6 lg:mt-8;
   }
   h5 {
-    @apply text-h5;
+    @apply text-h5 mt-6 lg:mt-8;
   }
   h6 {
-    @apply text-h6;
+    @apply text-h6 mt-6 lg:mt-8;
+  }
+  p {
+    @apply mt-6 lg:mt-8;
   }
   blockquote {
     @apply font-normal text-h5 m-8 border-l-4 border-warm-neutral-300 pl-4;
@@ -28,4 +31,15 @@
   code {
     @apply bg-warm-neutral-200 rounded inline-block px-2 py-1;
   }
+  ul,
+  ol {
+    @apply list-disc pl-6 mt-6 lg:mt-8;
+  }
+  li {
+    @apply mt-4;
+  }
+}
+
+.wysiwyg-lg {
+  @apply text-lg lg:text-xl;
 }

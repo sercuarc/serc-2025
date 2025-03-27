@@ -1,4 +1,9 @@
-<svg width="184" height="184" viewBox="0 0 184 184" fill="none" xmlns="http://www.w3.org/2000/svg">
+<?php
+$width = isset($args['width']) ? $args['width'] : 184;
+$height = isset($args['height']) ? $args['height'] : 184;
+$class = isset($args['class']) ? $args['class'] : '';
+?>
+<svg width="<?php echo $width; ?>" height="<?php echo $height; ?>" viewBox="0 0 184 184" fill="none" xmlns="http://www.w3.org/2000/svg" class="<?php echo $class; ?>">
 	<mask id="mask0_1834_2416" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="184" height="184">
 		<rect width="184" height="184" fill="white" />
 	</mask>

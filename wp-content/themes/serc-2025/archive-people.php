@@ -29,19 +29,28 @@
 					<div data-tab-content id="operations" class="tab-content is-active mt-20 lg:mt-30">
 						<h2 class="text-title-1 text-center">Leadership</h2>
 						<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-12 lg:mt-20 -mx-4">
-							<?php for ($i = 0; $i < 4; $i++) : ?>
-								<a href="#" class="group/person-card-lg flex flex-col sm:flex-row gap-8 p-4 bg-white hover:shadow-lg focus:shadow-lg outline-0 transition-all">
-									<div class="mx-auto sm:mx-0"><?php get_template_part("components/avatar-placeholder") ?></div>
+							<?php
+							$people = get_posts(['numberposts' => -1, 'post_type' => 'people', 'order' => 'ASC', 'orderby' => 'sort_order']);
+							// 'category_name' => 'operations'
+							foreach ($people as $person) : ?>
+								<a href="<?php echo get_the_permalink($person->ID) ?>" class="group/person-card-lg flex flex-col sm:flex-row gap-8 p-4 bg-white hover:shadow-lg focus:shadow-lg outline-0 transition-all">
+									<div class="mx-auto sm:mx-0">
+										<?php if (has_post_thumbnail($person->ID)) : ?>
+											<?php echo get_the_post_thumbnail($person->ID, 'medium', ["class" => "w-48 h-48 object-cover"]) ?>
+										<?php else : ?>
+											<?php get_template_part("components/avatar-placeholder", null, ["class" => "w-48 h-48"]) ?>
+										<?php endif; ?>
+									</div>
 									<div class="flex flex-col gap-6 text-center sm:text-left">
-										<h3 class="text-h4 leading-none text-light-surface-strong group-hover/person-card-lg:text-brand transition-colors">Person Name</h3>
-										<p class="label-base text-light-surface-strong">SERC Executive Director</p>
+										<h3 class="text-h4 leading-none text-light-surface-strong group-hover/person-card-lg:text-brand transition-colors"><?php echo $person->post_title ?></h3>
+										<p class="label-base text-light-surface-strong">[TITLE]</p>
 										<p class="text-xs leading-none uppercase text-light-surface-normal">
 											<?php echo serc_svg("institution", "inline text-brand size-3 mr-1"); ?>
-											Stevens Institute Of Technology
+											[INSTITUTE]
 										</p>
 									</div>
 								</a>
-							<?php endfor; ?>
+							<?php endforeach; ?>
 						</div>
 					</div>
 					<div data-tab-content id="research-council" class="tab-content mt-20 lg:mt-30">
