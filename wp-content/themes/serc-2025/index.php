@@ -9,11 +9,28 @@
 
 <main>
 
-	<div class="h-[20vh] flex items-center justify-center bg-light-tertiary">hero</div>
+	<div class="hero">
+		<div class="container">
+			<h1 class="text-h1">Default Hero with Heading</h1>
+		</div>
+	</div>
+
+	<div class="hero hero--inverted">
+		<div class="container">
+			<h1 class="text-h1">Inverted Hero with Heading</h1>
+		</div>
+	</div>
+
+	<div class="hero hero--inverted hero--with-image">
+		<img src="https://plus.unsplash.com/premium_photo-1679756099015-b06104fff761?fm=jpg&amp;q=60&amp;w=3000&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="nasa satellite">
+		<div class="container relative">
+			<h1 class="text-h1">Inverted Hero with Image</h1>
+		</div>
+	</div>
 
 	<div class="container flex flex-col gap-20 mt-16">
 
-		<section id="text-fields" class="flex flex-col gap-8">
+		<section id="text-fields" class="flex flex-col gap-8 test">
 			<h1 class="text-title-2 text-gray-300">Text Fields </h1>
 			<div class="flex flex-col lg:flex-row items-start gap-12 ">
 				<div class="field field-text w-full">
@@ -177,18 +194,22 @@
 			<h1 class="text-title-2 text-warm-neutral-300">Typography</h1>
 
 			<div>
-				<h1 class="text-h1">text-h1</h1>
-				<h2 class="text-h2">text-h2</h2>
-				<h3 class="text-h3">text-h3</h3>
-				<h4 class="text-h4">text-h4</h4>
-				<h5 class="text-h5">text-h5</h5>
-				<h6 class="text-h6">text-h6</h6>
+				<h1 class="text-h1">Text H1</h1>
+				<h2 class="text-h2">Text H2</h2>
+				<h3 class="text-h3">Text H3</h3>
+				<h4 class="text-h4">Text H4</h4>
+				<h5 class="text-h5">Text H5</h5>
+				<h6 class="text-h6">Text H6</h6>
 			</div>
 
 			<div>
-				<p class="text-title-1">text-title-1</p>
-				<p class="text-title-2">text-title-2</p>
+				<p class="text-title-1">Text Title 1</p>
+				<p class="text-title-2">Text Title 2</p>
 			</div>
+
+			<p class="label-lg">Label Large</p>
+			<p class="label-base">Label Base</p>
+			<p class="label-sm">Label Small</p>
 
 			<p class="body-lg"><code class="bg-gray-100 mr-1">body-lg</code>This is a <strong>large body text</strong> paragraph. Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 

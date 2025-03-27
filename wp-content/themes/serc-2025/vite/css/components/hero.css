@@ -1,0 +1,37 @@
+@layer components {
+  .hero {
+    @apply relative flex flex-col gap-8 
+    justify-end lg:justify-center
+    bg-light-tertiary text-dark-main 
+    py-12 lg:py-14 
+    min-h-[15rem] lg:min-h-[22rem]
+    overflow-hidden;
+  }
+  .hero--inverted {
+    @apply bg-dark-main text-white;
+  }
+  .hero--with-image {
+    @apply before:absolute before:top-0 before:left-0 before:inset-0 before:z-10 
+    before:bg-gradient-to-b 
+      before:from-transparent 
+        before:to-black/55 
+    lg:before:bg-gradient-to-r
+      lg:before:from-black/55 lg:before:from-47% 
+        lg:before:to-transparent lg:before:to-72%;
+
+    background: linear-gradient(
+        266deg,
+        rgba(0, 0, 0, 0) 2.11%,
+        rgba(0, 0, 0, 0.42) 69.23%
+      ),
+      url(<path-to-image>) lightgray -83.804px 92.38px / 120.799% 144.934% no-repeat;
+
+    img {
+      @apply absolute top-0 left-0 w-full h-full object-cover z-0;
+    }
+
+    & > *:not(img) {
+      @apply relative z-20;
+    }
+  }
+}
