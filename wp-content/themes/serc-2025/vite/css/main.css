@@ -24,4 +24,8 @@
   strong {
     @apply font-semibold;
   }
+  address {
+    font-style: normal;
+    color: inherit;
+  }
 }

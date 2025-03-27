@@ -11,7 +11,7 @@
 
 <main>
 	<header class="hero <?php if ($image) : ?>hero--inverted hero--with-image<?php endif; ?>">
-		<?php if ($image = null) : ?>
+		<?php if ($image) : ?>
 			<?php echo $image; ?>
 		<?php endif; ?>
 		<div class="container">

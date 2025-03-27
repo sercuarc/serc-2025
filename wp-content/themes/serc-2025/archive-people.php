@@ -7,9 +7,11 @@
 
 <?php get_header(); ?>
 
+<?php $image = null; ?>
+
 <main>
-	<header class="hero <?php if ($thumbnail) : ?>hero--inverted hero--with-image<?php endif; ?>">
-		<?php if ($image = null) : ?>
+	<header class="hero <?php if ($image) : ?>hero--inverted hero--with-image<?php endif; ?>">
+		<?php if ($image) : ?>
 			<?php echo $image; ?>
 		<?php endif; ?>
 		<div class="container">
