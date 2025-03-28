@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: SERC Search
+ * SERC Search
  */
 
 ?>
@@ -84,12 +84,18 @@
 			<label class="label" for="exact-checkbox">Show only exact matches for “<?php echo $search_query; ?>”</label>
 		</div>
 		<div class="mt-10">
-			<article class="py-8 border-t border-subtle">
-				<h4 class="text-h4 max-w-[var(--breakpoint-lg)] "><a href="#" class="hover:text-brand focus:text-brand outline-0 transition-colors">Trusted Artificial Intelligence Systems Engineering Challenge</a></h4>
-				<p class="text-h6 text-light-surface-subtle mt-6 max-w-[var(--breakpoint-lg)] ">By Dr. Peter Beling, Mr. Thomas McDermott, Dr. Stephen Adams</p>
-				<p class="body-base mt-4 max-w-[var(--breakpoint-lg)] ">The Trusted AI Challenge for Armaments SE is a novel approach to improving the performance of AI-enabled systems. Rather than focusing on improving AI models, this challenge asks student teams to develop SE methods to build and operate systems that provide trustworthy behaviors using components that are less trustworthy. Over the years, engineers have...</p>
-				<p class="uppercase font-light mt-4">Resource Type <span class="mx-2">|</span> MMM DD, YYYY</p>
-			</article>
+			<?php for ($i = 0; $i < 3; $i++) : ?>
+				<article
+					class="
+						relative hover:z-10 py-8 flex flex-col gap-4 border-t border-subtle
+						before:absolute beore:z-[-1] before:top-0 before:-left-6 before:-right-6 before:-bottom-0 before:bg-light-main before:transition-shadow hover:before:shadow-[0_4px_12px_0_rgba(0,0,0,0.15)]
+					">
+					<h4 class="relative text-h4 max-w-[var(--breakpoint-lg)] mb-2"><a href="#" class="hover:text-brand focus:text-brand outline-0 transition-colors">Trusted Artificial Intelligence Systems Engineering Challenge</a></h4>
+					<p class="relative text-h6 text-light-surface-subtle max-w-[var(--breakpoint-lg)] ">By Dr. Peter Beling, Mr. Thomas McDermott, Dr. Stephen Adams</p>
+					<p class="relative body-base max-w-[var(--breakpoint-lg)] ">The Trusted AI Challenge for Armaments SE is a novel approach to improving the performance of AI-enabled systems. Rather than focusing on improving AI models, this challenge asks student teams to develop SE methods to build and operate systems that provide trustworthy behaviors using components that are less trustworthy. Over the years, engineers have...</p>
+					<p class="relative uppercase font-light">Resource Type <span class="mx-2">|</span> MMM DD, YYYY</p>
+				</article>
+			<?php endfor; ?>
 		</div>
 	</div>
 

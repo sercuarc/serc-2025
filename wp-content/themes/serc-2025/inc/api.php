@@ -8,8 +8,43 @@
 <?php
 
 use Serc2025\Helpers;
+use Serc2025\OpenSearch;
 
-function serc_get_people()
+$serc_open_search = null;
+
+add_action('rest_api_init', function () {
+	global $serc_open_search;
+	$serc_open_search = new OpenSearch(); // Initialize once
+	$routes = [
+		'/events' => 'serc_get_events',
+		'/people' => 'serc_get_people',
+		'/posts' => 'serc_get_posts',
+		'/search' => 'serc_get_search',
+	];
+	foreach ($routes as $route => $callback) {
+		register_rest_route('serc-2025/v1', $route, array(
+			'methods' => 'GET',
+			'callback' => $callback,
+			'permission_callback' => '__return_true',
+		));
+	}
+});
+
+function serc_get_search(WP_REST_Request $request)
+{
+	global $serc_open_search;
+	if (!$serc_open_search) {
+		$serc_open_search = new OpenSearch(); // Fallback if not set
+	}
+
+	// $param1 = $request->get_param('param1'); // Get specific param
+	// $all_params = $request->get_params(); // Get all params
+
+	$results = $serc_open_search->search($request->get_params());
+	return new WP_REST_Response($results, 200);
+}
+
+function serc_get_people(WP_REST_Request $request)
 {
 	$posts = array_map(function ($post) {
 		return [
@@ -27,7 +62,7 @@ function serc_get_people()
 	return new WP_REST_Response($posts, 200);
 }
 
-function serc_get_posts()
+function serc_get_posts(WP_REST_Request $request)
 {
 	$posts = array_map(function ($post) {
 		return [
@@ -46,7 +81,7 @@ function serc_get_posts()
 	return new WP_REST_Response($posts, 200);
 }
 
-function serc_get_events()
+function serc_get_events(WP_REST_Request $request)
 {
 	$posts = array_map(function ($post) {
 
@@ -82,18 +117,3 @@ function serc_get_events()
 
 	return new WP_REST_Response($posts, 200);
 }
-
-add_action('rest_api_init', function () {
-	$routes = [
-		'/posts' => 'serc_get_posts',
-		'/events' => 'serc_get_events',
-		'/people' => 'serc_get_people',
-	];
-	foreach ($routes as $route => $callback) {
-		register_rest_route('serc-2025/v1', $route, array(
-			'methods' => 'GET',
-			'callback' => $callback,
-			'permission_callback' => '__return_true',
-		));
-	}
-});

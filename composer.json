@@ -1,8 +1,8 @@
 {
     "require": {
-        "meilisearch/meilisearch-php": "^1.13",
         "guzzlehttp/guzzle": "^7.9",
-        "http-interop/http-factory-guzzle": "^1.0"
+        "http-interop/http-factory-guzzle": "^1.0",
+        "opensearch-project/opensearch-php": "^2.4"
     },
     "config": {
         "allow-plugins": {
