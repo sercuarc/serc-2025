@@ -10,11 +10,11 @@
 }
 
 .tab-content-wrapper {
-  @apply relative;
+  @apply relative overflow-hidden;
 }
 
 .tab-content {
-  @apply absolute opacity-0 pointer-events-none;
+  @apply absolute top-0 left-0 opacity-0 pointer-events-none;
 
   &.is-active {
     @apply relative opacity-100 pointer-events-auto;

@@ -93,6 +93,7 @@ add_action('rest_api_init', function () {
 		register_rest_route('serc-2025/v1', $route, array(
 			'methods' => 'GET',
 			'callback' => $callback,
+			'permission_callback' => '__return_true',
 		));
 	}
 });

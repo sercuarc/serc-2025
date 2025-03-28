@@ -19,8 +19,9 @@ add_action('init', function () {
 	register_post_type('people', [
 		'label' => 'People',
 		'public' => true,
-		'has_archive' => true,
+		'has_archive' => false,
 		'supports' => ['title', 'editor', 'thumbnail'],
+		'taxonomies' => ['member_roles'],
 		'show_in_rest' => true,
 		'menu_icon' => 'dashicons-groups',
 		'singular_name' => 'Person',
