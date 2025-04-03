@@ -47,15 +47,17 @@ function serc_get_search(WP_REST_Request $request)
 function serc_get_people(WP_REST_Request $request)
 {
 	$posts = array_map(function ($post) {
+		$thumbnail = get_the_post_thumbnail_url($post->ID);
 		return [
 			'content' => str_replace(["\n", "\r"], '', strip_tags($post->post_content)),
+			'created_at' => get_the_date('F j, Y', $post->ID),
 			'id' => $post->ID,
-			'type' => "People",
-			'thumbnail' => get_the_post_thumbnail_url($post->ID),
-			'name' => $post->post_title,
-			'url' => get_permalink($post->ID),
-			'title' => '[Professional Title]',
+			'title' => $post->post_title,
 			'organization' => '[Organization]',
+			'thumbnail' => $thumbnail ? $thumbnail : '',
+			'professional_title' => '[Professional Title]',
+			'type' => "People",
+			'url' => get_permalink($post->ID),
 		];
 	}, get_posts(['numberposts' => -1, 'post_type' => 'people']));
 
@@ -65,15 +67,15 @@ function serc_get_people(WP_REST_Request $request)
 function serc_get_posts(WP_REST_Request $request)
 {
 	$posts = array_map(function ($post) {
+		$thumbnail = get_the_post_thumbnail_url($post->ID);
 		return [
 			'content' => str_replace(["\n", "\r"], '', strip_tags($post->post_content)),
 			'date_formatted' => get_the_date('F j, Y', $post->ID),
-			'date_unix' => get_the_date('U', $post->ID),
 			'excerpt' => $post->post_excerpt,
 			'id' => $post->ID,
-			'type' => "News",
-			'thumbnail' => get_the_post_thumbnail_url($post->ID),
+			'thumbnail' => $thumbnail ? $thumbnail : '',
 			'title' => $post->post_title,
+			'type' => "News",
 			'url' => get_permalink($post->ID),
 		];
 	}, get_posts(['numberposts' => -1, 'post_type' => 'post']));
@@ -87,18 +89,23 @@ function serc_get_events(WP_REST_Request $request)
 
 		// check if event is all day
 		$isAllDay = get_post_meta($post->ID, '_EventAllDay', true);
-		$start_date_unix = date('U', strtotime(get_post_meta($post->ID, '_EventStartDate', true)));
-		$end_date_unix = date('U', strtotime(get_post_meta($post->ID, '_EventEndDate', true)));
-		$date_formatted = Helpers::formatEventDates($start_date_unix, $end_date_unix, $isAllDay);
+		$start_date = get_post_meta($post->ID, '_EventStartDate', true);
+		$end_date = get_post_meta($post->ID, '_EventEndDate', true);
+		$date_formatted = Helpers::formatEventDates(
+			date('U', strtotime($start_date)),
+			date('U', strtotime($end_date)),
+			$isAllDay
+		);
 		$venue = tribe_get_venue($post->ID);
+		$thumbnail = get_the_post_thumbnail_url($post->ID);
 
 		return [
 			'content' => str_replace(["\n", "\r"], '', strip_tags($post->post_content)),
 			'date_formatted' => $date_formatted,
-			'end_date_unix' => $end_date_unix,
+			'end_date' => date('F j, Y', strtotime($end_date)),
 			'excerpt' => $post->post_excerpt,
 			'id' => $post->ID,
-			'location' => ! $venue ? null : [
+			'venue_details' => [
 				'address' => tribe_get_address($post->ID),
 				'city' => tribe_get_city($post->ID),
 				'coordinates' => tribe_get_coordinates($post->ID),
@@ -106,12 +113,12 @@ function serc_get_events(WP_REST_Request $request)
 				'stateprovince' => tribe_get_stateprovince($post->ID),
 				'zip' => tribe_get_zip($post->ID),
 			],
-			'type' => "Event",
-			'start_date_unix' => $start_date_unix,
-			'thumbnail' => get_the_post_thumbnail_url($post->ID),
+			'start_date' => date('F j, Y', strtotime($start_date)),
+			'thumbnail' => $thumbnail ? $thumbnail : '',
 			'title' => $post->post_title,
+			'type' => "Event",
 			'url' => get_permalink($post->ID),
-			'venue' => $venue,
+			'venue' => $venue ? $venue : "",
 		];
 	}, tribe_get_events(['posts_per_page' => -1, 'eventDisplay' => 'all']));
 
