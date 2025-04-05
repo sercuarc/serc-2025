@@ -1,4 +1,4 @@
-<div class="bg-dark-main py-16 lg:py-30 bg-center bg-cover" style="background-image:url(<?php echo get_template_directory_uri() . "/assets/nasa-vault.jpg"; ?>)">
+<div class="bg-dark-main py-16 lg:py-30 bg-center bg-cover" style="background-image:url(<?php echo get_template_directory_uri() . "/assets/images/nasa-vault.jpg"; ?>)">
 	<div class="container max-w-[88rem]">
 		<form class="bg-white/96 border-brand border-t-6 p-6 py-10 max-w-[50rem] mx-auto">
 			<p class="text-title-2 text-center">Email Newsletter</p>

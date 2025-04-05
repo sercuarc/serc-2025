@@ -7,6 +7,6 @@
 
 function serc_svg($id = "", $class_name = "icon")
 {
-	$sprite_path = get_template_directory_uri() . '/assets/icon-sprite.svg';
+	$sprite_path = get_template_directory_uri() . '/assets/images/icon-sprite.svg';
 	return "<svg class='{$class_name}' fill='none'><use href='{$sprite_path}#{$id}'/></svg>";
 }

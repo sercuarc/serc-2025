@@ -23,7 +23,7 @@
 				</a>
 			</div>
 			<a href="<?php echo home_url(); ?>" class="w-[152px] h-[40px] lg:w-[231px] lg:h-[62px] shrink-0 my-5">
-				<img src="<?php echo get_template_directory_uri() . "/assets/logo-horz-color.svg"; ?>" alt="SERC Logo" width="231" height="62" class="w-full h-full object-contain">
+				<img src="<?php echo get_template_directory_uri() . "/assets/images/logo-horz-color.svg"; ?>" alt="SERC Logo" width="231" height="62" class="w-full h-full object-contain">
 			</a>
 			<nav class="w-full flex items-start gap-6 xl:gap-16">
 				<?php foreach ($menu_items as $id => $item) : ?>

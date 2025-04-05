@@ -1,7 +1,5 @@
-// CSS
-import "../css/main.css";
 // JS
-import "./tabs.js";
+import "./_tabs.js";
 
 // Main JavaScript file
 console.log("Main JavaScript file loaded");

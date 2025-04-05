@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @source "../../**/*.php";
-@source "../../**/*.js";
+@source "../js/**/*.{js,vue}";
 
 @import "./theme.css";
 

@@ -2,23 +2,26 @@
   "name": "serc-2025",
   "version": "0.1.0",
   "description": "A Wordpress theme for the Systems Engineering Research Center (SERC)",
-  "main": "src/js/main.js",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "gulp dev --gulpfile gulpfile.mjs",
+    "build": "gulp --gulpfile gulpfile.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Studio Lekker",
+  "author": "Kirk Pettinga (Studio Lekker)",
   "license": "ISC",
   "devDependencies": {
-    "browser-sync": "^3.0.3",
-    "chokidar-cli": "^3.0.0",
-    "vite": "^6.1.0",
-    "vite-plugin-svg-sprite": "^0.6.2"
-  },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.0.7",
-    "tailwindcss": "^4.0.7"
+    "@tailwindcss/postcss": "^4.1.2",
+    "autoprefixer": "^10.4.21",
+    "cssnano": "^7.0.6",
+    "del": "^6.1.1",
+    "esbuild": "^0.25.2",
+    "gulp": "^5.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-esbuild": "^0.14.0",
+    "gulp-postcss": "^10.0.0",
+    "gulp-uglify": "^3.0.2",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.2"
   }
 }

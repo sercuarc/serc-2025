@@ -10,7 +10,7 @@
 $get = wp_remote_get($_SERVER['DDEV_PRIMARY_URL'] . ':5173/@vite/client');
 define('IS_DEV', wp_get_environment_type() === 'local' && $get["response"]["code"] == 200);
 define('THEME_URI', get_template_directory_uri());
-define('DIST_URI', THEME_URI . '/dist');
+define('DIST_URI', THEME_URI . '/assets/dist');
 define('MANIFEST_PATH', get_template_directory() . '/dist/manifest.json');
 
 function enqueue_asset_js($entry_point = "")
@@ -21,7 +21,7 @@ function enqueue_asset_js($entry_point = "")
 		// Get hashed JS file
 		if (isset($manifest[$entry_point]['file'])) {
 			$js_file = $manifest[$entry_point]['file'];
-			wp_enqueue_script('serc-scripts', DIST_URI . '/' . $js_file, [], null, true);
+			wp_enqueue_script('serc-scripts', DIST_URI . '/js' . $js_file, [], null, true);
 		}
 	}
 }
@@ -33,7 +33,7 @@ function enqueue_asset_css($entry_point = "")
 
 		if (isset($manifest[$entry_point]['css'])) {
 			foreach ($manifest[$entry_point]['css'] as $css_file) {
-				wp_enqueue_style('serc-styles', DIST_URI . '/' . $css_file, [], null);
+				wp_enqueue_style('serc-styles', DIST_URI . '/css' . $css_file, [], null);
 			}
 		}
 	}
@@ -41,12 +41,15 @@ function enqueue_asset_css($entry_point = "")
 
 function enqueue_serc_scripts_styles()
 {
-	if (IS_DEV) {
-		echo '<script type="module" src="' . preg_replace('/:\d+$/', '', $_SERVER['DDEV_PRIMARY_URL']) . ':5173/@vite/client"></script>';
-		echo '<script type="module" src="' . preg_replace('/:\d+$/', '', $_SERVER['DDEV_PRIMARY_URL']) . ':5173/vite/js/main.js"></script>';
-	} else {
-		enqueue_asset_js("vite/js/main.js");
-		enqueue_asset_css("vite/js/main.js");
-	}
+	// if (IS_DEV) {
+	// 	echo '<script type="module" src="' . preg_replace('/:\d+$/', '', $_SERVER['DDEV_PRIMARY_URL']) . ':5173/@vite/client"></script>';
+	// 	echo '<script type="module" src="' . preg_replace('/:\d+$/', '', $_SERVER['DDEV_PRIMARY_URL']) . ':5173/vite/js/main.js"></script>';
+	// } else {
+	// enqueue_asset_js("vite/js/main.js");
+	// enqueue_asset_css("vite/js/main.js");
+	// }
+
+	wp_enqueue_script('serc-scripts', DIST_URI . '/js/main.js', [], null, true);
+	wp_enqueue_style('serc-styles', DIST_URI . '/css/main.css', [], null);
 }
 add_action('wp_enqueue_scripts', 'enqueue_serc_scripts_styles');

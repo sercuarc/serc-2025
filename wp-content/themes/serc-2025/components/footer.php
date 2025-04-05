@@ -17,7 +17,7 @@
 			<div class="flex flex-col xl:flex-row gap-12 xl:gap-30">
 				<div class="flex flex-col gap-8">
 					<a href="<?php echo home_url(); ?>" class="block w-[276px] h-[74px] shrink-0 focus:outline-white">
-						<img src="<?php echo get_template_directory_uri() . "/assets/logo-horz-white.svg"; ?>" alt="SERC Logo" width="276" height="74" class="w-full h-full object-contain">
+						<img src="<?php echo get_template_directory_uri() . "/assets/images/logo-horz-white.svg"; ?>" alt="SERC Logo" width="276" height="74" class="w-full h-full object-contain">
 					</a>
 					<div class="flex items-center gap-4">
 						<a href="#youtube" title="YouTube" class="p-2 outline-0 text-dark-surface-subtle hover:text-white focus:text-white border border-dark-tertiary hover:border-white focus:border-white transition-all"><?php echo serc_svg('youtube', 'block size-4') ?><span class="sr-only">YouTube</span></a>
@@ -45,7 +45,7 @@
 			</div>
 			<div class="mt-12">
 				<div class="text-3xl font-bold">
-					<img src="<?php echo get_template_directory_uri() . "/assets/airc-white.png"; ?>" alt="AIRC Logo" width="72" height="24" class="inline-block object-contain">
+					<img src="<?php echo get_template_directory_uri() . "/assets/images/airc-white.png"; ?>" alt="AIRC Logo" width="72" height="24" class="inline-block object-contain">
 				</div>
 				<p class="text-sm text-white mt-1">Visit our sister research center at <a href="https://acqirc.org/" class="hover:text-brand transition-colors focus:outline-white"><strong>acqirc.org</strong></a></p>
 			</div>
