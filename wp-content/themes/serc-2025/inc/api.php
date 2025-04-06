@@ -16,15 +16,15 @@ add_action('rest_api_init', function () {
 	global $serc_open_search;
 	$serc_open_search = new OpenSearch(); // Initialize once
 	$routes = [
-		'/events' => 'serc_get_events',
-		'/people' => 'serc_get_people',
-		'/posts' => 'serc_get_posts',
-		'/search' => 'serc_get_search',
+		'/events' => ['method' => 'GET', 'callback' => 'serc_get_events'],
+		'/people' => ['method' => 'GET', 'callback' => 'serc_get_people'],
+		'/posts' => ['method' => 'GET', 'callback' => 'serc_get_posts'],
+		'/search' => ['method' => 'POST', 'callback' => 'serc_get_search'],
 	];
-	foreach ($routes as $route => $callback) {
+	foreach ($routes as $route => $props) {
 		register_rest_route('serc-2025/v1', $route, array(
-			'methods' => 'GET',
-			'callback' => $callback,
+			'methods' => $props['method'],
+			'callback' => $props['callback'],
 			'permission_callback' => '__return_true',
 		));
 	}
@@ -37,10 +37,9 @@ function serc_get_search(WP_REST_Request $request)
 		$serc_open_search = new OpenSearch(); // Fallback if not set
 	}
 
-	// $param1 = $request->get_param('param1'); // Get specific param
-	// $all_params = $request->get_params(); // Get all params
+	$all_params = $request->get_params(); // Get all params
 
-	$results = $serc_open_search->search($request->get_params());
+	$results = $serc_open_search->search($all_params);
 	return new WP_REST_Response($results, 200);
 }
 

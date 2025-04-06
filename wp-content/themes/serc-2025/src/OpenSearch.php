@@ -30,7 +30,7 @@ class OpenSearch
 	{
 		// Build sort param
 		$sort = ['_score'];
-		if (isset($params['sort'])) {
+		if (isset($params['sort']) && $params['sort'] != '_score') {
 			$sortField = $params['sort'] . '.keyword';
 			$sortOrder = isset($params['order']) ? $params['order'] : 'desc';
 			$sort = [
@@ -54,7 +54,7 @@ class OpenSearch
 		}
 
 		// If doc_types are provided, build the filter
-		if (isset($params['doc_types'])) {
+		if (isset($params['doc_types']) && $params['doc_types'] != '') {
 			$doc_types = array_map('trim', explode(',', $params['doc_types']));
 			$query["bool"] = [
 				"filter" => [
