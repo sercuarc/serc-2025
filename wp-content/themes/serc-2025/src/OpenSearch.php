@@ -28,41 +28,62 @@ class OpenSearch
 
 	public function search($params)
 	{
+		$has_query 			= isset($params['query']) && $params['query'] != '';
+		$is_exact 			= isset($params['exact']) && $params['exact'] === true;
+		$has_sort 			= isset($params['sort']) && $params['sort'] != '_score';
+		$has_order 			= isset($params['order']) && $params['order'] != '';
+		$has_per_page 	= isset($params['per_page']) && $params['per_page'] != '';
+		$has_page 			= isset($params['page']) && $params['page'] != '';
+		$has_doc_types 	= isset($params['doc_types']) && $params['doc_types'] != '';
+		$has_year 			= isset($params['year']) && $params['year'] != '' && $params['year'] != 'all';
+
 		// Build sort param
 		$sort = ['_score'];
-		if (isset($params['sort']) && $params['sort'] != '_score') {
-			$sortField = $params['sort'] . '.keyword';
-			$sortOrder = isset($params['order']) ? $params['order'] : 'desc';
+		if ($has_sort) {
+			$sortField = $params['sort'];
+			$sortOrder = $has_order ? $params['order'] : 'desc';
 			$sort = [
 				[$sortField => ['order' => $sortOrder]],
 			];
 		}
+
 		// Buid page param
-		$per_page = isset($params['per_page']) ? $params['per_page'] : 20;
-		$page = isset($params['page']) ? intval($params['page']) : 1;
+		$per_page = $has_per_page ? $params['per_page'] : 20;
+		$page = $has_page ? intval($params['page']) : 1;
 		$offset = ($page - 1) * $per_page;
 
-		// Build query
-		$query = [];
-
 		// Build multi_match if a search term is provided
-		if (isset($params['query'])) {
+		if ($has_query) {
 			$multi_match = [
 				"query" => $params["query"],
-				"fields" => ["title^2", "abstract", "description", "excerpt", "file", "file_text", "content"]
+				"type" => $is_exact ? "phrase" : "best_fields",
+				"fields" => ["title^3", "abstract^2", "description^2", "excerpt^2", "content^2", "file", "file_text"]
 			];
 		}
 
+		// Setup query
+		$query = [];
+
 		// If doc_types are provided, build the filter
-		if (isset($params['doc_types']) && $params['doc_types'] != '') {
-			$doc_types = array_map('trim', explode(',', $params['doc_types']));
+		if ($has_doc_types || $has_year) {
+			$filter = [];
+			if ($has_doc_types) {
+				$doc_types = $this->__parseDocTypes($params['doc_types']);
+				$filter[] = ["terms" => ["type" => $doc_types]];
+			}
+			if ($has_year) {
+				$filter[] = ["range" => [
+					"unix_time" => [
+						"gte" => strtotime($params['year'] . "-01-01T00:00:00-5:00"),
+						"lte" => strtotime($params['year'] . "-12-31T23:59:59-5:00"),
+					]
+				]];
+			}
 			$query["bool"] = [
-				"filter" => [
-					"terms" => ["type" => $doc_types]
-				]
+				"filter" => $filter
 			];
 			// If a search term is also provided, add it to the query
-			if (isset($params['query'])) {
+			if ($has_query) {
 				$query["bool"]["must"] = [
 					"multi_match" => $multi_match
 				];
@@ -95,5 +116,49 @@ class OpenSearch
 			],
 			"docs" => $docs,
 		];
+	}
+
+	/**
+	 * Get a list of document types from document type keywords
+	 */
+	private function __parseDocTypes($doc_types)
+	{
+		$doc_types = array_map('trim', explode(',', $doc_types));
+		$parsed = [];
+		foreach ($doc_types as $doc_type) {
+			if ($doc_type == 'events-news') {
+				$parsed[] = 'News';
+				$parsed[] = 'Event';
+			}
+			if ($doc_type == 'media') {
+				$parsed[] = 'Video';
+				$parsed[] = 'Poster';
+			}
+			if ($doc_type == 'people') {
+				$parsed[] = 'People';
+			}
+			if ($doc_type == 'other') {
+				$parsed[] = "Other";
+			}
+			if ($doc_type == 'publications') {
+				$parsed = array_merge($parsed, [
+					"Annual Report",
+					"Book",
+					"Conference Paper",
+					"Dissertation",
+					"Executive Summary",
+					"Good Reads",
+					"Journal Article",
+					"Poster",
+					"Presentation",
+					"Technical Report",
+					"Video",
+					"White Paper",
+					"Workshop Report",
+					"Conference Paper",
+				]);
+			}
+		}
+		return $parsed;
 	}
 }
