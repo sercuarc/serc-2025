@@ -17,6 +17,9 @@ if (! is_wp_error($response)) {
 
 $date_string = isset($content['publication_date']) ? $content['publication_date'] : $content['start_date'];
 $date_formatted = date_format(new DateTime($date_string), 'F j, Y');
+$has_authors = isset($content['authors']) && count($content['authors']) > 0;
+$has_authors2 = isset($content['authors2']) && count($content['authors2']) > 0;
+$has_event = isset($content['event_name']) && $content['event_name'];
 
 get_header(); ?>
 
@@ -53,56 +56,62 @@ get_header(); ?>
 				<div>
 					<h2 class="text-title-2">Details</h2>
 					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 lg:gap-18 mt-12">
-						<dl class="flex flex-col gap-6">
-							<?php if (isset($content['authors']) && count($content['authors']) > 0) : ?>
-								<div>
-									<dt class="label-base text-light-surface-subtle">Research Team</dt>
-									<dd class="text-base text-dark-main mt-3">
-										<?php echo implode(", ", array_map(function ($author) {
-											$prefix = isset($author['prefix']) ? $author['prefix'] . ' ' : '';
-											$first = isset($author['first_name']) ? $author['first_name'] : '';
-											$last = isset($author['last_name']) ? $author['last_name'] : '';
-											return "$prefix$first $last";
-										}, $content['authors'])); ?>
-									</dd>
-								</div>
-							<?php endif; ?>
-							<?php if (isset($content['authors2']) && count($content['authors2']) > 0) : ?>
-								<div>
-									<dt class="label-base text-light-surface-subtle">Collaborators</dt>
-									<dd class="text-base text-dark-main mt-3">
-										<?php echo implode(", ", array_map(function ($author) {
-											$prefix = isset($author['prefix']) ? $author['prefix'] . ' ' : '';
-											$first = isset($author['first_name']) ? $author['first_name'] : '';
-											$last = isset($author['last_name']) ? $author['last_name'] : '';
-											return "$prefix$first $last";
-										}, $content['authors2'])); ?>
-									</dd>
-								</div>
-							<?php endif; ?>
-							<?php if (isset($content['event_name']) && $content['event_name']) : ?>
-								<div>
-									<dt class="label-base text-light-surface-subtle">Event</dt>
-									<dd class="flex flex-col gap-2 text-base text-dark-main mt-3">
-										<span><?php echo $content['event_name']; ?></span>
-										<span><?php echo $content['location']; ?></span>
-										<span>
+						<?php if ($has_authors || $has_authors2 || $has_event) : ?>
+							<dl class="flex flex-col gap-6">
+								<?php if (isset($content['authors']) && count($content['authors']) > 0) : ?>
+									<div>
+										<dt class="label-base text-light-surface-subtle">Research Team</dt>
+										<dd class="text-base text-dark-main mt-3">
+											<?php echo implode(", ", array_map(function ($author) {
+												$prefix = isset($author['prefix']) ? $author['prefix'] . ' ' : '';
+												$first = isset($author['first_name']) ? $author['first_name'] : '';
+												$last = isset($author['last_name']) ? $author['last_name'] : '';
+												return "$prefix$first $last";
+											}, $content['authors'])); ?>
+										</dd>
+									</div>
+								<?php endif; ?>
+								<?php if (isset($content['authors2']) && count($content['authors2']) > 0) : ?>
+									<div>
+										<dt class="label-base text-light-surface-subtle">Collaborators</dt>
+										<dd class="text-base text-dark-main mt-3">
+											<?php echo implode(", ", array_map(function ($author) {
+												$prefix = isset($author['prefix']) ? $author['prefix'] . ' ' : '';
+												$first = isset($author['first_name']) ? $author['first_name'] : '';
+												$last = isset($author['last_name']) ? $author['last_name'] : '';
+												return "$prefix$first $last";
+											}, $content['authors2'])); ?>
+										</dd>
+									</div>
+								<?php endif; ?>
+								<?php if (isset($content['event_name']) && $content['event_name']) : ?>
+									<div>
+										<dt class="label-base text-light-surface-subtle">Event</dt>
+										<dd class="flex flex-col gap-2 text-base text-dark-main mt-3">
+											<span><?php echo $content['event_name']; ?></span>
+											<span><?php echo $content['location']; ?></span>
 											<?php
-											$start_date = isset($content['start_date']) ? $content['start_date'] : '';
-											$end_date = isset($content['end_date']) ? $content['end_date'] : '';
-											if ($start_date === $end_date) {
-												$start_formatted = date_format(new DateTime($start_date), 'M j, Y');
-												echo $start_formatted;
-											} else {
-												$start_formatted = date_format(new DateTime($start_date), 'M j');
-												$end_formatted = date_format(new DateTime($end_date), 'M j, Y');
-												echo $start_date === $end_date ? $start_formatted : $start_formatted . ' - ' . $end_formatted;
-											} ?>
-										</span>
-									</dd>
-								</div>
-							<?php endif; ?>
-						</dl>
+											$start_date = isset($content['start_date']) && $content['start_date'] ? $content['start_date'] : '';
+											$end_date = isset($content['end_date']) && $content['end_date'] ? $content['end_date'] : '';
+											?>
+											<?php if ($start_date && $end_date) : ?>
+												<span>
+													<?php
+													if ($start_date === $end_date) {
+														$start_formatted = date_format(new DateTime($start_date), 'M j, Y');
+														echo $start_formatted;
+													} else {
+														$start_formatted = date_format(new DateTime($start_date), 'M j');
+														$end_formatted = date_format(new DateTime($end_date), 'M j, Y');
+														echo $start_date === $end_date ? $start_formatted : $start_formatted . ' - ' . $end_formatted;
+													} ?>
+												</span>
+											<?php endif; ?>
+										</dd>
+									</div>
+								<?php endif; ?>
+							</dl>
+						<?php endif; ?>
 						<dl class="lg:col-span-2 flex flex-col gap-6">
 							<?php
 							$has_research_programs = isset($content['research_programs']) && count($content['research_programs']) > 0;
@@ -127,7 +136,6 @@ get_header(); ?>
 								</dd>
 							</div>
 						</dl>
-						<div class="flex flex-col gap-6"></div>
 					</div>
 				</div>
 				<?php if (isset($content['abstract'])) : ?>

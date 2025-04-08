@@ -96,7 +96,7 @@
 						relative hover:z-10 py-8 flex flex-col gap-4 border-t border-subtle
 						before:absolute beore:z-[-1] before:top-0 before:-left-6 before:-right-6 before:-bottom-0 before:bg-light-main before:transition-shadow hover:before:shadow-[0_4px_12px_0_rgba(0,0,0,0.15)]
 					">
-							<h3 class="relative text-h4 max-w-[var(--breakpoint-lg)] mb-2"><a href="#" class="hover:text-brand focus:text-brand outline-0 transition-colors">{{doc.title}}</a></h3>
+							<h3 class="relative text-h4 max-w-[var(--breakpoint-lg)] mb-2"><a :href="getDocumentUrl(doc)" class="hover:text-brand focus:text-brand outline-0 transition-colors">{{doc.title}}</a></h3>
 							<p v-if="doc.authors && doc.authors.length" class="relative text-h6 text-light-surface-subtle max-w-[var(--breakpoint-lg)] ">
 								{{ getAuthors(doc) }}
 							</p>

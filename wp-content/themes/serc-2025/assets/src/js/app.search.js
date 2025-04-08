@@ -152,6 +152,19 @@ const methods = {
     );
   },
 
+  getDocumentUrl(doc) {
+    switch (doc.type) {
+      case "News":
+      case "Event":
+      case "People":
+        return doc.url;
+      case "Technical Report":
+        return `/technical-reports/${doc.id}`;
+      default:
+        return `/publications/${doc.id}`;
+    }
+  },
+
   getDocumentDate(doc) {
     let dateString = "";
     switch (doc.type) {
