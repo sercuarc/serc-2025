@@ -155,7 +155,6 @@ class OpenSearch
 					"Video",
 					"White Paper",
 					"Workshop Report",
-					"Conference Paper",
 				]);
 			}
 		}
