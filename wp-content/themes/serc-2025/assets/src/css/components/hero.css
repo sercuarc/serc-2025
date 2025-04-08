@@ -12,22 +12,15 @@
   }
   .hero--with-image {
     @apply before:absolute before:top-0 before:left-0 before:inset-0 before:z-10 
-    before:bg-gradient-to-b 
+    before:bg-gradient-to-b
       before:from-transparent 
-        before:to-black/55 
-    lg:before:bg-gradient-to-r
-      lg:before:from-black/55 lg:before:from-47% 
-        lg:before:to-transparent lg:before:to-72%;
-
-    background: linear-gradient(
-        266deg,
-        rgba(0, 0, 0, 0) 2.11%,
-        rgba(0, 0, 0, 0.42) 69.23%
-      ),
-      url(<path-to-image>) lightgray -83.804px 92.38px / 120.799% 144.934% no-repeat;
+        before:to-black/42 
+    lg:before:bg-gradient-to-l
+      lg:before:from-transparent lg:before:from-2% 
+        lg:before:to-black/42 lg:before:to-67%;
 
     img {
-      @apply absolute top-0 left-0 w-full h-full object-cover z-0;
+      @apply absolute top-0 left-0 w-full h-full object-cover object-top z-0;
     }
 
     & > *:not(img) {

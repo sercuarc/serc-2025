@@ -7,12 +7,12 @@
 
 <?php get_header(); ?>
 
-<?php $image = get_the_post_thumbnail($post, 'large'); ?>
+<?php $has_image = has_post_thumbnail() ?>
 
 <main>
-	<header class="hero <?php if ($image) : ?>hero--inverted hero--with-image<?php endif; ?>">
-		<?php if ($image) : ?>
-			<?php echo $image; ?>
+	<header class="hero <?php if ($has_image) : ?>hero--inverted hero--with-image<?php endif; ?>">
+		<?php if ($has_image) : ?>
+			<?php the_post_thumbnail(); ?>
 		<?php endif; ?>
 		<div class="container">
 			<h1 class="text-h1"><?php the_title(); ?></h1>
