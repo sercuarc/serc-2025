@@ -4,9 +4,13 @@
  * SERC Search
  */
 
-?>
+add_filter('document_title_parts', function ($title) {
+	$title['title'] = 'Search';
+	$title['site_name'] = get_bloginfo('name');
+	return $title;
+});
 
-<?php get_header(); ?>
+get_header(); ?>
 
 <main>
 
