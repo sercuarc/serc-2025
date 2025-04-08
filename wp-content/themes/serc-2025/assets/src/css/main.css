@@ -21,6 +21,9 @@
   a {
     @apply cursor-pointer;
   }
+  button {
+    @apply cursor-pointer;
+  }
   strong {
     @apply font-semibold;
   }

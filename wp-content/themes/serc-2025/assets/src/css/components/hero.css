@@ -1,6 +1,6 @@
 @layer components {
   .hero {
-    @apply relative flex flex-col gap-8 
+    @apply relative flex flex-col gap-14 
     justify-end lg:justify-center
     bg-light-tertiary text-dark-main 
     py-12 lg:py-14 

@@ -8,7 +8,7 @@
 <?php get_header(); ?>
 
 <main>
-	<header class="hero lg:pb-30">
+	<header class="hero lg:pb-26">
 		<div class="container">
 			<?php get_template_part('components/breadcrumbs', '', [
 				'breadcrumbs' => [
@@ -21,7 +21,7 @@
 			<div class="lg:col-span-2">
 				<h1 class="text-h2"><?php the_title(); ?></h1>
 				<h2 class="text-h4 mt-6">[JOB TITLE]</h2>
-				<p class="uppercase mt-8">
+				<p class="uppercase mt-7">
 					<?php echo serc_svg("institution", "inline text-brand size-3 mr-1"); ?>
 					[INSTITUTE]
 				</p>
