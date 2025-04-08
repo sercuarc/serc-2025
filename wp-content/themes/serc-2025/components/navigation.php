@@ -28,7 +28,11 @@
 			<nav class="w-full flex items-start gap-6 xl:gap-16">
 				<?php foreach ($menu_items as $id => $item) : ?>
 					<a <?php if ($item["has_children"]) : ?>data-navigation-menu-hover-toggle<?php endif; ?>
-						href="#menu-<?php echo $id; ?>"
+						href="<?php if ($item["has_children"]) {
+										echo "#menu-$id";
+									} else {
+										echo home_url($id);
+									} ?>"
 						class="group/menu-item hidden lg:flex <?php echo $button_style . ' ' . $menu_item_style; ?>">
 						<?php echo $item["label"]; ?>
 						<?php if ($item["has_children"]) : ?>
@@ -88,7 +92,7 @@
 			[
 				"id" => "about",
 				"label" => "About",
-				"items" => [['label' => 'About SERC', 'url' => '#'], ['label' => 'People', 'url' => '#']],
+				"items" => [['label' => 'About SERC', 'url' => home_url('about')], ['label' => 'People', 'url' => home_url('people')]],
 				"headline" => [
 					"label" => "",
 					"icon" => "",
@@ -99,7 +103,7 @@
 			[
 				"id" => "research",
 				"label" => "Research",
-				"items" => [['label' => 'Our Research', 'url' => '#'], ['label' => 'Publications', 'url' => '#']],
+				"items" => [['label' => 'Our Research', 'url' => home_url('research')], ['label' => 'Publications', 'url' => home_url('publications')]],
 				"headline" => [
 					"label" => "",
 					"icon" => "",
@@ -110,13 +114,13 @@
 			[
 				"id" => "events-news",
 				"label" => "Events & News",
-				"items" => [['label' => 'Events', 'url' => '#'], ['label' => 'SERC Research Review', 'url' => '#'], ['label' => 'AI4SE & SE4AI Workshop', 'url' => '#'], ['label' => 'News', 'url' => '#']],
+				"items" => [['label' => 'Events', 'url' => home_url('events')], ['label' => 'SERC Research Review', 'url' => '#'], ['label' => 'AI4SE & SE4AI Workshop', 'url' => '#'], ['label' => 'News', 'url' => home_url('news')]],
 				"headline" => [
 					"label" => "Featured Event",
 					"icon" => "calendar",
 					"text" => "Upcoming Event: 2025 Pacific Operational Science & Technology (POST) Conference"
 				],
-				"cta" => ["label" => "View Our Events", "url" => "#"],
+				"cta" => ["label" => "View Event", "url" => home_url('events/2025-pacific-operational-science-and-technology-post-conference')],
 			],
 		]; ?>
 		<?php foreach ($menus as $menu) : ?>
