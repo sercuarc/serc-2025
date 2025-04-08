@@ -267,7 +267,7 @@ const methods = {
 };
 
 function mounted() {
-  if (this.query) {
+  if (this.query || this.doc_types.length > 0) {
     this.search();
   }
 }
