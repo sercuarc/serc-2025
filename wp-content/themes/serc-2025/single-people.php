@@ -3,28 +3,41 @@
 /**
  * People Single
  */
-?>
 
-<?php get_header(); ?>
+$member_roles = wp_get_post_terms($post->ID, "member_roles");
+
+// if SERC Staff, redirect to People page
+if ($member_roles[0]->slug === "serc-staff") {
+	wp_redirect(home_url('/people'));
+}
+
+$role = $member_roles[0]->name;
+$breadcrumbs = [
+	'People' => home_url('/people'),
+	$role => home_url('/people?' . http_build_query(['tab' => $member_roles[0]->slug]))
+];
+
+get_header();
+?>
 
 <main>
 	<header class="hero lg:pb-26">
 		<div class="container">
 			<?php get_template_part('components/breadcrumbs', '', [
-				'breadcrumbs' => [
-					'People' => get_post_type_archive_link('people'),
-					'[CATEGORY]' => '#'
-				]
+				'breadcrumbs' => $breadcrumbs
 			]); ?>
 		</div>
 		<div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-16 items-center">
 			<div class="lg:col-span-2">
 				<h1 class="text-h2"><?php the_title(); ?></h1>
-				<h2 class="text-h4 mt-6">[JOB TITLE]</h2>
-				<p class="uppercase mt-7">
-					<?php echo serc_svg("institution", "inline text-brand size-3 mr-1"); ?>
-					[INSTITUTE]
-				</p>
+				<h2 class="text-h4 mt-6"><?php the_field("job_title"); ?></h2>
+				<?php $organizations = wp_get_post_terms($post->ID, "organizations"); ?>
+				<?php if (!empty($organizations)) : ?>
+					<p class="flex items-center gap-2 uppercase mt-7">
+						<?php echo serc_svg("institution", "inline text-brand size-5 mr-1"); ?>
+						<?php echo $organizations[0]->name; ?>
+					</p>
+				<?php endif; ?>
 			</div>
 			<div>
 				<?php the_post_thumbnail('medium', array('class' => 'aspect-square object-cover')); ?>
@@ -40,19 +53,18 @@
 				</div>
 			</div>
 			<div>
-				<h3 class="text-[1.75rem] mb-10">
-					<?php echo serc_svg("badge", "inline text-brand size-8 mr-1"); ?>
-					<strong>Expertise</strong>
-				</h3>
-				<ul class="text-lg lg:text-xl flex flex-col gap-4">
-					<li>[EXPERTISE]</li>
-					<li>[EXPERTISE]</li>
-					<li>[EXPERTISE]</li>
-					<li>[EXPERTISE]</li>
-					<li>[EXPERTISE]</li>
-					<li>[EXPERTISE]</li>
-					<li>[EXPERTISE]</li>
-				</ul>
+				<?php $expertise = wp_get_post_terms($post->ID, "expertise"); ?>
+				<?php if (! empty($expertise)) : ?>
+					<h3 class="text-[1.75rem] mb-10">
+						<?php echo serc_svg("badge", "inline text-brand size-8 mr-1"); ?>
+						<strong>Expertise</strong>
+					</h3>
+					<ul class="text-lg lg:text-xl flex flex-col gap-4">
+						<?php foreach ($expertise as $expertise_item) : ?>
+							<li><?php echo $expertise_item->name; ?></li>
+						<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
 			</div>
 		</div>
 	</section>

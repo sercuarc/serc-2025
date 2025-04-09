@@ -26,3 +26,6 @@ require_once get_template_directory() . '/inc/post-types.php';
 require_once get_template_directory() . '/inc/taxonomies.php';
 require_once get_template_directory() . '/inc/template-helpers.php';
 require_once get_template_directory() . '/inc/utilities.php';
+
+// CLI Commands
+require_once get_template_directory() . '/src/commands/ImportPeople.php';

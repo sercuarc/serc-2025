@@ -78,7 +78,7 @@ $member_roles = [
 								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-12 lg:mt-20 -mx-4">
 									<?php foreach ($role["people"] as $person) : ?>
 										<a href="<?php echo get_the_permalink($person->ID) ?>" class="group/person-card-lg flex flex-col sm:flex-row gap-8 p-4 bg-white hover:shadow-lg focus:shadow-lg outline-0 transition-all">
-											<div class="mx-auto sm:mx-0">
+											<div class="mx-auto sm:mx-0 shrink-0">
 												<?php if (has_post_thumbnail($person->ID)) : ?>
 													<?php echo get_the_post_thumbnail($person->ID, 'medium', ["class" => "w-48 h-48 object-cover"]) ?>
 												<?php else : ?>
@@ -86,19 +86,28 @@ $member_roles = [
 												<?php endif; ?>
 											</div>
 											<div class="flex flex-col gap-6 text-center sm:text-left">
-												<h3 class="text-h4 leading-none text-light-surface-strong group-hover/person-card-lg:text-brand transition-colors"><?php echo $person->post_title ?></h3>
-												<p class="label-base text-light-surface-strong">[TITLE]</p>
-												<p class="text-xs leading-none uppercase text-light-surface-normal">
-													<?php echo serc_svg("institution", "inline text-brand size-3 mr-1"); ?>
-													[INSTITUTE*]
-												</p>
+												<h3 class="text-h4 leading-none text-light-surface-strong group-hover/person-card-lg:text-brand transition-colors"><?php echo get_formatted_name($person); ?></h3>
+												<p class="label-base leading-tight text-light-surface-strong"><?php the_field("job_title", $person->ID) ?></p>
+												<?php $organizations = wp_get_post_terms($person->ID, "organizations"); ?>
+												<?php if (!empty($organizations)) : ?>
+													<p class="flex items-center gap-2 text-xs leading-none uppercase text-light-surface-normal">
+														<?php echo serc_svg("institution", "inline text-brand size-5 mr-1"); ?>
+														<?php echo $organizations[0]->name; ?>
+													</p>
+												<?php endif; ?>
 											</div>
 										</a>
 									<?php endforeach; ?>
 								</div>
 							</div>
 							<?php if ($role["slug"] === "leadership") : ?>
-								<?php $staff = get_people("staff"); ?>
+								<?php $staff = get_posts(array_merge($default_people_args, ['tax_query' => [
+									[
+										'taxonomy' => 'member_roles',
+										'field' => 'slug',
+										'terms' => 'serc-staff',
+									]
+								]])); ?>
 								<?php if ($staff) : ?>
 									<div class="bg-light-tertiary py-20 lg:py-30">
 										<div class="container">
@@ -107,17 +116,18 @@ $member_roles = [
 												<?php foreach ($staff as $person) : ?>
 													<div class="group/person-card-lg flex flex-col gap-5 text-center sm:text-left">
 														<h3 class="text-h4 leading-none text-light-surface-strong transition-colors">
-															<?php echo ($person->prefix) . $person->first_name . ' ' . $person->middle_name . ' ' . $person->last_name . ' ' . $person->suffix; ?>
+															<?php echo get_formatted_name($person); ?>
 														</h3>
 														<p class="label-base text-light-surface-strong">
-															<?php foreach ($person->titles as $title) {
-																echo $title->current == 'yes' ? $title->job_title : "";
-															} ?>
+															<?php the_field("job_title", $person->ID) ?>
 														</p>
-														<p class="text-xs leading-none uppercase text-light-surface-normal">
-															<?php echo serc_svg("institution", "inline text-brand size-3 mr-1"); ?>
-															<?php echo $person->organizations[0]->organization_name; ?>
-														</p>
+														<?php $organizations = wp_get_post_terms($person->ID, "organizations"); ?>
+														<?php if (!empty($organizations)) : ?>
+															<p class="flex items-center gap-2 text-xs leading-none uppercase text-light-surface-normal">
+																<?php echo serc_svg("institution", "inline text-brand size-5 mr-1"); ?>
+																<?php echo $organizations[0]->name; ?>
+															</p>
+														<?php endif; ?>
 													</div>
 												<?php endforeach; ?>
 											</div>

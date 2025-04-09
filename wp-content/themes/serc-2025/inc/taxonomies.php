@@ -27,7 +27,7 @@ function register_member_roles()
 	$args = [
 		'labels'            => $labels,
 		'public'            => true,
-		'hierarchical'      => true, // True = behaves like categories, False = behaves like tags
+		'hierarchical'      => false, // True = behaves like categories, False = behaves like tags
 		'show_ui'           => true,
 		'show_in_menu'      => true,
 		'show_in_rest'      => true,
@@ -59,7 +59,7 @@ function register_organizations()
 	$args = [
 		'labels'            => $labels,
 		'public'            => true,
-		'hierarchical'      => true, // True = behaves like categories, False = behaves like tags
+		'hierarchical'      => false, // True = behaves like categories, False = behaves like tags
 		'show_ui'           => true,
 		'show_in_menu'      => true,
 		'show_in_rest'      => true,
@@ -91,7 +91,7 @@ function register_expertise()
 	$args = [
 		'labels'            => $labels,
 		'public'            => true,
-		'hierarchical'      => true, // True = behaves like categories, False = behaves like tags
+		'hierarchical'      => false, // True = behaves like categories, False = behaves like tags
 		'show_ui'           => true,
 		'show_in_menu'      => true,
 		'show_in_rest'      => true,
