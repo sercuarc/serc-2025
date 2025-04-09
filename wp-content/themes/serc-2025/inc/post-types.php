@@ -27,3 +27,11 @@ add_action('init', function () {
 		'singular_name' => 'Person',
 	]);
 });
+
+// Disable the block editor for the "people" post type
+add_filter('use_block_editor_for_post_type', function ($use_block_editor, $post_type) {
+	if ($post_type === 'people') {
+		return false;
+	}
+	return $use_block_editor;
+}, 10, 2);

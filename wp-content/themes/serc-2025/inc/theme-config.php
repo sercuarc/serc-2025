@@ -45,3 +45,18 @@ function serc_theme_support()
 	add_theme_support('post-thumbnails', ['people', 'page', 'post', 'tribe_events']);
 }
 add_action('after_setup_theme', 'serc_theme_support');
+
+/**
+ * Adds a custom editor style to the admin dashboard.
+ */
+add_action('admin_init', function () {
+	add_editor_style('editor-style.css');
+});
+
+/**
+ * Adds a custom class to the TinyMCE editor for the admin dashboard.
+ */
+add_filter('tiny_mce_before_init', function ($init) {
+	$init['body_class'] = 'wysiwyg'; // Add your custom class here
+	return $init;
+});

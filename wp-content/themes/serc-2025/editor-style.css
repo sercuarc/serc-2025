@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&family=Oswald:wght@400..600&display=swap");
+@import "assets/dist/css/main.css";
+
+.wp-editor {
+  font-family: var(--font-inter);
+}
+
+.wp-editor p:first-child {
+  margin-top: 0;
+}

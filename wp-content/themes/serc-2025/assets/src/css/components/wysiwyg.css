@@ -2,7 +2,7 @@
   @apply text-base leading-[1.6];
 
   a {
-    @apply text-brand hover:underline;
+    @apply text-brand hover:underline font-medium;
   }
   h1 {
     @apply text-h1 mt-6 lg:mt-8;
@@ -33,7 +33,22 @@
   }
   ul,
   ol {
-    @apply list-disc pl-6 mt-6 lg:mt-8;
+    @apply pl-6 mt-6 lg:mt-8;
+  }
+  ol {
+    @apply list-decimal;
+    ol {
+      @apply mt-4 list-[lower-alpha];
+      ol {
+        @apply list-[lower-roman];
+      }
+    }
+  }
+  ul {
+    @apply list-disc;
+    ul {
+      @apply list-[circle];
+    }
   }
   li {
     @apply mt-4;
