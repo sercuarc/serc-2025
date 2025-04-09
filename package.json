@@ -2,6 +2,7 @@
   "name": "serc-2025",
   "version": "0.1.0",
   "description": "A Wordpress theme for the Systems Engineering Research Center (SERC)",
+  "type": "module",
   "scripts": {
     "dev": "gulp dev --gulpfile gulpfile.mjs",
     "build": "gulp --gulpfile gulpfile.mjs",
@@ -13,7 +14,7 @@
     "@tailwindcss/postcss": "^4.1.2",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.0.6",
-    "del": "^6.1.1",
+    "del": "^8.0.0",
     "esbuild": "^0.25.2",
     "gulp": "^5.0.0",
     "gulp-babel": "^8.0.0",

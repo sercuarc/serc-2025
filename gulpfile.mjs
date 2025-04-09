@@ -1,10 +1,10 @@
-const { src, dest, parallel, series } = require("gulp");
-const postcss = require("gulp-postcss");
-const autoprefixer = require("autoprefixer");
-const cssnano = require("cssnano");
-const tailwindcss = require("@tailwindcss/postcss");
-const esbuild = require("gulp-esbuild");
-const del = require("del");
+import { src, dest, parallel, series } from "gulp";
+import postcss from "gulp-postcss";
+import autoprefixer from "autoprefixer";
+import cssnano from "cssnano";
+import tailwindcss from "@tailwindcss/postcss";
+import esbuild from "gulp-esbuild";
+import { deleteAsync } from "del";
 
 const themePath = "wp-content/themes/serc-2025";
 
@@ -18,17 +18,17 @@ const jsEntryPoints = ["main.js", "app.search.js"].map(
   (file) => `${paths.srcJs}/${file}`
 );
 
-function clean() {
-  return del([`${paths.dist}/*`]);
+export function clean() {
+  return deleteAsync([`${paths.dist}/*`]);
 }
 
-function css() {
-  return src(`${paths.srcCss}/main.css`) // Adjust your source path
+export function css() {
+  return src(`${paths.srcCss}/main.css`)
     .pipe(postcss([tailwindcss(), autoprefixer(), cssnano()]))
     .pipe(dest(`${paths.dist}/css`));
 }
 
-function js() {
+export function js() {
   return src(jsEntryPoints, { base: paths.srcJs })
     .pipe(
       esbuild({
@@ -43,4 +43,4 @@ function js() {
     .pipe(dest(paths.dist));
 }
 
-exports.default = series(clean, parallel(css, js));
+export default series(clean, parallel(css, js));
