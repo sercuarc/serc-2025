@@ -148,7 +148,7 @@ const methods = {
     switch (doc.type) {
       case "News":
       case "Event":
-        dateString = doc.date_formatted;
+        return doc.date_formatted;
       case "People":
       case "Organizations":
         dateString = "";
