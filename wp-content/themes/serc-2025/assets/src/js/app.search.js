@@ -101,19 +101,6 @@ const watch = {
 };
 
 const methods = {
-  getAuthors(doc) {
-    const authorNames = doc.authors.map(
-      (a) => `${a.prefix ? a.prefix + " " : ""}${a.first_name} ${a.last_name}`
-    );
-    if (authorNames.length > 1) {
-      return `By ${authorNames
-        .slice(0, authorNames.length - 1)
-        .join(", ")} and ${authorNames[authorNames.length - 1]}`;
-    } else {
-      return `By ${authorNames[0]}`;
-    }
-  },
-
   resetQuery() {
     this.query = "";
     this.$refs.queryInput.focus();
@@ -169,10 +156,11 @@ const methods = {
     let dateString = "";
     switch (doc.type) {
       case "News":
+      case "Event":
         dateString = doc.date_formatted;
       case "People":
       case "Organizations":
-        dateString = doc.created_at;
+        dateString = "";
       default:
         dateString = doc.publication_date || doc.start_date || doc.created_at;
     }
@@ -243,8 +231,8 @@ const methods = {
     }
 
     // Update state
-    this.totalDocs = response.docs.hits.total.value;
-    this.docs = response.docs.hits.hits.map((hit) => hit._source);
+    this.totalDocs = response.totalDocs;
+    this.docs = response.docs;
     this.docsQuery = response.params.query;
     this.pages = response.pages;
     this.status = STATUS_IDLE;
