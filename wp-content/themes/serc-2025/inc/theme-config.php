@@ -4,6 +4,19 @@
  * Theme Customizations
  */
 
+function serc_dynamic_home_url($url)
+{
+	if (!empty($_SERVER['HTTP_HOST']) && str_contains($_SERVER['HTTP_HOST'], 'ngrok')) {
+		return preg_replace('#^https://serc\.ddev\.site#', 'https://' . $_SERVER['HTTP_HOST'], $url);
+	}
+	return $url;
+}
+add_filter('home_url', 'serc_dynamic_home_url');
+add_filter('site_url', 'serc_dynamic_home_url');
+add_filter('template_directory_uri', 'serc_dynamic_home_url');
+add_filter('stylesheet_directory_uri', 'serc_dynamic_home_url');
+
+
 /**
  * Modifies the WordPress login page to display the SERC logo.
  *

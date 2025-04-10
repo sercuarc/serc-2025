@@ -102,7 +102,7 @@ get_header(); ?>
 					">
 							<h3 class="relative text-h4 max-w-[var(--breakpoint-lg)] mb-2"><a :href="getDocumentUrl(doc)" class="hover:text-brand focus:text-brand outline-0 transition-colors">{{doc.title}}</a></h3>
 							<p v-if="doc.authors && doc.authors.length" class="relative text-h6 text-light-surface-subtle max-w-[var(--breakpoint-lg)] ">
-								{{ getAuthors(doc) }}
+								By {{ doc.authors.join(", ") }}
 							</p>
 							<div v-if="doc.abstract || doc.description || doc.content" class="relative body-base max-w-[var(--breakpoint-lg)] ">{{truncate(doc.abstract || doc.description || doc.content)}}</div>
 							<p class="relative uppercase font-light">

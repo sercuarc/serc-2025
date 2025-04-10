@@ -109,13 +109,68 @@ class OpenSearch
 		// Return results
 		return [
 			"params" => $params,
-			"search_body" => $searchBody,
+			// "search_body" => $searchBody,
 			"pages" => [
 				"total" => ceil($docs['hits']['total']['value'] / $per_page),
 				"current" => $page
 			],
-			"docs" => $docs,
+			"totalDocs" => $docs['hits']['total']['value'],
+			"docs" => $this->__parseDocs($docs),
 		];
+	}
+
+	private function __parseDocs($docs)
+	{
+		return array_map(function ($doc) {
+			$source = $doc['_source'];
+			$props = [
+				"os_id" => $source['os_id'] ?? '',
+				"title" => $source['title'] ?? '',
+				"type" => $source['type'] ?? '',
+			];
+			// If Publication:
+			if (isset($source['abstract'])) {
+				$props['abstract'] = $this->__truncateText($source['abstract']);
+				$props['authors'] = isset($source['authors']) ? array_map(function ($author) {
+					$prefix = $author['prefix'] === 'Dr.' ? 'Dr. ' : '';
+					$name = $author['first_name'] . ' ' . $author['last_name'];
+					return $prefix . $name;
+				}, $source['authors']) : [];
+				$props["created_at"] = $source['created_at'] ?? '';
+				$props["description"] = isset($source['description']) ? $this->__truncateText($source['description']) : '';
+				$props["publication_date"] = $source['publication_date'] ?? '';
+				$props["start_date"] = $source['start_date'] ?? '';
+			}
+			// If News/Post
+			if ($source['type'] == 'News') {
+				$props["content"] = $this->__truncateText($source['content']);
+				$props["date_formatted"] = $source['date_formatted'] ?? '';
+				$props["url"] = $source['url'] ?? '';
+			}
+			// If Event
+			if ($source['type'] == 'Event') {
+				$props["content"] = $this->__truncateText($source['content']);
+				$props["date_formatted"] = $source['date_formatted'] ?? '';
+				$props["url"] = $source['url'] ?? '';
+				$props["venue_details"] = $source['venue_details'] ?? '';
+			}
+			// If People
+			if ($source['type'] == 'People') {
+				$props["content"] = $this->__truncateText($source['content']);
+				$props["url"] = $source['url'] ?? '';
+			}
+			return $props;
+		}, $docs['hits']['hits']);
+	}
+
+	private function __truncateText(string $text, int $words = 50)
+	{
+		$text = strip_tags($text);
+		$textArray = explode(" ", $text);
+		if (count($textArray) > $words) {
+			return implode(" ", array_slice($textArray, 0, $words)) . '...';
+		}
+		return $text;
 	}
 
 	/**
