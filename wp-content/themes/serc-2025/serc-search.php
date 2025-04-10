@@ -83,12 +83,14 @@ get_header(); ?>
 			<template v-else>
 				<div v-if="docs.length">
 					<h3 class="text-h5 font-normal">
-						Showing {{docsOffsetStart}}-{{docsOffsetEnd}} of {{ totalDocs }} results
-						<template v-if="query"> that include <strong>&ldquo;{{ docsQuery }}&rdquo;</strong></template>
+						Showing
+						<template v-if="pages.total > 1">{{docsOffsetStart}}-{{docsOffsetEnd}} of </template>
+						{{ totalDocs }} results
+						<template v-if="docsQuery"> that include <strong>&ldquo;{{ docsQuery }}&rdquo;</strong></template>
 						<template v-if="year !== 'all'"> in <strong>{{ year }}</strong></template>
 						<template v-if="doc_types.length"> under <strong>{{ formateDocTypesString(doc_types) }}</strong></template>
 					</h3>
-					<div v-if="query" class="field field-checkbox mt-4">
+					<div v-if="docsQuery" class="field field-checkbox mt-4">
 						<input v-model="exact" type="checkbox" name="exact" id="exact-checkbox">
 						<label class="label" for="exact-checkbox">Show only exact matches for “{{ docsQuery }}”</label>
 					</div>
@@ -104,7 +106,7 @@ get_header(); ?>
 							<p v-if="doc.authors && doc.authors.length" class="relative text-h6 text-light-surface-subtle max-w-[var(--breakpoint-lg)] ">
 								By {{ doc.authors.join(", ") }}
 							</p>
-							<div v-if="doc.abstract || doc.description || doc.content" class="relative body-base max-w-[var(--breakpoint-lg)] ">{{truncate(doc.abstract || doc.description || doc.content)}}</div>
+							<div v-if="doc.abstract || doc.description || doc.content" class="relative body-base max-w-[var(--breakpoint-lg)] ">{{(doc.abstract || doc.description || doc.content)}}</div>
 							<p class="relative uppercase font-light">
 								{{doc.type}}
 								<template v-if="doc.type !== 'People'">

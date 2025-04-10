@@ -124,12 +124,31 @@ class OpenSearch
 		return array_map(function ($doc) {
 			$source = $doc['_source'];
 			$props = [
+				"id" => $source['id'] ?? '',
 				"os_id" => $source['os_id'] ?? '',
 				"title" => $source['title'] ?? '',
 				"type" => $source['type'] ?? '',
 			];
-			// If Publication:
-			if (isset($source['abstract'])) {
+			// If News/Post
+			if ($source['type'] == 'News') {
+				$props["content"] = $this->__truncateText($source['content']);
+				$props["date_formatted"] = $source['date_formatted'] ?? '';
+				$props["url"] = $source['url'] ?? '';
+			}
+			// If Event
+			else if ($source['type'] == 'Event') {
+				$props["content"] = $this->__truncateText($source['content']);
+				$props["date_formatted"] = $source['date_formatted'] ?? '';
+				$props["url"] = $source['url'] ?? '';
+				$props["venue_details"] = $source['venue_details'] ?? '';
+			}
+			// If People
+			else if ($source['type'] == 'People') {
+				$props["content"] = $this->__truncateText($source['content']);
+				$props["url"] = $source['url'] ?? '';
+			}
+			// Publication
+			else {
 				$props['abstract'] = $this->__truncateText($source['abstract']);
 				$props['authors'] = isset($source['authors']) ? array_map(function ($author) {
 					$prefix = $author['prefix'] === 'Dr.' ? 'Dr. ' : '';
@@ -141,30 +160,15 @@ class OpenSearch
 				$props["publication_date"] = $source['publication_date'] ?? '';
 				$props["start_date"] = $source['start_date'] ?? '';
 			}
-			// If News/Post
-			if ($source['type'] == 'News') {
-				$props["content"] = $this->__truncateText($source['content']);
-				$props["date_formatted"] = $source['date_formatted'] ?? '';
-				$props["url"] = $source['url'] ?? '';
-			}
-			// If Event
-			if ($source['type'] == 'Event') {
-				$props["content"] = $this->__truncateText($source['content']);
-				$props["date_formatted"] = $source['date_formatted'] ?? '';
-				$props["url"] = $source['url'] ?? '';
-				$props["venue_details"] = $source['venue_details'] ?? '';
-			}
-			// If People
-			if ($source['type'] == 'People') {
-				$props["content"] = $this->__truncateText($source['content']);
-				$props["url"] = $source['url'] ?? '';
-			}
 			return $props;
 		}, $docs['hits']['hits']);
 	}
 
-	private function __truncateText(string $text, int $words = 50)
+	private function __truncateText(string|null $text, int $words = 50)
 	{
+		if (!$text) {
+			return '';
+		}
 		$text = strip_tags($text);
 		$textArray = explode(" ", $text);
 		if (count($textArray) > $words) {

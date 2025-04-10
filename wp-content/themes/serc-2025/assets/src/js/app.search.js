@@ -130,15 +130,6 @@ const methods = {
     this.search();
   },
 
-  truncate(str, wordCount = 50) {
-    if (!str) return "";
-    const words = str.split(" ");
-    return (
-      words.slice(0, wordCount).join(" ") +
-      (words.length > wordCount ? " ..." : "")
-    );
-  },
-
   getDocumentUrl(doc) {
     switch (doc.type) {
       case "News":
