@@ -50,11 +50,11 @@
   @apply text-sm leading-5;
 }
 @utility label-lg {
-  @apply text-lg lg:text-xl font-medium leading-tight;
+  @apply text-lg lg:text-xl font-medium leading-[1.6];
 }
 @utility label-base {
-  @apply text-base font-medium leading-tight;
+  @apply text-base font-medium leading-normal;
 }
 @utility label-sm {
-  @apply text-sm font-medium leading-tight;
+  @apply text-sm font-medium leading-[1.43];
 }

@@ -85,13 +85,13 @@ $member_roles = [
 													<?php get_template_part("components/avatar-placeholder", null, ["class" => "w-48 h-48"]) ?>
 												<?php endif; ?>
 											</div>
-											<div class="flex flex-col gap-6 text-center sm:text-left">
-												<h3 class="text-h4 leading-none text-light-surface-strong group-hover/person-card-lg:text-brand transition-colors"><?php echo get_formatted_name($person); ?></h3>
-												<p class="label-base leading-tight text-light-surface-strong"><?php the_field("job_title", $person->ID) ?></p>
+											<div class="text-center sm:text-left">
+												<h3 class="text-h4 text-light-surface-strong group-hover/person-card-lg:text-brand transition-colors"><?php echo get_formatted_name($person); ?></h3>
+												<p class="label-base text-light-surface-strong mt-1"><?php the_field("job_title", $person->ID) ?></p>
 												<?php $organizations = wp_get_post_terms($person->ID, "organizations"); ?>
 												<?php if (!empty($organizations)) : ?>
-													<p class="flex items-center gap-2 text-xs leading-none uppercase text-light-surface-normal">
-														<?php echo serc_svg("institution", "inline text-brand size-5 mr-1"); ?>
+													<p class="flex items-center gap-2 text-xs uppercase text-light-surface-normal mt-3">
+														<?php echo serc_svg("institution", "inline text-brand size-4 mr-1"); ?>
 														<?php echo $organizations[0]->name; ?>
 													</p>
 												<?php endif; ?>
@@ -114,17 +114,16 @@ $member_roles = [
 											<h2 class="text-title-1 text-center">Staff</h2>
 											<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 md:gap-x-12 xl:gap-x-28 gap-y-12 mt-12 lg:mt-20">
 												<?php foreach ($staff as $person) : ?>
-													<div class="group/person-card-lg flex flex-col gap-5 text-center sm:text-left">
-														<h3 class="text-h4 leading-none text-light-surface-strong transition-colors">
+													<div class="group/person-card-lg text-center sm:text-left">
+														<h3 class="text-h4 text-light-surface-strong">
 															<?php echo get_formatted_name($person); ?>
 														</h3>
-														<p class="label-base text-light-surface-strong">
+														<p class="text-base text-light-surface-strong mt-1">
 															<?php the_field("job_title", $person->ID) ?>
 														</p>
 														<?php $organizations = wp_get_post_terms($person->ID, "organizations"); ?>
 														<?php if (!empty($organizations)) : ?>
-															<p class="flex items-center gap-2 text-xs leading-none uppercase text-light-surface-normal">
-																<?php echo serc_svg("institution", "inline text-brand size-5 mr-1"); ?>
+															<p class="text-base text-light-surface-subtle mt-3">
 																<?php echo $organizations[0]->name; ?>
 															</p>
 														<?php endif; ?>
