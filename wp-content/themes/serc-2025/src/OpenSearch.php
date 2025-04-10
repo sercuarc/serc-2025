@@ -11,6 +11,24 @@ define('INDEX_NAME', 'serc');
 class OpenSearch
 {
 	private $client;
+	private $sourceFields = [
+		'id',
+		'os_id',
+		'title',
+		'type',
+		'content',
+		'date_formatted',
+		'url',
+		'venue_details',
+		'abstract',
+		'authors.prefix',
+		'authors.first_name',
+		'authors.last_name',
+		'created_at',
+		'description',
+		'publication_date',
+		'start_date',
+	];
 
 	public function __construct()
 	{
@@ -19,11 +37,6 @@ class OpenSearch
 			'auth' => ['kirk', 'SERCSearch2025!'],
 			'verify' => false, // Disables SSL verification for local development.
 		]);
-	}
-
-	public function test()
-	{
-		return ['hello' => 'world'];
 	}
 
 	public function search($params)
@@ -99,13 +112,16 @@ class OpenSearch
 			"size" => $per_page,
 			"from" => $offset,
 			"query" => $query,
+			"_source" => $this->sourceFields, // drastically improves response time!!
 			"sort" => $sort
 		];
+
 		// Execute search
 		$docs = $this->client->search([
 			"index" => INDEX_NAME,
 			"body" => $searchBody
 		]);
+
 		// Return results
 		return [
 			"params" => $params,
