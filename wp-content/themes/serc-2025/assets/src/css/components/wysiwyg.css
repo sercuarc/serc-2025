@@ -1,5 +1,8 @@
 .wysiwyg {
   @apply text-base leading-[1.6];
+  & > *:first-child {
+    @apply mt-0;
+  }
 
   a {
     @apply text-brand hover:underline font-medium;
