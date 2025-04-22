@@ -7,7 +7,7 @@
 
 <?php get_header(); ?>
 
-<?php $image = null; ?>
+<?php $image = get_the_post_thumbnail($post, 'full'); ?>
 
 <?php
 $default_people_args = [
