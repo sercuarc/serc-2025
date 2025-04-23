@@ -24,7 +24,7 @@ $pagination = paginate_links([
 ?>
 
 <main>
-	<header class="hero <?php if ($image) : ?>hero--inverted hero--with-image<?php endif; ?>">
+	<header class="hero hero--center-y <?php if ($image) : ?>hero--inverted hero--with-image<?php endif; ?>">
 		<?php if ($image) {
 			echo $image;
 		} ?>

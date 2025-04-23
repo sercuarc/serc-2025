@@ -31,7 +31,6 @@ $breadcrumbs = [
 		<div class="container grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 items-center">
 			<div class="lg:col-span-2 order-2 lg:order-1">
 				<h1 class="text-h2"><?php the_title(); ?></h1>
-				<h2 class="text-h4 mt-6"><?php the_field("job_title"); ?></h2>
 				<p class="flex items-center gap-2 uppercase mt-7">
 					<?php the_date('F j, Y'); ?>
 				</p>

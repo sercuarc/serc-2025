@@ -1,14 +1,18 @@
 @layer components {
   .hero {
     @apply relative flex flex-col gap-14 
-    justify-end lg:justify-center
+    justify-end lg:justify-start
     bg-light-tertiary text-dark-main 
-    py-12 lg:py-14 
-    min-h-[15rem] lg:min-h-[22rem]
+    pt-6 lg:pt-10 
+    pb-12 lg:pb-15
+    min-h-[15rem] lg:min-h-[24rem]
     overflow-hidden;
   }
   .hero--inverted {
     @apply bg-dark-main text-white;
+  }
+  .hero--center-y {
+    @apply lg:justify-center;
   }
   .hero--with-image {
     @apply before:absolute before:top-0 before:left-0 before:inset-0 before:z-10 

@@ -10,7 +10,7 @@
 <?php $has_image = has_post_thumbnail() ?>
 
 <main>
-	<header class="hero <?php if ($has_image) : ?>hero--inverted hero--with-image<?php endif; ?>">
+	<header class="hero hero--center-y <?php if ($has_image) : ?>hero--inverted hero--with-image<?php endif; ?>">
 		<?php if ($has_image) : ?>
 			<?php the_post_thumbnail(); ?>
 		<?php endif; ?>

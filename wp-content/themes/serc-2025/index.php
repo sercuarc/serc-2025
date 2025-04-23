@@ -9,19 +9,19 @@
 
 <main>
 
-	<div class="hero">
+	<div class="hero hero--center-y">
 		<div class="container">
 			<h1 class="text-h1">Default Hero with Heading</h1>
 		</div>
 	</div>
 
-	<div class="hero hero--inverted">
+	<div class="hero hero--center-y hero--inverted">
 		<div class="container">
 			<h1 class="text-h1">Inverted Hero with Heading</h1>
 		</div>
 	</div>
 
-	<div class="hero hero--inverted hero--with-image">
+	<div class="hero hero--center-y hero--inverted hero--with-image">
 		<img src="https://plus.unsplash.com/premium_photo-1679756099015-b06104fff761?fm=jpg&amp;q=60&amp;w=3000&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="nasa satellite" style="object-position:center">
 		<div class="container relative">
 			<h1 class="text-h1">Inverted Hero with Image</h1>
