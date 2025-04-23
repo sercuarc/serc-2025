@@ -12,8 +12,8 @@ class Helpers
 {
 	public static function formatEventDates($start_date, $end_date, $isAllDay)
 	{
-		$start = new DateTime("@{$start_date}");
-		$end = new DateTime("@{$end_date}");
+		$start = new DateTime($start_date);
+		$end = new DateTime($end_date);
 
 		if ($start->format('Y-m-d') === $end->format('Y-m-d')) {
 			return $isAllDay

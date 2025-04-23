@@ -1,3 +1,7 @@
+.tab-menu {
+  @apply flex gap-0 overflow-y-hidden overflow-x-auto;
+}
+
 .tab {
   @apply text-light-surface-normal hover:bg-light-secondary focus:bg-light-secondary outline-0
   text-base lg:text-lg font-normal 

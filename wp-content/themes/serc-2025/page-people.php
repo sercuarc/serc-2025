@@ -60,7 +60,7 @@ $member_roles = [
 
 		<div data-tabs>
 			<div class="container">
-				<nav class="tab-menu flex gap-0 overflow-y-hidden overflow-x-auto">
+				<nav class="tab-menu">
 					<?php $count = 0;
 					foreach ($member_roles as $member_role) : ?>
 						<a data-tab href="#<?php echo $member_role["slug"] ?>" class="tab <?php echo $count === 0 ? "is-active" : "" ?>"><?php echo $member_role["label"] !== "Leadership" ? $member_role["label"] : "Operations"; ?></a>

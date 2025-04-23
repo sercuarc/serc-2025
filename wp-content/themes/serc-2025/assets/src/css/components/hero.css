@@ -24,7 +24,7 @@
         lg:before:to-black/42 lg:before:to-67%;
 
     & > img:first-child {
-      @apply absolute top-0 left-0 w-full h-full object-cover object-top z-0;
+      @apply absolute top-0 left-0 w-full h-full object-cover object-top z-0 blur-sm;
     }
 
     & > *:not(img) {
