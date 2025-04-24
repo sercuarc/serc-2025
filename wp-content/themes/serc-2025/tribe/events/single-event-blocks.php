@@ -4,6 +4,7 @@
  * Single Event (Blocks)
  */
 
+use Serc2025\Helpers;
 
 get_header();
 the_post();
@@ -19,6 +20,9 @@ if ($isUpcoming) {
 	$breadcrumbs['Past Events'] = home_url('/events/?view=past');
 }
 
+$calendar = serc_svg("calendar", "inline-block size-5 mr-2");
+$pin = serc_svg("location", "inline-block size-5 mr-1");
+$details = Helpers::get_event_details(get_the_ID());
 ?>
 
 <main>
@@ -36,8 +40,9 @@ if ($isUpcoming) {
 		<div class="container grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 items-center">
 			<div class="lg:col-span-2 order-2 lg:order-1">
 				<h1 class="text-h2"><?php the_title(); ?></h1>
-				<p class="flex items-center gap-2 uppercase mt-7">
-					[Date] [Location]
+				<p class="flex flex-col sm:flex-row gap-1 sm:gap-4 mt-7">
+					<span class="flex items-center"><?php echo $calendar . ' ' . $details['schedule']; ?></span>
+					<span class="flex items-center"><?php echo $details['location'] ? $pin . ' ' . $details['location'] : ''; ?></span>
 				</p>
 			</div>
 			<div class="order-1 lg:order-2">
