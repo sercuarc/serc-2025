@@ -40,9 +40,9 @@ $class_names = implode(' ', array_keys(array_filter($class_names)));
 				<h2 class="<?php echo $subtitle_class; ?>"><?php echo $subtitle; ?></h2>
 			<?php endif; ?>
 			<?php if ($description) : ?>
-				<p class="<?php echo $description_class; ?>">
+				<div class="<?php echo $description_class; ?>">
 					<?php echo $description; ?>
-				</p>
+				</div>
 			<?php endif; ?>
 			<?php if ($custom_html) : ?>
 				<?php echo $custom_html; ?>

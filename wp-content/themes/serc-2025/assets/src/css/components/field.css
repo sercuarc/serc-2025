@@ -150,4 +150,9 @@
       @apply py-[0.4em];
     }
   }
+  .field-select-md {
+    select {
+      @apply py-[0.75em];
+    }
+  }
 }

@@ -2,40 +2,42 @@
 
 use Serc2025\Helpers;
 
+$events = $args['events'] ?? [];
 $count = 0;
-while (have_posts()) : the_post(); ?>
+?>
 
-	<?php if ($count > 0) : ?>
-		<hr class="border-subtle my-12 lg:my-24" />
-	<?php endif;
-	$count++; ?>
+<div class="flex flex-col gap-12 lg:gap-24">
 
-	<?php
-	$calendar = serc_svg("calendar", "inline-block text-brand size-4 mr-2");
-	$isAllDay = get_post_meta($post, '_EventAllDay', true);
-	$start_date = get_post_meta($post, '_EventStartDate', true);
-	$end_date = get_post_meta($post, '_EventEndDate', true);
-	$schedule = Helpers::formatEventDates($start_date, $end_date, $isAllDay);
+	<?php foreach ($events as $event) : ?>
 
-	$city = tribe_get_city();
-	$state = tribe_get_stateprovince();
-	$country = tribe_get_country();
-	$pin = serc_svg("location", "inline-block text-brand size-4 mr-1");
-	$location = implode(', ', array_filter([$city, $state, $country]));
+		<?php if ($count > 0) : ?>
+			<hr class="border-subtle" />
+		<?php endif; ?>
 
-	ob_start(); ?>
-	<div class="flex flex-col sm:flex-row gap-1 sm:gap-4">
-		<span class="flex items-center"><?php echo $calendar . ' ' . $schedule; ?></span>
-		<span class="flex items-center"><?php echo $location ? $pin . ' ' . $location : ''; ?></span>
-	</div>
-	<?php $event_details = ob_get_clean(); ?>
+		<?php
+		$calendar = serc_svg("calendar", "inline-block text-brand size-4 mr-2");
+		$pin = serc_svg("location", "inline-block text-brand size-4 mr-1");
+		$details = Helpers::get_event_details($event->ID);
+		ob_start(); ?>
+		<div class="flex flex-col sm:flex-row gap-1 sm:gap-4">
+			<span class="flex items-center"><?php echo $calendar . ' ' . $details['schedule']; ?></span>
+			<span class="flex items-center"><?php echo $details['location'] ? $pin . ' ' . $details['location'] : ''; ?></span>
+		</div>
+		<?php $event_details = ob_get_clean(); ?>
 
-	<?php get_template_part('components/card-horz', null, [
-		'title' => get_the_title(),
-		'label_below' => $event_details,
-		'text' => get_the_excerpt(),
-		'cta' => ['text' => 'View Event Details', 'url' => get_the_permalink()],
-		'image' => get_the_post_thumbnail($post, 'medium', array('class' => 'w-full p-3 lg:p-6 border border-normal'))
-	]); ?>
+		<?php get_template_part('components/card-horz', null, [
+			'title' => get_the_title($event),
+			'label_below' => $event_details,
+			'text' => get_the_excerpt($event),
+			'cta' => ['text' => 'View Event Details', 'url' => get_the_permalink($event)],
+			'image' => get_the_post_thumbnail($event, 'medium', [
+				'class' => 'w-full p-3 lg:p-6 border border-normal',
+				'loading' => 'lazy'
+			])
+		]); ?>
 
-<?php endwhile; ?>
+		<?php $count++; ?>
+
+	<?php endforeach; ?>
+
+</div>

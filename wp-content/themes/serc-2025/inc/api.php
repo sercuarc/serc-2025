@@ -89,7 +89,7 @@ function serc_get_events(WP_REST_Request $request)
 		$isAllDay = get_post_meta($post->ID, '_EventAllDay', true);
 		$start_date = get_post_meta($post->ID, '_EventStartDate', true);
 		$end_date = get_post_meta($post->ID, '_EventEndDate', true);
-		$date_formatted = Helpers::formatEventDates($start_date, $end_date, $isAllDay);
+		$date_formatted = Helpers::format_event_dates($start_date, $end_date, $isAllDay);
 		$venue = tribe_get_venue($post->ID);
 		$thumbnail = get_the_post_thumbnail_url($post->ID);
 
