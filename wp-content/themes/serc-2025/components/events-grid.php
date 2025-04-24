@@ -12,6 +12,9 @@ $events = $args['events'] ?? [];
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
 		<?php foreach ($events as $event) : ?>
 			<?php
+			if (is_numeric($event)) {
+				$event = tribe_get_event($event);
+			}
 			$calendar = serc_svg("calendar", "inline-block text-brand size-4 mr-2");
 			$pin = serc_svg("location", "inline-block text-brand size-4 mr-1");
 			$details = Helpers::get_event_details($event->ID);
