@@ -49,15 +49,14 @@ $pagination = paginate_links([
 
 		<div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 my-6 lg:my-12">
 			<?php while ($news_query->have_posts()) : $news_query->the_post(); ?>
-				<a href="<?php the_permalink(); ?>" class="group/card border outline-0 border-[#d9d9d9] transition-all flex flex-col hover:shadow-lg">
-					<?php the_post_thumbnail('small', array('class' => 'block w-full')); ?>
-					<div class="border-brand border-t-4 border-solid px-7 py-6 h-full flex flex-col">
-						<h3 class="text-h5 transition-colors group-hover/card:text-brand"><?php the_title(); ?></h3>
-						<p class="mt-2"><?php the_date('F j, Y'); ?></p>
-						<div class="mt-4 mb-6 lg:mb-12 body-sm"><?php the_excerpt(); ?></div>
-						<p class="font-medium mt-auto">Read More <?php echo serc_svg('arrow-right', 'inline text-brand size-5 ml-1 transition-transform group-hover/card:translate-x-2'); ?></p>
-					</div>
-				</a>
+				<?php get_template_part('components/card-vert', null, [
+					'title' => get_the_title(),
+					'url' => get_the_permalink(),
+					'label_below' => get_the_date('F j, Y'),
+					'text' => get_the_excerpt(),
+					'cta' => 'Read More ' . serc_svg('arrow-right', 'inline text-brand size-5 ml-1 transition-transform group-hover/card:translate-x-2'),
+					'image' => get_the_post_thumbnail(get_the_ID(), 'small', ['class' => 'block w-full'])
+				]); ?>
 			<?php endwhile; ?>
 		</div>
 
