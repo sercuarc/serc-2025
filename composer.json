@@ -1,27 +1,20 @@
 {
-    "require": {
-        "guzzlehttp/guzzle": "^7.9",
-        "http-interop/http-factory-guzzle": "^1.0",
-        "opensearch-project/opensearch-php": "^2.4",
-        "wpengine/advanced-custom-fields": "^6.4"
-    },
-    "config": {
-        "allow-plugins": {
-            "php-http/discovery": true,
-            "composer/installers": true
-        }
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://composer.advancedcustomfields.com"
-        }
-    ],
-    "extra": {
-        "installer-paths": {
-            "wp-content/mu-plugins/{$name}/": [
-                "wpengine/advanced-custom-fields"
-            ]
-        }
-    }
+	"require": {
+		"guzzlehttp/guzzle": "^7.9",
+		"http-interop/http-factory-guzzle": "^1.0",
+		"opensearch-project/opensearch-php": "^2.4"
+	},
+	"config": {
+		"allow-plugins": {
+			"php-http/discovery": true,
+			"composer/installers": true
+		}
+	},
+	"extra": {
+		"installer-paths": {
+			"wp-content/mu-plugins/{$name}/": [
+				"wpengine/advanced-custom-fields"
+			]
+		}
+	}
 }
