@@ -29,6 +29,7 @@ $count = 0;
 			'title' => get_the_title($event),
 			'label_below' => $event_details,
 			'text' => get_the_excerpt($event),
+			'url' => get_the_permalink($event),
 			'cta' => ['text' => 'View Event Details', 'url' => get_the_permalink($event)],
 			'image' => get_the_post_thumbnail($event, 'medium', [
 				'class' => 'w-full p-3 lg:p-6 border border-normal',

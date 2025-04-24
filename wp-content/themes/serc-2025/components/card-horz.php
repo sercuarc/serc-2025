@@ -4,6 +4,7 @@ $label_above = $args['label_above'] ?? null;
 $label_below = $args['label_below'] ?? null;
 $text = $args['text'] ?? null;
 $cta = $args['cta'] ?? null;
+$url = $args['url'] ?? null;
 $image = $args['image'] ?? null;
 $reversed = $args['reversed'] ?? false;
 
@@ -18,7 +19,13 @@ $image_order = $reversed ? 'order-1' : 'order-1 md:order-2';
 		<?php endif; ?>
 
 		<?php if ($title) : ?>
-			<h3 class="font-semibold text-[24px] lg:text-[28px] leading-[1.4] mb-2"><?php echo $title; ?></h3>
+			<h3 class="font-semibold text-[24px] lg:text-[28px] leading-[1.4] mb-2">
+				<?php if ($url) : ?>
+					<a href="<?php echo $url; ?>" class="text-inherit hover:text-brand focus:text-brand outline-0"><?php echo $title; ?></a>
+				<?php else : ?>
+					<?php echo $title; ?>
+				<?php endif; ?>
+			</h3>
 		<?php endif; ?>
 
 		<?php if ($label_below) : ?>
@@ -33,9 +40,15 @@ $image_order = $reversed ? 'order-1' : 'order-1 md:order-2';
 			<p class="pt-6 md:pt-12 mt-auto"><a href="<?php echo $cta['url']; ?>" class="btn btn-primary inline-block"><?php echo $cta['text']; ?></a></p>
 		<?php endif; ?>
 	</div>
-	<div class="w-full <?php echo $image_order; ?>">
-		<?php if ($image) {
-			echo $image;
-		} ?>
-	</div>
+	<?php if ($image) : ?>
+		<div class="w-full <?php echo $image_order; ?>">
+			<?php if ($url) : ?>
+				<a href="<?php echo $url; ?>" class="text-inherit hover:text-brand focus:text-brand outline-0">
+					<?php echo $image; ?>
+				</a>
+			<?php else : ?>
+				<?php echo $image; ?>
+			<?php endif; ?>
+		</div>
+	<?php endif; ?>
 </article>
