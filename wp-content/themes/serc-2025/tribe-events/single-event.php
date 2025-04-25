@@ -7,8 +7,18 @@
 use Serc2025\Helpers;
 
 $id = get_the_ID();
-$image = get_the_post_thumbnail($id, 'full', array('class' => 'blur-sm'));
+$image = get_the_post_thumbnail($id, 'medium', ['class' => 'hero-image']);
+$bg_image = str_replace('hero-image', 'hero-bg-image', $image);
 $isUpcoming = strtotime(get_post_meta($id, '_EventStartDate', true)) > time();
+$event_website = tribe_get_event_website_url(get_the_ID());
+$venue_name = tribe_get_venue();
+$venue_address = tribe_get_full_address();
+$venue_phone = tribe_get_phone();
+$venue_website = tribe_get_venue_website_url();
+$organizer_name = tribe_get_organizer();
+$organizer_phone = tribe_get_organizer_phone();
+$organizer_website = tribe_get_organizer_website_url();
+$organizer_email = tribe_get_organizer_email();
 $breadcrumbs = [
 	'Events' => home_url('/events')
 ];
@@ -21,34 +31,54 @@ if ($isUpcoming) {
 $calendar = serc_svg("calendar", "inline-block size-5 mr-2");
 $pin = serc_svg("location", "inline-block size-5 mr-1");
 $details = Helpers::get_event_details(get_the_ID());
-?>
+
+ob_start(); ?>
+<p class="flex flex-col sm:flex-row gap-1 sm:gap-4 mt-3">
+	<span class="flex items-center"><?php echo $calendar . ' ' . $details['schedule']; ?></span>
+	<span class="flex items-center"><?php echo $details['location'] ? $pin . ' ' . $details['location'] : ''; ?></span>
+</p>
+<?php if ($isUpcoming) : ?>
+	<div class="flex items-center gap-4 mt-4 lg:mt-8">
+		<?php if ($event_website) : ?>
+			<a href="<?php echo $event_website; ?>" class="btn btn-primary"><?php echo serc_svg("external-link", "size-4"); ?>Register</a>
+		<?php endif; ?>
+		<a href="<?php echo tribe_get_gcal_link(); ?>" class="btn <?php echo $bg_image ? 'btn-inverted-outline' : 'btn-outline' ?>"><?php echo serc_svg("calendar-add", "size-4"); ?>Add to Calendar (gcal)</a>
+		<a href="<?php echo tribe_get_single_ical_link(); ?>" class="btn <?php echo $bg_image ? 'btn-inverted-outline' : 'btn-outline' ?>"><?php echo serc_svg("download", "size-4"); ?>Download invite (.ics)</a>
+	</div>
+<?php endif; ?>
+<?php $hero_html = ob_get_clean(); ?>
 
 <main>
-	<header class="hero <?php if ($image) : ?>hero--inverted hero--with-image<?php endif; ?>">
-		<?php
-		if ($image) {
-			echo $image;
-		}
-		?>
-		<div class="container">
-			<?php get_template_part('components/breadcrumbs', '', [
-				'breadcrumbs' => $breadcrumbs
-			]); ?>
-		</div>
-		<div class="container grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 items-center">
-			<div class="lg:col-span-2 order-2 lg:order-1">
-				<h1 class="text-h2"><?php the_title(); ?></h1>
-				<p class="flex flex-col sm:flex-row gap-1 sm:gap-4 mt-7">
-					<span class="flex items-center"><?php echo $calendar . ' ' . $details['schedule']; ?></span>
-					<span class="flex items-center"><?php echo $details['location'] ? $pin . ' ' . $details['location'] : ''; ?></span>
-				</p>
+	<?php get_template_part('components/hero', null, [
+		'bg_image' => $bg_image,
+		'blur_bg' => true,
+		'image' => $image,
+		'center_y' => false,
+		'title' => get_the_title(),
+		'breadcrumbs' => $breadcrumbs,
+		'custom_html' => $hero_html
+	]); ?>
+	<section data-event-bar-threshold class="relative py-12 lg:py-20 overflow-y-hidden">
+		<div data-event-bar class="absolute z-40 top-0 left-0 w-full bg-white py-6 shadow-lg -translate-y-full transition-transform duration-300 ease-in-out" aria-hidden="true" tabindex="-1">
+			<div class="container flex items-center">
+				<div>
+					<p class="text-h5"><?php the_title(); ?></p>
+					<p class="flex gap-4 mt-1">
+						<span class="flex items-center"><?php echo serc_svg("calendar", "inline-block size-4 mr-2 text-brand") . ' ' . $details['schedule']; ?></span>
+						<span class="flex items-center"><?php echo $details['location'] ? serc_svg("location", "inline-block size-4 mr-1 text-brand") . ' ' . $details['location'] : ''; ?></span>
+					</p>
+				</div>
+				<?php if ($isUpcoming) : ?>
+					<div class="shrink-0 ml-auto flex items-center gap-4">
+						<?php if ($event_website) : ?>
+							<a href="<?php echo $event_website; ?>" class="btn btn-primary"><?php echo serc_svg("external-link", "size-4"); ?>Register</a>
+						<?php endif; ?>
+						<a href="<?php echo tribe_get_gcal_link(); ?>" class="btn btn-secondary"><?php echo serc_svg("calendar-add", "size-4"); ?>Add to Calendar (gcal)</a>
+						<a href="<?php echo tribe_get_single_ical_link(); ?>" class="btn btn-secondary"><?php echo serc_svg("download", "size-4"); ?>Download invite (.ics)</a>
+					</div>
+				<?php endif; ?>
 			</div>
-			<div class="order-1 lg:order-2">
-				<?php the_post_thumbnail('medium', array('class' => 'border border-subtle block w-full md:w-auto')); ?>
-			</div>
 		</div>
-	</header>
-	<section class="py-12 lg:py-20">
 		<div class="container grid grid-cols-1 lg:grid-cols-4 gap-9 lg:gap-18 items-start">
 			<div class="lg:col-span-3 flex flex-col gap-10 lg:gap-20 order-2 lg:order-1">
 				<?php the_content(); ?>
@@ -71,9 +101,6 @@ $details = Helpers::get_event_details(get_the_ID());
 					<h4 class="text-h4 pt-1">Event</h4>
 					<p class="text-lg font-medium"><?php the_title(); ?></p>
 					<dl>
-						<?php
-						$event_website = tribe_get_event_website_url(get_the_ID());
-						?>
 						<dt class="not-first:mt-5 font-bold text-light-surface-subtle leading-5">Start Date</dt>
 						<dd class="text-base leading-[28px]"><?php echo tribe_get_start_date(get_the_ID()); ?></dd>
 						<dt class="not-first:mt-5 font-bold text-light-surface-subtle leading-5">End Date</dt>
@@ -85,12 +112,6 @@ $details = Helpers::get_event_details(get_the_ID());
 
 				<div class="flex flex-col gap-6 mt-12">
 					<h4 class="text-h4 pt-1">Venue</h4>
-					<?php
-					$venue_name = tribe_get_venue();
-					$venue_address = tribe_get_full_address();
-					$venue_phone = tribe_get_phone();
-					$venue_website = tribe_get_venue_website_url();
-					?>
 					<?php if ($venue_name) : ?>
 						<p class="text-lg font-medium"><?php echo $venue_name; ?></p>
 					<?php endif; ?>
@@ -112,12 +133,6 @@ $details = Helpers::get_event_details(get_the_ID());
 
 				<div class="flex flex-col gap-6 mt-12">
 					<h4 class="text-h4 pt-1">Organizer</h4>
-					<?php
-					$organizer_name = tribe_get_organizer();
-					$organizer_phone = tribe_get_organizer_phone();
-					$organizer_website = tribe_get_organizer_website_url();
-					$organizer_email = tribe_get_organizer_email();
-					?>
 					<?php if ($organizer_name) : ?>
 						<p class="text-lg font-medium"><?php echo $organizer_name; ?></p>
 					<?php endif; ?>
@@ -141,3 +156,58 @@ $details = Helpers::get_event_details(get_the_ID());
 		</div>
 	</section>
 </main>
+
+<script type="text/javascript" defer>
+	window.addEventListener('DOMContentLoaded', function() {
+		const minScreenWidth = 1024;
+		// dont run on small screens
+		if (window.innerWidth < minScreenWidth) return;
+		// get elements
+		const eventBar = document.querySelector('[data-event-bar]');
+		const eventBarThreshold = document.querySelector('[data-event-bar-threshold]');
+		if (!eventBar || !eventBarThreshold) return;
+		const navigation = document.querySelector('[data-navigation]') || {
+			offsetHeight: 0
+		};
+		const wpAdminBar = document.querySelector('#wpadminbar') || {
+			offsetHeight: 0
+		};
+		// calculate thresholds and sizes
+		function getMeasurements() {
+			const threshold = eventBarThreshold.getBoundingClientRect().y;
+			const fixedOffset = wpAdminBar.offsetHeight + navigation.offsetHeight;
+			return {
+				threshold,
+				fixedOffset
+			};
+		}
+		let m = getMeasurements();
+		// manage the fixed state
+		let fixed = false;
+		// on scroll...
+		window.addEventListener('scroll', () => {
+			if (window.innerWidth < minScreenWidth) return;
+			if (window.scrollY > m.threshold - m.fixedOffset) {
+				if (!fixed) {
+					eventBar.classList.remove('-translate-y-full', 'absolute');
+					eventBar.classList.add('translate-y-0', 'fixed');
+					eventBar.style.top = `${m.fixedOffset}px`;
+					fixed = true;
+				}
+			} else {
+				if (fixed) {
+					eventBar.classList.add('-translate-y-full', 'absolute');
+					eventBar.classList.remove('translate-y-0', 'fixed');
+					eventBar.style.top = '';
+					fixed = false;
+				}
+			}
+		});
+		// on resize...
+		window.addEventListener('resize', () => {
+			if (window.innerWidth >= minScreenWidth) {
+				m = getMeasurements();
+			}
+		});
+	});
+</script>
