@@ -11,7 +11,7 @@
 
 <main>
 	<?php get_template_part('components/hero', null, [
-		'bg_image' => get_the_post_thumbnail($post, 'large', ['class' => 'hero-bg-image']),
+		'bg_image' => get_the_post_thumbnail($post, 'large', ['class' => 'hero-bg-image object-top']),
 		'title' => get_the_title(),
 		'center_y' => true
 	]); ?>
