@@ -62,7 +62,7 @@ $events = get_posts([
 
 <main>
 	<?php get_template_part('components/hero', null, [
-		'bg_image' => get_the_post_thumbnail(get_the_ID(), 'medium', ['class' => 'object-center']),
+		'bg_image' => get_the_post_thumbnail(get_the_ID(), 'large', ['class' => 'hero-bg-image object-center']),
 		'title' => get_the_title(),
 		'title_class' => 'text-h1',
 		'description' => get_the_content(),

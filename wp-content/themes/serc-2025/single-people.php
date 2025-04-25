@@ -16,34 +16,19 @@ $breadcrumbs = [
 	'People' => home_url('/people'),
 	$role => home_url('/people?' . http_build_query(['tab' => $member_roles[0]->slug]))
 ];
+$organizations = wp_get_post_terms($post->ID, "organizations");
 
 get_header();
 ?>
 
 <main>
-	<header class="hero lg:pb-26">
-		<div class="container">
-			<?php get_template_part('components/breadcrumbs', '', [
-				'breadcrumbs' => $breadcrumbs
-			]); ?>
-		</div>
-		<div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-16 items-center">
-			<div class="lg:col-span-2">
-				<h1 class="text-h2"><?php the_title(); ?></h1>
-				<h2 class="text-h4 mt-6"><?php the_field("job_title"); ?></h2>
-				<?php $organizations = wp_get_post_terms($post->ID, "organizations"); ?>
-				<?php if (!empty($organizations)) : ?>
-					<p class="flex items-center gap-2 uppercase mt-7">
-						<?php echo serc_svg("institution", "inline text-brand size-5 mr-1"); ?>
-						<?php echo $organizations[0]->name; ?>
-					</p>
-				<?php endif; ?>
-			</div>
-			<div>
-				<?php the_post_thumbnail('medium', array('class' => 'aspect-square object-cover')); ?>
-			</div>
-		</div>
-	</header>
+	<?php get_template_part('components/hero', null, [
+		'image' => get_the_post_thumbnail($post, 'medium', ['class' => 'hero-image aspect-square object-cover']),
+		'breadcrumbs' => $breadcrumbs,
+		'title' => get_the_title(),
+		'subtitle' => get_field("job_title"),
+		'description' => serc_svg("institution", "inline text-brand size-5 mr-1") . '<span class="uppercase">' . $organizations[0]->name . '</span>'
+	]); ?>
 	<section class="py-12 lg:py-20">
 		<div class="container grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 items-start">
 			<div class="lg:col-span-2">

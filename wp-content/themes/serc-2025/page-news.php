@@ -5,7 +5,6 @@
  */
 
 get_header();
-$image = get_the_post_thumbnail($post, 'full');
 $page = get_query_var('paged');
 $content = get_the_content();
 $news_query = new WP_Query([
@@ -25,7 +24,7 @@ $pagination = paginate_links([
 
 <main>
 	<?php get_template_part('components/hero', null, [
-		'bg_image' => $image,
+		'bg_image' => get_the_post_thumbnail($post, 'large', ['class' => 'hero-bg-image']),
 		'title' => 'News',
 		'title_class' => 'text-h1',
 		'center_y' => true,

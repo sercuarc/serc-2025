@@ -10,14 +10,11 @@
 <?php $has_image = has_post_thumbnail() ?>
 
 <main>
-	<header class="hero hero--center-y <?php if ($has_image) : ?>hero--inverted hero--with-bg-image<?php endif; ?>">
-		<?php if ($has_image) : ?>
-			<?php the_post_thumbnail(); ?>
-		<?php endif; ?>
-		<div class="container">
-			<h1 class="text-h1"><?php the_title(); ?></h1>
-		</div>
-	</header>
+	<?php get_template_part('components/hero', null, [
+		'bg_image' => get_the_post_thumbnail($post, 'large', ['class' => 'hero-bg-image']),
+		'title' => get_the_title(),
+		'center_y' => true
+	]); ?>
 	<section class="bg-white pt-12 lg:pt-16 pb-20 lg:pb-30">
 		<div class="container">
 			<div class="wysiwyg wysiwyg-lg">

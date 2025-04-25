@@ -7,13 +7,11 @@
 
 get_header();
 the_post();
-$image = get_the_post_thumbnail($post, 'medium');
 ?>
 
 <main>
 	<?php get_template_part('components/hero', null, [
-		'bg_image' => $image,
-		'image' => $image,
+		'image' => get_the_post_thumbnail($post, 'medium', ['class' => 'hero-image']),
 		'title' => get_the_title(),
 		'description' => get_the_date('F j, Y'),
 		'breadcrumbs' => [

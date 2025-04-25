@@ -7,8 +7,6 @@
 
 <?php get_header(); ?>
 
-<?php $image = get_the_post_thumbnail($post, 'full'); ?>
-
 <?php
 $default_people_args = [
 	'numberposts' => -1,
@@ -48,14 +46,11 @@ $member_roles = [
 ?>
 
 <main>
-	<header class="hero hero--center-y <?php if ($image) : ?>hero--inverted hero--with-bg-image<?php endif; ?>">
-		<?php if ($image) : ?>
-			<?php echo $image; ?>
-		<?php endif; ?>
-		<div class="container">
-			<h1 class="text-h1">People</h1>
-		</div>
-	</header>
+	<?php get_template_part('components/hero', null, [
+		'bg_image' => get_the_post_thumbnail($post, 'large', ['class' => 'hero-bg-image']),
+		'title' => get_the_title(),
+		'center_y' => true
+	]); ?>
 	<section class="bg-white pt-12 lg:pt-16">
 
 		<div data-tabs>
