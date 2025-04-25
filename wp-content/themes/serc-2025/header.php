@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" <?php post_class(); ?>>
 
 <head>
 	<meta charset="UTF-8">
