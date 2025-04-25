@@ -18,6 +18,7 @@ require_once get_template_directory() . '/inc/autoloader.php';
 require_once get_template_directory() . '/inc/admin.php';
 require_once get_template_directory() . '/inc/api.php';
 require_once get_template_directory() . '/inc/assets.php';
+require_once get_template_directory() . '/inc/blocks.php';
 require_once get_template_directory() . '/inc/comments.php';
 require_once get_template_directory() . '/inc/theme-config.php';
 require_once get_template_directory() . '/inc/menus.php';
