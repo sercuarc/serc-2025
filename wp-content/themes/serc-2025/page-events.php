@@ -70,7 +70,7 @@ $events = get_posts([
 		'center_y' => true
 	]); ?>
 	<div class="container py-12 lg:py-16">
-		<div class="flex sm:items-end flex-col sm:flex-row gap-4 sm:gap-8 lg:gap-24 pb-12 lg:pb-20">
+		<div class="flex sm:items-end flex-col sm:flex-row gap-4 sm:gap-8 lg:gap-24 <?php echo $view === 'past' ? 'pb-8 lg:pb-12' : 'pb-16 lg:pb-24' ?>">
 			<nav class="tab-menu lg:pt-3">
 				<a href="<?php echo $eventsUrl; ?>" class="tab <?php echo $view === 'upcoming' ? "is-active" : "" ?>">Upcoming Events</a>
 				<a href="<?php echo $eventsPastUrl; ?>" class="tab <?php echo $view === 'past' ? "is-active" : "" ?>">Past Events</a>
@@ -93,6 +93,11 @@ $events = get_posts([
 				</div>
 			<?php endif; ?>
 		</div>
+		<?php if ($view === 'past') : ?>
+			<div class="pb-8 lg:pb-12">
+				<p class="text-lg text-light-surface-normal">Showing results for the year <strong><?php echo $events_year ?? date('Y'); ?></strong></p>
+			</div>
+		<?php endif; ?>
 		<?php
 		if ($view === 'past') {
 			get_template_part('components/events-grid', null, [
