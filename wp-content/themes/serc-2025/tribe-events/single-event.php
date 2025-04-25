@@ -106,14 +106,14 @@ ob_start(); ?>
 						$job_title = get_field("job_title", $person);
 						$url = get_the_permalink($person);
 					?>
-						<article class="flex items-start gap-4">
+						<a href="<?php echo $url; ?>" class="group/person flex items-start gap-4">
 							<?php echo $image; ?>
 							<div class="flex flex-col gap-2">
-								<h3 class="text-h5"><?php echo $name; ?></h3>
+								<h3 class="text-h5 group-hover/person:text-brand group-focus/person:text-brand"><?php echo $name; ?></h3>
 								<p class="text-sm text-light-surface-subtle"><?php echo $job_title; ?></p>
-								<p><a href="<?php echo $url; ?>" class="font-medium group/bio-link hover:text-brand focus:text-brand transition-colors">View Bio <?php echo serc_svg("arrow-right", "text-brand group-hover/bio-link:translate-x-2 transition-transform inline-block size-5 ml-1"); ?></a></p>
+								<p class="font-medium group-hover/person:text-brand group-focus/person:text-brand transition-colors">View Bio <?php echo serc_svg("arrow-right", "text-brand group-hover/person:translate-x-2 transition-transform inline-block size-5 ml-1"); ?></p>
 							</div>
-						</article>
+						</a>
 					<?php endforeach; ?>
 				</div>
 			</div>
