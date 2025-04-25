@@ -81,7 +81,7 @@ ob_start(); ?>
 			</div>
 		</div>
 		<div class="container grid grid-cols-1 lg:grid-cols-4 gap-9 lg:gap-18 items-start">
-			<div class="lg:col-span-3 flex flex-col gap-10 lg:gap-20 order-2 lg:order-1">
+			<div class="lg:col-span-3 flex flex-col gap-10 lg:gap-20 order-2 lg:order-1 body-lg">
 				<?php the_content(); ?>
 			</div>
 			<div class="lg:col-span-1 order-1 lg:order-2">
@@ -116,6 +116,38 @@ ob_start(); ?>
 						</article>
 					<?php endforeach; ?>
 				</div>
+			</div>
+		</section>
+	<?php endif; ?>
+	<?php if ($schedule = true) : ?>
+		<section class="py-12 lg:py-20">
+			<div class="container">
+				<?php if ($schedule_title = "Schedule") : ?>
+					<h2 class="text-title-2 mb-12"><?php echo $schedule_title; ?></h2>
+				<?php endif; ?>
+				<?php for ($i = 0; $i < 3; $i++) : ?>
+					<article class="py-8 lg:py-12 border-t border-subtle">
+						<h3 class="text-h3 mb-2">Monday 3/6</h3>
+						<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap:12 xl:gap-24">
+							<div class="lg:col-span-2">
+								<p class="font-medium flex items-center"><?php echo serc_svg("clock", "inline-block size-5 mr-2 text-brand") ?> 9:00 AM - 4:00 PM</p>
+								<div class="mt-6">
+									<p>Aenean vitae dui vitae est rutrum tristique vitae sit amet orci. Aenean tristique tincidunt rhoncus. Nulla tempus posuere sem, non placerat ligula semper sed. Etiam a viverra dui. Ut id egestas sem, vitae molestie eros. Mauris lacinia nec magna in faucibus. Cras suscipit metus eu consequat semper.</p>
+								</div>
+								<h4 class="text-h5 mt-6">Speakers</h4>
+								<ul class="mt-4 leading-loose">
+									<li>Dr. John Doe</li>
+								</ul>
+							</div>
+							<div class="col-span-1">
+								<h4 class="text-h5">Downloads</h4>
+								<ul class="mt-4 leading-loose">
+									<li><a href="#" class="text-brand hover:text-dark-main focus:text-dark-main">Agenda (PDF) <?php echo serc_svg("download", "inline-block size-4 ml-1"); ?></a></li>
+								</ul>
+							</div>
+						</div>
+					</article>
+				<?php endfor; ?>
 			</div>
 		</section>
 	<?php endif; ?>
