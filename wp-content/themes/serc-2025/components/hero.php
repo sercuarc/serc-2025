@@ -1,5 +1,6 @@
 <?php
 $bg_image = $args['bg_image'] ?? null;
+$blur_bg = $args['blur_bg'] ?? false;
 $image = $args['image'] ?? null;
 $title = $args['title'] ?? null;
 $title_class = $args['title_class'] ?? "text-h2";
@@ -14,8 +15,9 @@ $custom_html = $args['custom_html'] ?? null;
 $class_names = [
 	'hero' => true,
 	'hero--inverted' => $bg_image,
-	'hero--with-image' => $bg_image,
-	'hero--center-y' => $center_y
+	'hero--with-bg-image' => $bg_image,
+	'hero--center-y' => $center_y,
+	'hero--blur-bg' => $blur_bg
 ];
 $class_names = implode(' ', array_keys(array_filter($class_names)));
 ?>

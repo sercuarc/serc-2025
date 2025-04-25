@@ -8,13 +8,25 @@
     min-h-[15rem] lg:min-h-[24rem]
     overflow-hidden;
   }
-  .hero--inverted {
+  .hero-image {
+    @apply block w-full;
+    .hero--with-bg-image & {
+      @apply border border-subtle;
+    }
+  }
+  .hero-bg-image {
+    @apply absolute top-0 left-0 w-full h-full object-cover object-top z-0;
+    .hero--blur-bg & {
+      @apply blur-sm;
+    }
+  }
+  .hero.hero--inverted {
     @apply bg-dark-main text-white;
   }
-  .hero--center-y {
+  .hero.hero--center-y {
     @apply lg:justify-center;
   }
-  .hero--with-image {
+  .hero.hero--with-bg-image {
     @apply before:absolute before:top-0 before:left-0 before:inset-0 before:z-10 
     before:bg-gradient-to-b
       before:from-transparent 
@@ -22,10 +34,6 @@
     lg:before:bg-gradient-to-l
       lg:before:from-transparent lg:before:from-2% 
         lg:before:to-black/42 lg:before:to-67%;
-
-    & > img:first-child {
-      @apply absolute top-0 left-0 w-full h-full object-cover object-top z-0;
-    }
 
     & > *:not(img) {
       @apply relative z-20;
