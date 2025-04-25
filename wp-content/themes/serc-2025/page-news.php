@@ -24,28 +24,15 @@ $pagination = paginate_links([
 ?>
 
 <main>
-	<header class="hero hero--center-y <?php if ($image) : ?>hero--inverted hero--with-image<?php endif; ?>">
-		<?php if ($image) {
-			echo $image;
-		} ?>
-		<div class="container">
-			<h1 class="text-h1">News</h1>
-			<?php if ($content) : ?>
-				<div class="mt-8">
-					<?php echo $content; ?>
-				</div>
-			<?php endif; ?>
-		</div>
-	</header>
+	<?php get_template_part('components/hero', null, [
+		'bg_image' => $image,
+		'title' => 'News',
+		'title_class' => 'text-h1',
+		'center_y' => true,
+		'description' => get_the_content(),
+		'description_class' => 'body-lg mt-7',
+	]); ?>
 	<section class="py-12 lg:py-20">
-
-		<?php if ($page > 1) : ?>
-			<div class="container">
-				<?php get_template_part('components/pagination', null, [
-					'pagination' => $pagination
-				]); ?>
-			</div>
-		<?php endif; ?>
 
 		<div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 my-6 lg:my-12">
 			<?php while ($news_query->have_posts()) : $news_query->the_post(); ?>
