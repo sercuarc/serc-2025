@@ -19,6 +19,7 @@ $organizer_name = tribe_get_organizer();
 $organizer_phone = tribe_get_organizer_phone();
 $organizer_website = tribe_get_organizer_website_url();
 $organizer_email = tribe_get_organizer_email();
+$people = get_field('people_people');
 $breadcrumbs = [
 	'Events' => home_url('/events')
 ];
@@ -92,6 +93,32 @@ ob_start(); ?>
 			</div>
 		</div>
 	</section>
+	<?php if ($people) : ?>
+		<section class="py-12 lg:py-20 bg-light-secondary">
+			<div class="container">
+				<?php if ($people_title = get_field("people_title")) : ?>
+					<h2 class="text-title-2 mb-16"><?php echo $people_title; ?></h2>
+				<?php endif; ?>
+				<div class="max-w-[64rem] grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-y-16 lg:gap-x-24">
+					<?php foreach ($people as $person) :
+						$image = get_the_post_thumbnail($person, 'small', ['class' => 'aspect-square size-[7rem] object-cover']);
+						$name = get_the_title($person);
+						$job_title = get_field("job_title", $person);
+						$url = get_the_permalink($person);
+					?>
+						<article class="flex items-start gap-4">
+							<?php echo $image; ?>
+							<div class="flex flex-col gap-2">
+								<h3 class="text-h5"><?php echo $name; ?></h3>
+								<p class="text-sm text-light-surface-subtle"><?php echo $job_title; ?></p>
+								<p><a href="<?php echo $url; ?>" class="font-medium group/bio-link hover:text-brand focus:text-brand transition-colors">View Bio <?php echo serc_svg("arrow-right", "text-brand group-hover/bio-link:translate-x-2 transition-transform inline-block size-5 ml-1"); ?></a></p>
+							</div>
+						</article>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</section>
+	<?php endif; ?>
 	<section class="py-12 lg:py-20 bg-light-tertiary">
 		<div class="container">
 			<h3 class="text-title-2">Details</h3>
