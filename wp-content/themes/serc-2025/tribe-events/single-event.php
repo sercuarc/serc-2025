@@ -120,55 +120,69 @@ ob_start(); ?>
 		</section>
 	<?php endif; ?>
 
-	<?php while (have_rows('event_content_blocks')) : the_row(); ?>
+	<?php if (have_rows('event_schedule')) : ?>
+		<section class="py-12 lg:py-20">
+			<?php while (have_rows('event_schedule')) : the_row(); ?>
 
-		<?php if (get_row_layout() == 'schedule') : ?>
+				<?php if (get_row_layout() == 'schedule_title') : ?>
 
-			<section class="py-12 lg:py-20">
-				<div class="container">
-					<?php if ($schedule_title = get_sub_field("title")) : ?>
-						<h2 class="text-title-2 mb-12"><?php echo $schedule_title; ?></h2>
-					<?php endif; ?>
-					<?php while (have_rows('schedule_items')) : the_row(); ?>
-						<article class="py-8 lg:py-12 border-t border-subtle">
-							<?php if ($title = get_sub_field("title")) : ?>
-								<h3 class="text-h3 mb-2"><?php echo $title; ?></h3>
-							<?php endif; ?>
-							<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap:12 xl:gap-24">
-								<div class="lg:col-span-2 flex flex-col gap-6">
-									<?php
-									$start_time = get_sub_field("start_time");
-									$end_time = get_sub_field("end_time");
-									if ($start_time || $end_time) : ?>
-										<p class="font-medium flex items-center">
-											<?php echo serc_svg("clock", "inline-block size-5 mr-2 text-brand") ?>
-											<?php echo $start_time . ($end_time ? " - " . $end_time : ""); ?>
-										</p>
-									<?php endif; ?>
-									<?php if ($content = get_sub_field("content")) : ?>
-										<div class="wysiwyg">
-											<?php echo apply_filters('the_content', $content); ?>
+					<div class="container">
+						<h2 class="text-title-2 my-8 lg:my-12"><?php echo the_sub_field('schedule_title_text'); ?></h2>
+					</div>
+
+				<?php elseif (get_row_layout() == 'schedule') : ?>
+
+					<div class="container">
+						<?php while (have_rows('schedule_group_items')) : the_row(); ?>
+							<article class="py-8 lg:py-12 border-t border-subtle">
+								<?php if ($title = get_sub_field("title")) : ?>
+									<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap:12 xl:gap-24">
+										<div class="lg:col-span-2 flex flex-col gap-6">
+											<h3 class="text-h4 mb-2"><?php echo $title; ?></h3>
 										</div>
-									<?php endif; ?>
+									</div>
+								<?php endif; ?>
+								<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap:12 xl:gap-24">
+									<div class="lg:col-span-2 flex flex-col gap-6">
+										<?php
+										$start_time = get_sub_field("start_time");
+										$end_time = get_sub_field("end_time");
+										if ($start_time || $end_time) : ?>
+											<p class="font-medium flex items-center">
+												<?php echo serc_svg("clock", "inline-block size-5 mr-2 text-brand") ?>
+												<?php echo $start_time . ($end_time ? " - " . $end_time : ""); ?>
+											</p>
+										<?php endif; ?>
+										<?php if ($content = get_sub_field("content")) : ?>
+											<div class="wysiwyg">
+												<?php echo apply_filters('the_content', $content); ?>
+											</div>
+										<?php endif; ?>
+									</div>
+									<div class="col-span-1">
+										<?php if ($right_column_title = get_sub_field("right_column_title")) : ?>
+											<h4 class="text-h5"><?php echo $right_column_title; ?></h4>
+										<?php endif; ?>
+										<?php if (have_rows("right_column_links")) : ?>
+											<div class="wysiwyg wysiwyg-tight mt-5">
+												<?php while (have_rows("right_column_links")) : the_row();
+													$link = get_sub_field("link"); ?>
+													<a href="<?php echo $link["url"]; ?>" target="<?php echo $link["target"]; ?>"><?php echo $link["title"]; ?></a>
+												<?php endwhile; ?>
+											</div>
+										<?php endif; ?>
+										</ul>
+									</div>
 								</div>
-								<div class="col-span-1">
-									<?php if ($right_column_title = get_sub_field("right_column_title")) : ?>
-										<h4 class="text-h5"><?php echo $right_column_title; ?></h4>
-									<?php endif; ?>
-									<?php if ($right_column_content = get_sub_field("right_column_content")) : ?>
-										<div class="wysiwyg wysiwyg-tight mt-5"><?php echo apply_filters('the_content', $right_column_content); ?></div>
-									<?php endif; ?>
-									</ul>
-								</div>
-							</div>
-						</article>
-					<?php endwhile; ?>
-				</div>
-			</section>
+							</article>
+						<?php endwhile; ?>
+					</div>
 
-		<?php endif; ?>
+				<?php endif; ?>
 
-	<?php endwhile; ?>
+			<?php endwhile; ?>
+		</section>
+	<?php endif; ?>
 
 	<section class="py-12 lg:py-20 bg-light-tertiary">
 		<div class="container">
