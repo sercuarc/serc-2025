@@ -10,6 +10,6 @@
 	<?php wp_head(); ?>
 </head>
 
-<body class="group/body text-dark-main selection:bg-red-200 selection:text-dark-main overflow-x-hidden pt-[81px] lg:pt-[102px]" style="-webkit-font-smoothing: antialiased;">
+<body class="group/body text-dark-main selection:bg-red-200 selection:text-dark-main overflow-x-hidden <?php if (is_admin_bar_showing()) : ?>pt-[35px] lg:pt-[70px]<?php else : ?>pt-[80px] lg:pt-[103px]<?php endif; ?>" style="-webkit-font-smoothing: antialiased;">
 
 	<?php get_template_part('components/navigation'); ?>
