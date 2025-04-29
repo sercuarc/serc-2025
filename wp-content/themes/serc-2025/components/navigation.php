@@ -7,9 +7,13 @@
 	"resources-partners" => ["label" => "Resources & Partners", "has_children" => false],
 	"contact" => ["label" => "Contact", "has_children" => false],
 ];
+$featured_event = tribe_get_events([
+	"posts_per_page" => 1,
+	'start_date' => date('Y-m-d'),
+])
 ?>
 
-<div data-navigation class="group/navigation fixed z-50 top-0 group-[.customize-support]/body:top-[46px] md:group-[.customize-support]/body:top-8 left-0 w-full">
+<div data-navigation class="group/navigation fixed z-50 top-0 left-0 w-full">
 	<header data-navigation-header class="group/header z-10 bg-white border-b border-subtle relative">
 		<div class="flex items-center lg:items-end gap-6 lg:gap-16 px-6 xl:pr-12">
 			<div class="relative lg:hidden my-5">
@@ -118,9 +122,9 @@
 				"headline" => [
 					"label" => "Featured Event",
 					"icon" => "calendar",
-					"text" => "Upcoming Event: 2025 Pacific Operational Science & Technology (POST) Conference"
+					"text" => get_the_title($featured_event[0]->ID)
 				],
-				"cta" => ["label" => "View Event", "url" => home_url('events/2025-pacific-operational-science-and-technology-post-conference')],
+				"cta" => ["label" => "View Event", "url" => get_permalink($featured_event[0]->ID)],
 			],
 		]; ?>
 		<?php foreach ($menus as $menu) : ?>
@@ -161,9 +165,9 @@
 					<?php endif; ?>
 					<p class="text-xl lg:text-h4"><?php echo $menu["headline"]["text"] ?></p>
 					<p class="font-medium lg:text-xl">
-						<a href="<?php echo $menu["cta"]["url"]; ?>" class="hover:text-brand transition-colors">
+						<a href="<?php echo $menu["cta"]["url"]; ?>" class="group hover:text-brand transition-colors">
 							<?php echo $menu["cta"]["label"]; ?>
-							<?php echo serc_svg("arrow-right", "inline text-brand size-4 ml-2") ?>
+							<?php echo serc_svg("arrow-right", "group-hover:translate-x-2 transition-transform inline text-brand size-4 ml-2") ?>
 						</a>
 					</p>
 				</div>

@@ -19,7 +19,6 @@ $organizer_name = tribe_get_organizer();
 $organizer_phone = tribe_get_organizer_phone();
 $organizer_website = tribe_get_organizer_website_url();
 $organizer_email = tribe_get_organizer_email();
-$people = get_field('people_people');
 $breadcrumbs = [
 	'Events' => home_url('/events')
 ];
@@ -43,8 +42,8 @@ ob_start(); ?>
 		<?php if ($event_website) : ?>
 			<a href="<?php echo $event_website; ?>" class="btn btn-primary"><?php echo serc_svg("external-link", "size-4"); ?>Register</a>
 		<?php endif; ?>
-		<a href="<?php echo tribe_get_gcal_link(); ?>" class="btn <?php echo $bg_image ? 'btn-inverted-outline' : 'btn-outline' ?>"><?php echo serc_svg("calendar-add", "size-4"); ?>Add to Calendar (gcal)</a>
-		<a href="<?php echo tribe_get_single_ical_link(); ?>" class="btn <?php echo $bg_image ? 'btn-inverted-outline' : 'btn-outline' ?>"><?php echo serc_svg("download", "size-4"); ?>Download invite (.ics)</a>
+		<a href="<?php echo tribe_get_gcal_link(); ?>" class="btn <?php echo $bg_image ? 'btn-inverted-outline' : 'btn-outline' ?>"><?php echo serc_svg("calendar-add", "size-4"); ?>Add to Calendar</a>
+		<!-- <a href="<?php echo tribe_get_single_ical_link(); ?>" class="btn <?php echo $bg_image ? 'btn-inverted-outline' : 'btn-outline' ?>"><?php echo serc_svg("download", "size-4"); ?>Download invite (.ics)</a> -->
 	</div>
 <?php endif; ?>
 <?php $hero_html = ob_get_clean(); ?>
@@ -74,8 +73,8 @@ ob_start(); ?>
 						<?php if ($event_website) : ?>
 							<a href="<?php echo $event_website; ?>" class="btn btn-primary"><?php echo serc_svg("external-link", "size-4"); ?>Register</a>
 						<?php endif; ?>
-						<a href="<?php echo tribe_get_gcal_link(); ?>" class="btn btn-secondary"><?php echo serc_svg("calendar-add", "size-4"); ?>Add to Calendar (gcal)</a>
-						<a href="<?php echo tribe_get_single_ical_link(); ?>" class="btn btn-secondary"><?php echo serc_svg("download", "size-4"); ?>Download invite (.ics)</a>
+						<a href="<?php echo tribe_get_gcal_link(); ?>" class="btn btn-secondary"><?php echo serc_svg("calendar-add", "size-4"); ?>Add to Calendar</a>
+						<!-- <a href="<?php echo tribe_get_single_ical_link(); ?>" class="btn btn-secondary"><?php echo serc_svg("download", "size-4"); ?>Download invite (.ics)</a> -->
 					</div>
 				<?php endif; ?>
 			</div>
@@ -93,64 +92,84 @@ ob_start(); ?>
 			</div>
 		</div>
 	</section>
-	<?php if ($people) : ?>
-		<section class="py-12 lg:py-20 bg-light-secondary">
-			<div class="container">
-				<?php if ($people_title = get_field("people_title")) : ?>
-					<h2 class="text-title-2 mb-16"><?php echo $people_title; ?></h2>
-				<?php endif; ?>
-				<div class="max-w-[64rem] grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-y-16 lg:gap-x-24">
-					<?php foreach ($people as $person) :
-						$image = get_the_post_thumbnail($person, 'small', ['class' => 'aspect-square size-[7rem] object-cover']);
-						$name = get_the_title($person);
-						$job_title = get_field("job_title", $person);
-						$url = get_the_permalink($person);
-					?>
-						<a href="<?php echo $url; ?>" class="group/person flex items-start gap-4">
-							<?php echo $image; ?>
-							<div class="flex flex-col gap-2">
-								<h3 class="text-h5 group-hover/person:text-brand group-focus/person:text-brand"><?php echo $name; ?></h3>
-								<p class="text-sm text-light-surface-subtle"><?php echo $job_title; ?></p>
-								<p class="font-medium group-hover/person:text-brand group-focus/person:text-brand transition-colors">View Bio <?php echo serc_svg("arrow-right", "text-brand group-hover/person:translate-x-2 transition-transform inline-block size-5 ml-1"); ?></p>
-							</div>
-						</a>
-					<?php endforeach; ?>
-				</div>
-			</div>
-		</section>
-	<?php endif; ?>
-	<?php if ($schedule = true) : ?>
-		<section class="py-12 lg:py-20">
-			<div class="container">
-				<?php if ($schedule_title = "Schedule") : ?>
-					<h2 class="text-title-2 mb-12"><?php echo $schedule_title; ?></h2>
-				<?php endif; ?>
-				<?php for ($i = 0; $i < 3; $i++) : ?>
-					<article class="py-8 lg:py-12 border-t border-subtle">
-						<h3 class="text-h3 mb-2">Monday 3/6</h3>
-						<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap:12 xl:gap-24">
-							<div class="lg:col-span-2">
-								<p class="font-medium flex items-center"><?php echo serc_svg("clock", "inline-block size-5 mr-2 text-brand") ?> 9:00 AM - 4:00 PM</p>
-								<div class="mt-6">
-									<p>Aenean vitae dui vitae est rutrum tristique vitae sit amet orci. Aenean tristique tincidunt rhoncus. Nulla tempus posuere sem, non placerat ligula semper sed. Etiam a viverra dui. Ut id egestas sem, vitae molestie eros. Mauris lacinia nec magna in faucibus. Cras suscipit metus eu consequat semper.</p>
+
+	<?php while (have_rows('event_content_blocks')) : the_row(); ?>
+
+		<?php if (get_row_layout() == 'people') : ?>
+
+			<section class="py-12 lg:py-20 bg-light-secondary">
+				<div class="container">
+					<?php if ($people_title = get_sub_field("title")) : ?>
+						<h2 class="text-title-2 mb-16"><?php echo $people_title; ?></h2>
+					<?php endif; ?>
+					<div class="max-w-[64rem] grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-y-16 lg:gap-x-24">
+						<?php foreach (get_sub_field("people") as $person) :
+							$image = get_the_post_thumbnail($person, 'small', ['class' => 'aspect-square size-[7rem] object-cover']);
+							$name = get_the_title($person);
+							$job_title = get_field("job_title", $person);
+							$url = get_the_permalink($person);
+						?>
+							<a href="<?php echo $url; ?>" class="group/person flex items-start gap-4">
+								<?php echo $image; ?>
+								<div class="flex flex-col gap-2">
+									<h3 class="text-h5 group-hover/person:text-brand group-focus/person:text-brand"><?php echo $name; ?></h3>
+									<p class="text-sm text-light-surface-subtle"><?php echo $job_title; ?></p>
+									<p class="font-medium group-hover/person:text-brand group-focus/person:text-brand transition-colors">View Bio <?php echo serc_svg("arrow-right", "text-brand group-hover/person:translate-x-2 transition-transform inline-block size-5 ml-1"); ?></p>
 								</div>
-								<h4 class="text-h5 mt-6">Speakers</h4>
-								<ul class="mt-4 leading-loose">
-									<li>Dr. John Doe</li>
-								</ul>
+							</a>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</section>
+
+		<?php elseif (get_row_layout() == 'schedule') : ?>
+
+			<section class="py-12 lg:py-20">
+				<div class="container">
+					<?php if ($schedule_title = get_sub_field("title")) : ?>
+						<h2 class="text-title-2 mb-12"><?php echo $schedule_title; ?></h2>
+					<?php endif; ?>
+					<?php while (have_rows('schedule_items')) : the_row(); ?>
+						<article class="py-8 lg:py-12 border-t border-subtle">
+							<?php if ($title = get_sub_field("title")) : ?>
+								<h3 class="text-h3 mb-2"><?php echo $title; ?></h3>
+							<?php endif; ?>
+							<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap:12 xl:gap-24">
+								<div class="lg:col-span-2 flex flex-col gap-6">
+									<?php
+									$start_time = get_sub_field("start_time");
+									$end_time = get_sub_field("end_time");
+									if ($start_time || $end_time) : ?>
+										<p class="font-medium flex items-center">
+											<?php echo serc_svg("clock", "inline-block size-5 mr-2 text-brand") ?>
+											<?php echo $start_time . ($end_time ? " - " . $end_time : ""); ?>
+										</p>
+									<?php endif; ?>
+									<?php if ($content = get_sub_field("content")) : ?>
+										<div class="wysiwyg">
+											<?php echo apply_filters('the_content', $content); ?>
+										</div>
+									<?php endif; ?>
+								</div>
+								<div class="col-span-1">
+									<?php if ($right_column_title = get_sub_field("right_column_title")) : ?>
+										<h4 class="text-h5"><?php echo $right_column_title; ?></h4>
+									<?php endif; ?>
+									<?php if ($right_column_content = get_sub_field("right_column_content")) : ?>
+										<div class="wysiwyg wysiwyg-tight mt-5"><?php echo apply_filters('the_content', $right_column_content); ?></div>
+									<?php endif; ?>
+									</ul>
+								</div>
 							</div>
-							<div class="col-span-1">
-								<h4 class="text-h5">Downloads</h4>
-								<ul class="mt-4 leading-loose">
-									<li><a href="#" class="text-brand hover:text-dark-main focus:text-dark-main">Agenda (PDF) <?php echo serc_svg("download", "inline-block size-4 ml-1"); ?></a></li>
-								</ul>
-							</div>
-						</div>
-					</article>
-				<?php endfor; ?>
-			</div>
-		</section>
-	<?php endif; ?>
+						</article>
+					<?php endwhile; ?>
+				</div>
+			</section>
+
+		<?php endif; ?>
+
+	<?php endwhile; ?>
+
 	<section class="py-12 lg:py-20 bg-light-tertiary">
 		<div class="container">
 			<h3 class="text-title-2">Details</h3>
@@ -228,13 +247,10 @@ ob_start(); ?>
 		const navigation = document.querySelector('[data-navigation]') || {
 			offsetHeight: 0
 		};
-		const wpAdminBar = document.querySelector('#wpadminbar') || {
-			offsetHeight: 0
-		};
 		// calculate thresholds and sizes
 		function getMeasurements() {
-			const threshold = eventBarThreshold.getBoundingClientRect().y;
-			const fixedOffset = wpAdminBar.offsetHeight + navigation.offsetHeight;
+			const threshold = eventBarThreshold.offsetTop;
+			const fixedOffset = navigation.offsetHeight;
 			return {
 				threshold,
 				fixedOffset
@@ -245,6 +261,8 @@ ob_start(); ?>
 		let fixed = false;
 		// on scroll...
 		window.addEventListener('scroll', () => {
+			console.log(window.scrollY, m.threshold, m.fixedOffset);
+
 			if (window.innerWidth < minScreenWidth) return;
 			if (window.scrollY > m.threshold - m.fixedOffset) {
 				if (!fixed) {
