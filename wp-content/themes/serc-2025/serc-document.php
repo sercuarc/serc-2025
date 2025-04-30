@@ -1,4 +1,7 @@
 <?php
+
+use Serc2025\Helpers;
+
 $type = get_query_var('serc_document_type');
 $id   = get_query_var('serc_document_id');
 
@@ -35,6 +38,7 @@ $has_abstract = isset($content['abstract']) && $content['abstract'];
 $has_description = isset($content['description']) && $content['description'];
 $has_file = isset($content['file_s3']) && $content['file_s3'];
 $has_image = isset($content['image_s3']) && $content['image_s3'];
+$type = isset($content['category']) ? $content['category'] : $content['type'];
 
 get_header(); ?>
 
@@ -53,13 +57,13 @@ get_header(); ?>
 			<div class="lg:col-span-2">
 				<h1 class="text-h2 !font-normal capitalize"><?php echo $content['title']; ?></h1>
 				<p class="uppercase mt-7 flex items-center gap-6">
-					<span>
-						<?php echo serc_svg("calendar", "inline-block align-middle text-brand size-4 mr-1"); ?>
+					<span class="flex gap-2 items-center">
+						<?php echo serc_svg("calendar", "inline-block align-middle text-brand size-5 mr-1"); ?>
 						<?php echo $date_formatted; ?>
 					</span>
-					<span>
-						<?php echo serc_svg("paper", "inline-block align-middle text-brand size-4 mr-1"); ?>
-						<?php echo isset($content['category']) ? $content['category'] : $content['type']; ?>
+					<span class="flex gap-2 items-center">
+						<?php echo serc_svg(Helpers::getCategoryIconHandle($type), "inline-block align-middle text-brand size-5 mr-1"); ?>
+						<?php echo $type; ?>
 					</span>
 				</p>
 			</div>

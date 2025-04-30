@@ -16,10 +16,21 @@ $image = $args['image'] ?? null;
 			</div>
 		<?php endif; ?>
 		<div class="border-brand border-t-4 border-solid px-7 py-6 h-full flex flex-col">
-			<h3 class="text-h5 transition-colors text-light-surface-strong group-hover/card:text-brand"><?php echo $title; ?></h3>
-			<p class="mt-2 text-light-surface-strong"><?php echo $label_below; ?></p>
-			<div class="mt-4 mb-6 lg:mb-12 body-sm text-light-surface-muted"><?php echo $text; ?></div>
-			<p class="font-medium mt-auto text-light-surface-strong group-hover/card:text-brand"><?php echo $cta; ?></p>
+			<?php if ($label_above) : ?>
+				<p class="mb-4 text-light-surface-strong"><?php echo $label_above; ?></p>
+			<?php endif; ?>
+			<?php if ($title) : ?>
+				<h3 class="text-h5 transition-colors text-light-surface-strong group-hover/card:text-brand"><?php echo $title; ?></h3>
+			<?php endif; ?>
+			<?php if ($label_below) : ?>
+				<p class="mt-2 text-light-surface-strong"><?php echo $label_below; ?></p>
+			<?php endif; ?>
+			<?php if ($text) : ?>
+				<div class="mt-4 mb-6 lg:mb-12 body-sm text-light-surface-muted"><?php echo $text; ?></div>
+			<?php endif; ?>
+			<?php if ($cta) : ?>
+				<p class="font-medium mt-auto text-light-surface-strong group-hover/card:text-brand"><?php echo $cta; ?></p>
+			<?php endif; ?>
 		</div>
 	</a>
 </article>

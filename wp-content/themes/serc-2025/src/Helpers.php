@@ -10,6 +10,28 @@ use DateTime;
 
 class Helpers
 {
+	public static function getCategoryIconHandle(string $category = ''): string
+	{
+		switch (strtolower(trim($category))) {
+			case 'presentation':
+				return 'presentation';
+			case 'video':
+				return 'video';
+			case 'event':
+			case 'events':
+				return 'calendar';
+			case 'news':
+			case 'journal article':
+				return 'news';
+			case 'update':
+				return 'pin';
+			case 'institution':
+				return 'institution';
+			default:
+				return 'paper';
+		}
+	}
+
 	public static function get_event_details($post_id)
 	{
 		$isAllDay = get_post_meta($post_id, '_EventAllDay', true);

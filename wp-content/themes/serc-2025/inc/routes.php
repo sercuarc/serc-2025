@@ -11,12 +11,12 @@ function serc_custom_routes()
 {
 	add_rewrite_rule('^search/?$', 'index.php?serc_search=1', 'top');
 	add_rewrite_rule(
-		'^publications/([0-9]+)/?$',
+		'^documents/publications/([0-9]+)/?$',
 		'index.php?serc_document_type=publications&serc_document_id=$matches[1]',
 		'top'
 	);
 	add_rewrite_rule(
-		'^technical-reports/([0-9]+)/?$',
+		'^documents/technical-reports/([0-9]+)/?$',
 		'index.php?serc_document_type=technical-reports&serc_document_id=$matches[1]',
 		'top'
 	);
