@@ -1,10 +1,8 @@
 <?php
 
 /**
- * Block Customizations
+ * Add SERC Blocks Category
  */
-
-
 add_filter('block_categories_all', function ($categories, $post) {
 	// Your custom category
 	$custom_category = [
@@ -13,17 +11,27 @@ add_filter('block_categories_all', function ($categories, $post) {
 		'icon'  => null,
 	];
 
-	// Remove it if it already exists (avoid duplicates)
-	$categories = array_filter($categories, function ($cat) {
-		return $cat['slug'] !== 'serc-blocks';
-	});
-
-	// Prepend to the beginning
-	array_unshift($categories, $custom_category);
-
-	return $categories;
+	return [$custom_category];
 }, 10, 2);
 
+/**
+ * Allow ONLY SERC Blocks
+ */
+add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context) {
+	$all_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
+	$allowed = [];
+
+	foreach ($all_blocks as $block_name => $block_obj) {
+		if (str_starts_with($block_name, 'acf/') || str_starts_with($block_name, 'serc/')) {
+			$allowed[] = $block_name;
+		}
+	}
+	return $allowed;
+}, 10, 2);
+
+/**
+ * Register ACF Blocks
+ */
 add_action('acf/init', function () {
 	if (function_exists('acf_register_block_type')) {
 		acf_register_block_type([
