@@ -24,6 +24,7 @@ require_once get_template_directory() . '/inc/theme-config.php';
 require_once get_template_directory() . '/inc/menus.php';
 require_once get_template_directory() . '/inc/routes.php';
 require_once get_template_directory() . '/inc/post-types.php';
+require_once get_template_directory() . '/inc/shortcodes.php';
 require_once get_template_directory() . '/inc/taxonomies.php';
 require_once get_template_directory() . '/inc/template-helpers.php';
 require_once get_template_directory() . '/inc/utilities.php';
