@@ -8,7 +8,16 @@
     min-h-[15rem] lg:min-h-[24rem]
     overflow-hidden;
   }
-  .hero-image {
+  .hero-title {
+    @apply text-h1;
+  }
+  .hero-title-small {
+    @apply text-h2;
+  }
+  .hero-subtitle {
+    @apply text-h4 mt-6;
+  }
+  .hero-title .hero-image {
     @apply block w-full;
     .hero--with-bg-image & {
       @apply border border-subtle;

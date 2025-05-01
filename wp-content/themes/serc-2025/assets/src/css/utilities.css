@@ -41,13 +41,13 @@
   @apply font-oswald text-2xl lg:text-[2rem] leading-[1.5] uppercase font-semibold;
 }
 @utility body-lg {
-  @apply text-lg lg:text-xl leading-7 lg:leading-8;
+  @apply text-lg lg:text-xl leading-[1.5];
 }
 @utility body-base {
-  @apply text-base leading-6;
+  @apply text-base leading-[1.5];
 }
 @utility body-sm {
-  @apply text-sm leading-5;
+  @apply text-sm leading-[1.5];
 }
 @utility label-lg {
   @apply text-lg lg:text-xl font-medium leading-[1.6];

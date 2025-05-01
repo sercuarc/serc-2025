@@ -8,18 +8,27 @@
 <?php get_header(); ?>
 
 <main>
-	<?php get_template_part('components/hero', null, [
-		'bg_image' => get_the_post_thumbnail($post, 'large', ['class' => 'hero-bg-image']),
-		'title' => get_the_title(),
-		'center_y' => true
-	]); ?>
-	<section class="bg-white pt-12 lg:pt-16 pb-20 lg:pb-30">
-		<div class="container grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16">
-			<div class="lg:col-span-2 wysiwyg wysiwyg-lg">
-				<?php the_content(); ?>
-			</div>
-		</div>
-	</section>
+	<?php
+	// Get the post content
+	$content = get_the_content();
+
+	// Parse the blocks in the content
+	$blocks = parse_blocks($content);
+
+	// Check if the first block is a 'hero' block
+	if ($blocks[0]['blockName'] !== 'acf/hero') {
+		// Render a default hero with the page title
+		get_template_part('components/hero', null, [
+			'title' => get_the_title(),
+			'center_y' => true,
+		]);
+	}
+
+	// Loop through each block
+	foreach ($blocks as $block) {
+		echo render_block($block);
+	}
+	?>
 </main>
 
 <?php get_footer(); ?>

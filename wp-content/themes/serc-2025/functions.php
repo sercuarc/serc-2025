@@ -28,5 +28,17 @@ require_once get_template_directory() . '/inc/taxonomies.php';
 require_once get_template_directory() . '/inc/template-helpers.php';
 require_once get_template_directory() . '/inc/utilities.php';
 
+function serc_enqueue_block_editor_styles()
+{
+	// Enqueue the editor stylesheet
+	wp_enqueue_style(
+		'serc-editor-styles', // Handle
+		get_template_directory_uri() . '/editor-style.css', // Path to your editor-style.css
+		array(), // Dependencies
+		filemtime(get_template_directory() . '/editor-style.css') // Cache-busting
+	);
+}
+add_action('enqueue_block_editor_assets', 'serc_enqueue_block_editor_styles');
+
 // CLI Commands
 require_once get_template_directory() . '/src/commands/ImportPeople.php';

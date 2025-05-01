@@ -3,9 +3,8 @@ $bg_image = $args['bg_image'] ?? null;
 $blur_bg = $args['blur_bg'] ?? false;
 $image = $args['image'] ?? null;
 $title = $args['title'] ?? null;
-$title_class = $args['title_class'] ?? "text-h2";
+$title_small = $args['title_small'] ?? null;
 $subtitle = $args['subtitle'] ?? null;
-$subtitle_class = $args['subtitle_class'] ?? "text-h4 mt-6";
 $description = $args['description'] ?? null;
 $description_class = $args['description_class'] ?? "flex items-center gap-2 mt-7";
 $breadcrumbs = $args['breadcrumbs'] ?? null;
@@ -36,10 +35,13 @@ $class_names = implode(' ', array_keys(array_filter($class_names)));
 	<div class="container grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 items-center">
 		<div class="lg:col-span-2 order-2 lg:order-1">
 			<?php if ($title) : ?>
-				<h1 class="<?php echo $title_class; ?>"><?php echo $title; ?></h1>
+				<h1 class="hero-title"><?php echo $title; ?></h1>
+			<?php endif; ?>
+			<?php if ($title_small) : ?>
+				<h1 class="hero-title-small"><?php echo $title_small; ?></h1>
 			<?php endif; ?>
 			<?php if ($subtitle) : ?>
-				<h2 class="<?php echo $subtitle_class; ?>"><?php echo $subtitle; ?></h2>
+				<h2 class="hero-subtitle"><?php echo $subtitle; ?></h2>
 			<?php endif; ?>
 			<?php if ($description) : ?>
 				<div class="<?php echo $description_class; ?>">
