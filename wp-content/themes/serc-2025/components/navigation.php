@@ -1,6 +1,9 @@
-<?php $button_style = "gap-2 items-center font-medium hover:text-brand focus:text-brand whitespace-nowrap cursor-pointer transition-colors"; ?>
-<?php $menu_item_style = "border-b-4 border-transparent hover:border-brand focus:border-brand focus:text-brand pt-2 pb-6 focus:outline-0"; ?>
-<?php $menu_items = [
+<?php
+global $post;
+$post->post_name;
+$button_style = "gap-2 items-center font-medium hover:text-brand focus:text-brand whitespace-nowrap cursor-pointer transition-colors";
+$menu_item_style = "border-b-4 border-transparent hover:border-brand focus:border-brand focus:text-brand pt-2 pb-6 focus:outline-0";
+$menu_items = [
 	"about" => ["label" => "About", "has_children" => "chevron-down"],
 	"research" => ["label" => "Research", "has_children" => "chevron-down"],
 	"events-news" => ["label" => "Events & News", "has_children" => "chevron-down"],
@@ -37,7 +40,13 @@ $featured_event = tribe_get_events([
 									} else {
 										echo home_url($id);
 									} ?>"
-						class="group/menu-item hidden lg:flex <?php echo $button_style . ' ' . $menu_item_style; ?>">
+						class="
+							group/menu-item hidden lg:flex 
+							<?php echo $button_style . ' ' . $menu_item_style; ?>
+							<?php if (strpos($id, $post->post_name) !== false) : ?>
+								!border-brand !text-brand
+							<?php endif; ?>
+						">
 						<?php echo $item["label"]; ?>
 						<?php if ($item["has_children"]) : ?>
 							<?php echo serc_svg("chevron-down", "size-4 transition-all group-[.is-active]/menu-item:rotate-180") ?>
