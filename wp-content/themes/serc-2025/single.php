@@ -21,7 +21,7 @@ the_post();
 	<section class="py-12 lg:py-20">
 		<div class="container grid grid-cols-1 lg:grid-cols-4 gap-9 lg:gap-18 items-start">
 			<div class="lg:col-span-3 flex flex-col gap-10 lg:gap-20 order-2 lg:order-1">
-				<div class="wysiwyg wysiwyg-lg">
+				<div class="wysiwyg wysiwyg--lg">
 					<?php the_content(); ?>
 				</div>
 			</div>

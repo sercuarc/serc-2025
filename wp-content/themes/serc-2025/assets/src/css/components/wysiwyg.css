@@ -1,7 +1,7 @@
 .wysiwyg {
   @apply flex flex-col gap-6 lg:gap-8 text-base leading-[1.6];
 
-  a {
+  a:not(.btn) {
     @apply text-brand hover:underline font-medium;
   }
   h1 {
@@ -56,6 +56,6 @@
   @apply gap-2;
 }
 
-.wysiwyg-lg {
+.wysiwyg--lg {
   @apply text-lg lg:text-xl;
 }

@@ -17,7 +17,7 @@
 	]); ?>
 	<section class="bg-white pt-12 lg:pt-16 pb-20 lg:pb-30">
 		<div class="container">
-			<div class="wysiwyg wysiwyg-lg">
+			<div class="wysiwyg wysiwyg--lg">
 				<?php the_content(); ?>
 			</div>
 			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mt:12 lg:mt-20">

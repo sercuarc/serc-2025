@@ -64,5 +64,15 @@ add_action('acf/init', function () {
 			'mode'            => 'auto',
 			'keywords'        => ['list', 'group', 'organizations', 'resources'],
 		));
+		acf_register_block_type(array(
+			'name'            => 'wysiwyg',
+			'title'           => __('WYSIWYG'),
+			'description'     => __('A Rich Text Editor block.'),
+			'render_template' => 'blocks/wysiwyg.php',
+			'category'        => 'serc-blocks',
+			'icon'            => 'text',
+			'mode'            => 'auto',
+			'keywords'        => ['text', 'wysiwyg', 'editor', 'rich text'],
+		));
 	}
 });

@@ -33,7 +33,7 @@ get_header();
 		<div class="container grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 items-start">
 			<div class="lg:col-span-2">
 				<h3 class="text-[1.75rem] mb-10"><strong>About</strong></h3>
-				<div class="wysiwyg wysiwyg-lg">
+				<div class="wysiwyg wysiwyg--lg">
 					<?php the_content(); ?>
 				</div>
 			</div>
