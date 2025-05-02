@@ -45,26 +45,6 @@ add_action('acf/init', function () {
 			'keywords'        => ['hero', 'image', 'background'],
 		]);
 		acf_register_block_type(array(
-			'name'            => 'entity-list',
-			'title'           => __('Entity List'),
-			'description'     => __('A list of entities such as Organizations, Resources, etc.'),
-			'render_template' => 'blocks/entity-list.php',
-			'category'        => 'serc-blocks',
-			'icon'            => 'excerpt-view',
-			'mode'            => 'auto',
-			'keywords'        => ['list', 'entity', 'entities', 'organizations', 'resources'],
-		));
-		acf_register_block_type(array(
-			'name'            => 'grouped-list',
-			'title'           => __('Grouped List'),
-			'description'     => __('A list of items, grouped by headlines.'),
-			'render_template' => 'blocks/grouped-list.php',
-			'category'        => 'serc-blocks',
-			'icon'            => 'list-view',
-			'mode'            => 'auto',
-			'keywords'        => ['list', 'group', 'organizations', 'resources'],
-		));
-		acf_register_block_type(array(
 			'name'            => 'wysiwyg',
 			'title'           => __('WYSIWYG'),
 			'description'     => __('A Rich Text Editor block.'),
@@ -83,6 +63,36 @@ add_action('acf/init', function () {
 			'icon'            => 'screenoptions',
 			'mode'            => 'auto',
 			'keywords'        => ['image', 'tiles', 'gallery'],
+		));
+		acf_register_block_type(array(
+			'name'            => 'banner',
+			'title'           => __('Banner'),
+			'description'     => __('A banner with a title, description, and button.'),
+			'render_template' => 'blocks/banner.php',
+			'category'        => 'serc-blocks',
+			'icon'            => 'align-wide',
+			'mode'            => 'auto',
+			'keywords'        => ['text', 'banner', 'button'],
+		));
+		acf_register_block_type(array(
+			'name'            => 'entity-list',
+			'title'           => __('Entity List'),
+			'description'     => __('A list of entities such as Organizations, Resources, etc.'),
+			'render_template' => 'blocks/entity-list.php',
+			'category'        => 'serc-blocks',
+			'icon'            => 'excerpt-view',
+			'mode'            => 'auto',
+			'keywords'        => ['list', 'entity', 'entities', 'organizations', 'resources'],
+		));
+		acf_register_block_type(array(
+			'name'            => 'grouped-list',
+			'title'           => __('Grouped List'),
+			'description'     => __('A list of items, grouped by headlines.'),
+			'render_template' => 'blocks/grouped-list.php',
+			'category'        => 'serc-blocks',
+			'icon'            => 'list-view',
+			'mode'            => 'auto',
+			'keywords'        => ['list', 'group', 'organizations', 'resources'],
 		));
 	}
 });
