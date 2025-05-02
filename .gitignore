@@ -39,6 +39,7 @@ wp-content/themes/*
 
 # THEMES AND PLUGINS TO NOT IGNORE
 !wp-content/themes/serc-2025
+!wp-content/mu-plugins/advanced-custom-fields-pro/*
 
 # MISCELLANEOUS
 .DS_Store
