@@ -30,9 +30,15 @@ wp-signup.php
 wp-trackback.php
 xmlrpc.php
 
+# IGNORE WORDPRESS PLUGINS & THEMES FILES BY DEFAULT
+!wp-content/mu-plugins/
+!wp-content/plugins/
+!wp-content/themes/
+wp-content/plugins/*
+wp-content/themes/*
+
 # THEMES AND PLUGINS TO NOT IGNORE
 !wp-content/themes/serc-2025
-!wp-content/mu-plugins
 
 # MISCELLANEOUS
 .DS_Store
