@@ -78,12 +78,12 @@ $active_focus_area = array_values($active_focus_area)[0] ?? $focus_areas[0] ?? n
 					$category = $is_tech_report ? 'TECHNICAL REPORT' : strtoupper($pub_data['category']);
 					$image_id = $pub['publication_image'];
 					if ($image_id) {
-						$image = wp_get_attachment_image($image_id, 'small', false, ['class' => 'w-full aspect-[394/176] object-cover']);
+						$image = wp_get_attachment_image($image_id, 'small', false, ['class' => 'w-full aspect-[11/5] object-cover']);
 					} else {
 						$image = null;
 					}
 					get_template_part('components/card-vert', null, [
-						'image' => $image ?? '<div class="relative bg-light-tertiary aspect-[394/176] overflow-hidden">' . serc_svg("serc-star", "absolute text-brand w-3/4 aspect-square left-1/4 bottom-0 translate-y-1/2 opacity-10") . '</div>',
+						'image' => $image ?? '<div class="relative bg-light-tertiary aspect-[11/5] overflow-hidden">' . serc_svg("serc-star", "absolute text-brand w-3/4 aspect-square left-1/4 bottom-0 translate-y-1/2 opacity-10") . '</div>',
 						'label_above' => '<span class="flex items-center">' . serc_svg(Helpers::getCategoryIconHandle($category), 'inline-block text-brand size-5 mr-2') . ' ' . $category . '</span>',
 						'title' => $pub_data['title'],
 						'url' => home_url('documents/' . $pub['publication_type'] . '/' . $pub_data['id']),

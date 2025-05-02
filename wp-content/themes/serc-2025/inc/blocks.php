@@ -94,5 +94,15 @@ add_action('acf/init', function () {
 			'mode'            => 'auto',
 			'keywords'        => ['list', 'group', 'organizations', 'resources'],
 		));
+		acf_register_block_type(array(
+			'name'            => 'news',
+			'title'           => __('News'),
+			'description'     => __('A grid of news posts.'),
+			'render_template' => 'blocks/news.php',
+			'category'        => 'serc-blocks',
+			'icon'            => '<svg fill="#000000" height="64px" width="64px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M0,149.854v212.293h512V149.854H0z M158.179,324.683H37.463V187.317h120.716V324.683z M316.357,324.683H195.643V187.317 h120.715V324.683z M474.537,324.683H353.821V187.317h120.716V324.683z"></path> </g> </g> </g></svg>',
+			'mode'            => 'auto',
+			'keywords'        => ['news', 'group', 'articles', 'posts'],
+		));
 	}
 });
