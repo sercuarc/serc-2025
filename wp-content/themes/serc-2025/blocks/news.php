@@ -4,9 +4,7 @@ $description = get_field('news_description') ?: (is_admin() ? 'Add a description
 $get_static_posts = get_field('news_get_static_posts') ?: false;
 $button = get_field('news_button') ?: (is_admin() ? ['title' => 'Add a Button (optional)', 'url' => '#', 'target' => '_self'] : null);
 
-if ($get_static_posts) {
-	$posts = get_field('news_posts') ?: [];
-} else {
+if (! $get_static_posts || ! $posts = get_field('news_posts')) {
 	$posts = get_posts([
 		'post_type' => 'post',
 		'posts_per_page' => 4,
