@@ -74,5 +74,15 @@ add_action('acf/init', function () {
 			'mode'            => 'auto',
 			'keywords'        => ['text', 'wysiwyg', 'editor', 'rich text'],
 		));
+		acf_register_block_type(array(
+			'name'            => 'image-tiles',
+			'title'           => __('Image Tiles'),
+			'description'     => __('A collection of image tiles with text.'),
+			'render_template' => 'blocks/image-tiles.php',
+			'category'        => 'serc-blocks',
+			'icon'            => 'screenoptions',
+			'mode'            => 'auto',
+			'keywords'        => ['image', 'tiles', 'gallery'],
+		));
 	}
 });

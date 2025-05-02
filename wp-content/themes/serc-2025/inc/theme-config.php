@@ -57,6 +57,17 @@ add_action('admin_init', function () {
  * Adds a custom class to the TinyMCE editor for the admin dashboard.
  */
 add_filter('tiny_mce_before_init', function ($init) {
-	$init['body_class'] = 'wysiwyg'; // Add your custom class here
+	$init['body_class'] = 'wysiwyg';
+	return $init;
+});
+
+add_filter('tiny_mce_before_init', function ($init) {
+
+
+	// Ensure 'Formats' dropdown appears in the toolbar
+	if (empty($init['toolbar1']) || !str_contains($init['toolbar1'], 'styleselect')) {
+		$init['toolbar1'] = 'styleselect ' . $init['toolbar1'];
+	}
+
 	return $init;
 });
