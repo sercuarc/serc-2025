@@ -1,5 +1,6 @@
-<?php $feature_sign_up = false; ?>
-<?php $menus = [
+<?php
+$newsletter_display = get_field('newsletter_display');
+$menus = [
 	["id" => "menu-1", "label" => "About", "items" => [["label" => "About SERC", "url" => "#"], ["label" => "People", "url" => "#"]]],
 	["id" => "menu-2", "label" => "Research", "items" => [["label" => "Our Research", "url" => "#"], ["label" => "Research Publications", "url" => "#"]]],
 	["id" => "menu-3", "label" => "Events & News", "items" => [['label' => 'Events', 'url' => '#'], ['label' => 'SERC Research Review', 'url' => '#'], ['label' => 'AI4SE & SE4AI Workshop', 'url' => '#'], ['label' => 'News', 'url' => '#']],],
@@ -7,8 +8,11 @@
 ]; ?>
 
 <footer>
-	<?php if ($feature_sign_up) : ?>
-		<?php get_template_part("components/sign-up-featured"); ?>
+	<?php if ($newsletter_display === "featured") : ?>
+		<?php get_template_part("components/newsletter", null, [
+			'title' => get_field('newsletter_title', 'option') ?: 'Email Newsletter',
+			'description' => get_field('newsletter_description', 'option'),
+		]); ?>
 	<?php else : ?>
 		<?php get_template_part("components/sign-up"); ?>
 	<?php endif; ?>

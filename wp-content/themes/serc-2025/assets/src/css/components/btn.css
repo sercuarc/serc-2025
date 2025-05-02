@@ -1,6 +1,6 @@
 @layer components {
   .btn {
-    @apply inline-flex items-center gap-2 font-medium py-[0.6em] px-[1.25em] cursor-pointer transition-all appearance-none active:shadow-md;
+    @apply inline-flex items-center justify-center gap-2 font-medium py-[0.6em] px-[1.25em] cursor-pointer transition-all appearance-none active:shadow-md;
   }
   .btn-primary {
     @apply bg-brand hover:bg-brand-hover active:bg-brand-dark focus:outline-brand/30 text-white border-0;
