@@ -34,13 +34,11 @@ xmlrpc.php
 !wp-content/mu-plugins/
 !wp-content/plugins/
 !wp-content/themes/
-wp-content/mu-plugins/*
 wp-content/plugins/*
 wp-content/themes/*
 
 # THEMES AND PLUGINS TO NOT IGNORE
 !wp-content/themes/serc-2025
-# !wp-content/plugins/plugin-name
 
 # MISCELLANEOUS
 .DS_Store
