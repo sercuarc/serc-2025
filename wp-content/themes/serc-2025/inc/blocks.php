@@ -55,6 +55,16 @@ add_action('acf/init', function () {
 			'keywords'        => ['text', 'wysiwyg', 'editor', 'rich text'],
 		));
 		acf_register_block_type(array(
+			'name'            => 'text-image',
+			'title'           => __('Text & Image(s)'),
+			'description'     => __('Text and image pairing. Multiple images can be added.'),
+			'render_template' => 'blocks/text-image.php',
+			'category'        => 'serc-blocks',
+			'icon'            => 'screenoptions',
+			'mode'            => 'auto',
+			'keywords'        => ['image', 'tiles', 'gallery', 'text', 'wysiwyg'],
+		));
+		acf_register_block_type(array(
 			'name'            => 'image-tiles',
 			'title'           => __('Image Tiles'),
 			'description'     => __('A collection of image tiles with text.'),
