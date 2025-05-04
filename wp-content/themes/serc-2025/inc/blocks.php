@@ -60,9 +60,19 @@ add_action('acf/init', function () {
 			'description'     => __('Text and image pairing. Multiple images can be added.'),
 			'render_template' => 'blocks/text-image.php',
 			'category'        => 'serc-blocks',
-			'icon'            => 'screenoptions',
+			'icon'            => '<svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" fill="none"><rect x="0" y="1" width="6" height="5" fill="black" /><rect x="8" y="1" width="6" height="1" fill="black" /><rect x="8" y="3" width="6" height="1" fill="black" /><rect x="8" y="5" width="6" height="1" fill="black" /><rect x="8" y="8" width="6" height="5" fill="black" /><rect x="0" y="8" width="6" height="1" fill="black" /><rect x="0" y="10" width="6" height="1" fill="black" /><rect x="0" y="12" width="6" height="1" fill="black" /></svg>',
 			'mode'            => 'auto',
 			'keywords'        => ['image', 'tiles', 'gallery', 'text', 'wysiwyg'],
+		));
+		acf_register_block_type(array(
+			'name'            => 'text-image-slider',
+			'title'           => __('Text w/ Image Slider'),
+			'description'     => __('Text with an adjacent image slider.'),
+			'render_template' => 'blocks/text-image-slider.php',
+			'category'        => 'serc-blocks',
+			'icon'            => '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none"><g transform="translate(0, 4)"><rect x="0" y="1" width="9" height="9" fill="black" /><rect x="11" y="1" width="9" height="3" fill="black" /><rect x="11" y="5" width="9" height="1" fill="black" /><rect x="11" y="7" width="9" height="1" fill="black" /><rect x="11" y="9" width="6" height="1" fill="black" /><rect x="2" y="11" width="1" height="1" fill="black" /><rect x="4" y="11" width="1" height="1" fill="black" /><rect x="6" y="11" width="1" height="1" fill="black" /></g></svg>',
+			'mode'            => 'auto',
+			'keywords'        => ['image', 'text', 'wysiwyg', 'slider', 'gallery'],
 		));
 		acf_register_block_type(array(
 			'name'            => 'image-tiles',

@@ -33,7 +33,7 @@ $posts = array_map(function ($post) {
 	<div class="container flex flex-col gap-8 lg:gap-14">
 		<div>
 			<?php if ($title) : ?>
-				<h2 class="text-h2 text-center">
+				<h2 class="text-title-1 text-center">
 					<?php echo esc_html($title); ?>
 				</h2>
 			<?php endif; ?>

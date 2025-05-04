@@ -4,7 +4,7 @@ $section_title = get_field('text_image_section_title') ?: (is_admin() ? 'Add a S
 <div class="py-16 lg:py-30">
 	<div class="container flex flex-col gap-16 lg:gap-24">
 		<?php if ($section_title) : ?>
-			<h2 class="text-h2 text-center"><?php echo esc_html($section_title); ?></h2>
+			<h2 class="text-title-1 text-center"><?php echo esc_html($section_title); ?></h2>
 		<?php endif; ?>
 		<?php while (have_rows('text_image')) : the_row(); ?>
 			<?php
@@ -43,7 +43,7 @@ $section_title = get_field('text_image_section_title') ?: (is_admin() ? 'Add a S
 						</div>
 						<?php if ($link) : ?>
 							<p>
-								<a href="<?php echo esc_url($link['url']); ?>" class="<?php echo $link_style; ?> flex items-center gap-2" target="<?php echo esc_attr($link['target']); ?>" rel="noopener noreferrer">
+								<a href="<?php echo esc_url($link['url']); ?>" class="<?php echo $link_style; ?> inline-flex items-center gap-2" target="<?php echo esc_attr($link['target']); ?>" rel="noopener noreferrer">
 									<?php
 									$is_external = strpos($link['url'], home_url()) === false;
 									if ($is_external) {
