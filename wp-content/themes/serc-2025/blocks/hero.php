@@ -1,4 +1,6 @@
 <?php
+$title = get_field('hero_title');
+$subtitle = get_field('hero_subtitle');
 $image = get_field('hero_image');
 $button = get_field('hero_button');
 $button_html = '';
@@ -17,9 +19,9 @@ get_template_part('components/hero', null, [
 		'class' => 'hero-bg-image'
 	]),
 	'blur_bg' => $image ? true : false,
-	'title' => get_field('hero_title'),
+	'title' => $title,
 	'title_class' => 'text-h1',
-	'subtitle' => get_field('hero_subtitle'),
+	'subtitle' => $subtitle,
 	'description' => $button_html,
 	'description_class' => 'mt-7 text-lg lg:text-xl',
 	'center_y' => true

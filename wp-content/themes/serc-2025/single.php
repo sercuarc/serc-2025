@@ -7,11 +7,15 @@
 
 get_header();
 the_post();
+$image = get_the_post_thumbnail($post, 'medium', ['class' => 'hero-image']);
+$bg_image = get_field('background_image');
 ?>
 
 <main>
 	<?php get_template_part('components/hero', null, [
-		'image' => get_the_post_thumbnail($post, 'medium', ['class' => 'hero-image']),
+		'bg_image' => wp_get_attachment_image($bg_image, 'large', false, ['class' => 'hero-bg-image']),
+		'blur_bg' => $image ? true : false,
+		'image' => $image,
 		'title' => get_the_title(),
 		'description' => get_the_date('F j, Y'),
 		'breadcrumbs' => [

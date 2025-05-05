@@ -8,7 +8,7 @@ use Serc2025\Helpers;
 
 $id = get_the_ID();
 $image = get_the_post_thumbnail($id, 'medium', ['class' => 'hero-image']);
-$bg_image = str_replace('hero-image', 'hero-bg-image', $image);
+$bg_image = wp_get_attachment_image(get_field('background_image'), 'large', false, ['class' => 'hero-bg-image']);
 $isUpcoming = strtotime(get_post_meta($id, '_EventStartDate', true)) > time();
 $event_website = tribe_get_event_website_url(get_the_ID());
 $venue_name = tribe_get_venue();
@@ -51,7 +51,7 @@ ob_start(); ?>
 <main>
 	<?php get_template_part('components/hero', null, [
 		'bg_image' => $bg_image,
-		'blur_bg' => true,
+		'blur_bg' => $image ? true : false,
 		'image' => $image,
 		'center_y' => false,
 		'title' => get_the_title(),
