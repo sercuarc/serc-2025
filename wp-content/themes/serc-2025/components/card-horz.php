@@ -4,6 +4,7 @@ $label_above = $args['label_above'] ?? null;
 $label_below = $args['label_below'] ?? null;
 $text = $args['text'] ?? null;
 $cta = $args['cta'] ?? null;
+$cta_style = $cta && isset($cta['style']) ? $cta['style'] : 'button';
 $url = $args['url'] ?? null;
 $image = $args['image'] ?? null;
 $reversed = $args['reversed'] ?? false;
@@ -12,7 +13,7 @@ $text_order = $reversed ? 'order-2' : 'order-2 md:order-1';
 $image_order = $reversed ? 'order-1' : 'order-1 md:order-2';
 ?>
 
-<article class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 xl:gap-24 items-start">
+<article class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 xl:gap-20 items-start">
 	<div class="flex flex-col gap-4 w-full <?php echo $text_order; ?>">
 		<?php if ($label_above) : ?>
 			<div class="font-medium"><?php echo $label_above; ?></div>
@@ -37,7 +38,16 @@ $image_order = $reversed ? 'order-1' : 'order-1 md:order-2';
 		<?php endif; ?>
 
 		<?php if ($cta) : ?>
-			<p class="pt-6 md:pt-12 mt-auto"><a href="<?php echo $cta['url']; ?>" class="btn btn-primary inline-block"><?php echo $cta['text']; ?></a></p>
+			<p class="pt-6 md:pt-12 mt-auto">
+				<?php if ($cta_style === 'button') : ?>
+					<a href="<?php echo $cta['url']; ?>" class="btn btn-primary inline-block"><?php echo $cta['text']; ?></a>
+				<?php else : ?>
+					<a href="<?php echo $cta['url']; ?>" class="font-medium hover:text-brand focus:text-brand outline-0">
+						<?php echo $cta['text']; ?>
+						<?php echo serc_svg("arrow-right", "inline text-brand size-4 ml-2") ?>
+					</a>
+				<?php endif; ?>
+			</p>
 		<?php endif; ?>
 	</div>
 	<?php if ($image) : ?>
