@@ -38,7 +38,7 @@ $publications = array_map(function ($pub) {
 	$url_path = $is_tech_report ? 'technical-reports' : 'publications';
 	$icon = Helpers::get_category_icon_handle($type);
 	return [
-		'cta' 				=> 'Read More ' . serc_svg('arrow-right', 'inline text-brand size-5 ml-1 transition-transform group-hover/card:translate-x-2'),
+		'cta' 				=> 'Read More',
 		'date'   			=> $pub['date'],
 		'image'   		=> $pub['image'] ?? '<div class="relative bg-light-tertiary aspect-[11/5] overflow-hidden">' . serc_svg("serc-star", "absolute text-brand w-3/4 aspect-square left-1/4 bottom-0 translate-y-1/2 opacity-10") . '</div>',
 		'label_above' => '<span class="flex items-center">' . serc_svg($icon, 'inline-block text-brand size-5 mr-2') . ' ' . $type . '</span>',

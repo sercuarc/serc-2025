@@ -88,7 +88,7 @@ $active_focus_area = array_values($active_focus_area)[0] ?? $focus_areas[0] ?? n
 						'title' => $pub_data['title'],
 						'url' => home_url('documents/' . $pub['publication_type'] . '/' . $pub_data['id']),
 						'text' => $pub_data['abstract'] ? substr(strip_tags($pub_data['abstract']), 0, 100) . '...' : '',
-						'cta' => 'Read More ' . serc_svg('arrow-right', 'inline text-brand size-5 ml-1 transition-transform group-hover/card:translate-x-2'),
+						'cta' => 'Read More',
 					]);
 				} ?>
 			</div>

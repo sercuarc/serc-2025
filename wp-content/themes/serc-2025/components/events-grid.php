@@ -29,7 +29,7 @@ $events = $args['events'] ?? [];
 				'url' => get_the_permalink($event->ID),
 				'label_below' => $event_details,
 				'text' => get_the_excerpt($event->ID),
-				'cta' => 'Read More ' . serc_svg('arrow-right', 'inline text-brand size-5 ml-1 transition-transform group-hover/card:translate-x-2'),
+				'cta' => 'Read More',
 				'image' => get_the_post_thumbnail($event->ID, 'small', ['class' => 'block w-full', 'loading' => 'lazy'])
 			]); ?>
 		<?php endforeach; ?>

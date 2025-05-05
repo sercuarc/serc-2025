@@ -22,7 +22,7 @@ $posts = array_map(function ($post) {
 		'title'   		=> get_the_title($post),
 		'url'     		=> get_permalink($post),
 		'text' 				=> '<span class="uppercase">' . get_the_date('M j, Y', $post) . '</span> – ' . wp_trim_words($post->post_excerpt ?: $post->post_content, 15),
-		'cta' 				=> 'Read More ' . serc_svg('arrow-right', 'inline text-brand size-5 ml-1 transition-transform group-hover/card:translate-x-2'),
+		'cta' 				=> 'Read More',
 		'contained'   => false,
 		'class'				=> 'pt-4 md:pt-0 md:px-4 not-first:border-t md:not-first:border-t-0 md:even:border-l lg:not-first:border-l border-subtle',
 	];

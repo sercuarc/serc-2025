@@ -33,7 +33,9 @@ $content_class = $contained ? 'border-brand border-t-4 border-solid px-7 py-6' :
 			<div class="body-sm text-light-surface-muted"><?php echo $text; ?></div>
 		<?php endif; ?>
 		<?php if ($cta) : ?>
-			<div class="font-medium mt-auto text-light-surface-strong group-hover/card:text-brand"><?php echo $cta; ?></div>
+			<div class="font-medium mt-auto text-light-surface-strong group-hover/card:text-brand flex items-center gap-1">
+				<?php echo $cta . serc_svg('arrow-right', 'inline text-brand size-5 ml-1 transition-transform group-hover/card:translate-x-2'); ?>
+			</div>
 		<?php endif; ?>
 	</div>
 </a>

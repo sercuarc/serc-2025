@@ -40,7 +40,7 @@ $pagination = paginate_links([
 					'url' => get_the_permalink(),
 					'label_below' => get_the_date('F j, Y'),
 					'text' => get_the_excerpt(),
-					'cta' => 'Read More ' . serc_svg('arrow-right', 'inline text-brand size-5 ml-1 transition-transform group-hover/card:translate-x-2'),
+					'cta' => 'Read more',
 					'image' => get_the_post_thumbnail(get_the_ID(), 'small', ['class' => 'block w-full'])
 				]); ?>
 			<?php endwhile; ?>
