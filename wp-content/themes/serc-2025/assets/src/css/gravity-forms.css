@@ -24,3 +24,15 @@
 .gform-grid-row {
   @apply grid grid-cols-2 gap-4 md:gap-x-10;
 }
+
+.gfield--type-name legend {
+  @apply mb-2;
+}
+
+.gform-grid-col {
+  @apply flex flex-col gap-2;
+}
+
+.gform_confirmation_message {
+  @apply bg-light-secondary p-4 lg:p-8 border-t-4 border-brand body-lg;
+}

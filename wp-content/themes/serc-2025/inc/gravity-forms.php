@@ -33,12 +33,25 @@ add_filter('gform_field_css_class', function ($classes, $field, $form) {
 
 // Customize field markup
 add_filter('gform_field_content', function ($content, $field, $value, $lead_id, $form_id) {
+
+	// Add class to labels
+	$content = str_replace(
+		'gfield_label gform-field-label',
+		'gfield_label gform-field-label label',
+		$content
+	);
+
 	// Add class to sub-labels
 	$content = str_replace(
-		'gform-field-label--type-sub',
-		'gform-field-label--type-sub hint',
+		'gform-field-label gform-field-label--type-sub',
+		'gform-field-label gform-field-label--type-sub hint',
 		$content
 	);
 
 	return $content;
 }, 10, 5);
+
+// Customize Submit
+add_filter('gform_submit_button', function ($button, $form) {
+	return "<button class='gform_button btn btn-primary btn-lg' id='gform_submit_button_{$form['id']}'>{$form['button']['text']}</button>";
+}, 10, 2);
