@@ -33,7 +33,7 @@
     @apply bg-dark-main text-white;
   }
   .hero.hero--center-y {
-    @apply lg:justify-center;
+    @apply lg:justify-center lg:pt-28 lg:pb-32;
   }
   .hero.hero--with-bg-image {
     @apply before:absolute before:top-0 before:left-0 before:inset-0 before:z-10 

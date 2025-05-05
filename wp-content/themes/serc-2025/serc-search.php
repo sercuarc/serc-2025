@@ -21,7 +21,7 @@ get_header(); ?>
 	</script>
 	<div id="app-search">
 
-		<div class="hero hero--center-y bg-light-tertiary py-20">
+		<div class="hero hero--center-y bg-light-tertiary py-12 lg:py-16">
 			<form class="container flex flex-col gap-6" @submit.prevent="handleSearchSubmit">
 				<h1 class="text-title-1">Search</h1>
 				<div class="flex gap-2 mt-4">
