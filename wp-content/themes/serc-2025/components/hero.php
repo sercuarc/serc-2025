@@ -1,7 +1,7 @@
 <?php
 $bg_image = $args['bg_image'] ?? null;
 $blur_bg = $args['blur_bg'] ?? false;
-$image = $args['image'] ?? null;
+$right_column = $args['right_column'] ?? null;
 $title = $args['title'] ?? null;
 $title_small = $args['title_small'] ?? null;
 $subtitle = $args['subtitle'] ?? null;
@@ -52,9 +52,9 @@ $class_names = implode(' ', array_keys(array_filter($class_names)));
 				<?php echo $custom_html; ?>
 			<?php endif; ?>
 		</div>
-		<?php if ($image) : ?>
+		<?php if ($right_column) : ?>
 			<div class="order-1 lg:order-2">
-				<?php echo $image; ?>
+				<?php echo $right_column; ?>
 			</div>
 		<?php endif; ?>
 	</div>

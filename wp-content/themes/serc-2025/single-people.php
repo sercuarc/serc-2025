@@ -23,7 +23,7 @@ get_header();
 
 <main>
 	<?php get_template_part('components/hero', null, [
-		'image' => get_the_post_thumbnail($post, 'medium', ['class' => 'hero-image aspect-square object-cover']),
+		'right_column' => get_the_post_thumbnail($post, 'medium', ['class' => 'hero-image aspect-square object-cover']),
 		'breadcrumbs' => $breadcrumbs,
 		'title' => get_the_title(),
 		'subtitle' => get_field("job_title"),

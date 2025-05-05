@@ -52,7 +52,7 @@ ob_start(); ?>
 	<?php get_template_part('components/hero', null, [
 		'bg_image' => $bg_image,
 		'blur_bg' => $image ? true : false,
-		'image' => $image,
+		'right_column' => $image,
 		'center_y' => false,
 		'title' => get_the_title(),
 		'breadcrumbs' => $breadcrumbs,

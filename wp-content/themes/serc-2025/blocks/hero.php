@@ -12,7 +12,7 @@ if ($button) :
 $button_html = ob_get_clean();
 
 get_template_part('components/hero', null, [
-	'image' => wp_get_attachment_image($image, 'small', false, [
+	'right_column' => wp_get_attachment_image($image, 'small', false, [
 		'class' => 'hero-image'
 	]),
 	'bg_image' => wp_get_attachment_image(get_field('hero_bg_image'), 'large', false, [

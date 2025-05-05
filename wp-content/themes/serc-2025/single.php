@@ -15,7 +15,7 @@ $bg_image = get_field('background_image');
 	<?php get_template_part('components/hero', null, [
 		'bg_image' => wp_get_attachment_image($bg_image, 'large', false, ['class' => 'hero-bg-image']),
 		'blur_bg' => $image ? true : false,
-		'image' => $image,
+		'right_column' => $image,
 		'title' => get_the_title(),
 		'description' => get_the_date('F j, Y'),
 		'breadcrumbs' => [
