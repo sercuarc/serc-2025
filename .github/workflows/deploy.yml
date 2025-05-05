@@ -23,7 +23,7 @@ jobs:
 
     - name: Rsync code to EC2 (excluding wp-config and uploads)
       run: |
-        rsync -avz --exclude='wp-config.php' --exclude='wp-content/uploads' \
+        rsync -avz --no-times --exclude='wp-config.php' --exclude='wp-content/uploads' \
         -e "ssh -o StrictHostKeyChecking=no" \
         ./ $EC2_USER@$EC2_HOST:/var/www/serc_dev
 
