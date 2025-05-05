@@ -2,6 +2,7 @@
 $bg_image = $args['bg_image'] ?? null;
 $blur_bg = $args['blur_bg'] ?? false;
 $right_column = $args['right_column'] ?? null;
+$hide_right_column_on_mobile = $args['hide_right_column_on_mobile'] ?? false;
 $title = $args['title'] ?? null;
 $title_small = $args['title_small'] ?? null;
 $subtitle = $args['subtitle'] ?? null;
@@ -53,7 +54,7 @@ $class_names = implode(' ', array_keys(array_filter($class_names)));
 			<?php endif; ?>
 		</div>
 		<?php if ($right_column) : ?>
-			<div class="order-1 lg:order-2">
+			<div class="order-1 lg:order-2 <?php echo $hide_right_column_on_mobile ? 'hidden lg:block' : '' ?>">
 				<?php echo $right_column; ?>
 			</div>
 		<?php endif; ?>

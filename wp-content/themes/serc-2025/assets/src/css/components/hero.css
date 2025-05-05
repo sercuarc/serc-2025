@@ -15,7 +15,7 @@
     @apply text-h2;
   }
   .hero-subtitle {
-    @apply text-h4 mt-6;
+    @apply text-lg md:text-h4 lg:text-h3 mt-6 max-w-[540px];
   }
   .hero-title .hero-image {
     @apply block w-full;
@@ -33,7 +33,7 @@
     @apply bg-dark-main text-white;
   }
   .hero.hero--center-y {
-    @apply lg:justify-center lg:pt-28 lg:pb-32;
+    @apply justify-end lg:justify-center lg:pt-28 lg:pb-32;
   }
   .hero.hero--with-bg-image {
     @apply before:absolute before:top-0 before:left-0 before:inset-0 before:z-10 
