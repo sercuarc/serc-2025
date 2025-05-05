@@ -17,11 +17,11 @@ $posts = array_map(function ($post) {
 	$icon = $is_update ? 'pin' : 'news';
 	$category = $is_update ? 'Update' : 'News';
 	return [
-		'image'   		=> get_the_post_thumbnail($post, 'small', ['class' => 'w-full aspect-[11/5] object-cover']),
+		'image'   		=> get_the_post_thumbnail($post, 'small', ['class' => 'w-full aspect-video object-cover']),
 		'label_above' => '<span class="flex items-center">' . serc_svg($icon, 'inline-block text-brand size-5 mr-2') . ' ' . $category . '</span>',
 		'title'   		=> get_the_title($post),
 		'url'     		=> get_permalink($post),
-		'text' 				=> wp_trim_words($post->post_excerpt ?: $post->post_content, 15),
+		'text' 				=> '<span class="uppercase">' . get_the_date('M j, Y', $post) . '</span> – ' . wp_trim_words($post->post_excerpt ?: $post->post_content, 15),
 		'cta' 				=> 'Read More ' . serc_svg('arrow-right', 'inline text-brand size-5 ml-1 transition-transform group-hover/card:translate-x-2'),
 		'contained'   => false,
 		'class'				=> 'pt-4 md:pt-0 md:px-4 not-first:border-t md:not-first:border-t-0 md:even:border-l lg:not-first:border-l border-subtle',
