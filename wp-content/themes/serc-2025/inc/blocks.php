@@ -124,5 +124,25 @@ add_action('acf/init', function () {
 			'mode'            => 'auto',
 			'keywords'        => ['news', 'group', 'articles', 'posts'],
 		));
+		acf_register_block_type(array(
+			'name'            => 'publications',
+			'title'           => __('Publications'),
+			'description'     => __('A grid of publications.'),
+			'render_template' => 'blocks/publications.php',
+			'category'        => 'serc-blocks',
+			'icon'            => '<svg fill="#000000" height="64px" width="64px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M0,149.854v212.293h512V149.854H0z M158.179,324.683H37.463V187.317h120.716V324.683z M316.357,324.683H195.643V187.317 h120.715V324.683z M474.537,324.683H353.821V187.317h120.716V324.683z"></path> </g> </g> </g></svg>',
+			'mode'            => 'auto',
+			'keywords'        => ['publications', 'group', 'articles', 'posts'],
+		));
+		acf_register_block_type(array(
+			'name'            => 'featured-event',
+			'title'           => __('Featured Event'),
+			'description'     => __('A featured event.'),
+			'render_template' => 'blocks/featured-event.php',
+			'category'        => 'serc-blocks',
+			'icon'            => 'calendar-alt',
+			'mode'            => 'auto',
+			'keywords'        => ['events', 'articles', 'posts'],
+		));
 	}
 });

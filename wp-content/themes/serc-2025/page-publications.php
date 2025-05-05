@@ -84,7 +84,7 @@ $active_focus_area = array_values($active_focus_area)[0] ?? $focus_areas[0] ?? n
 					}
 					get_template_part('components/card-vert', null, [
 						'image' => $image ?? '<div class="relative bg-light-tertiary aspect-[11/5] overflow-hidden">' . serc_svg("serc-star", "absolute text-brand w-3/4 aspect-square left-1/4 bottom-0 translate-y-1/2 opacity-10") . '</div>',
-						'label_above' => '<span class="flex items-center">' . serc_svg(Helpers::getCategoryIconHandle($category), 'inline-block text-brand size-5 mr-2') . ' ' . $category . '</span>',
+						'label_above' => '<span class="flex items-center">' . serc_svg(Helpers::get_category_icon_handle($category), 'inline-block text-brand size-5 mr-2') . ' ' . $category . '</span>',
 						'title' => $pub_data['title'],
 						'url' => home_url('documents/' . $pub['publication_type'] . '/' . $pub_data['id']),
 						'text' => $pub_data['abstract'] ? substr(strip_tags($pub_data['abstract']), 0, 100) . '...' : '',

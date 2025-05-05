@@ -62,7 +62,7 @@ get_header(); ?>
 						<?php echo $date_formatted; ?>
 					</span>
 					<span class="flex gap-2 items-center">
-						<?php echo serc_svg(Helpers::getCategoryIconHandle($type), "inline-block align-middle text-brand size-5 mr-1"); ?>
+						<?php echo serc_svg(Helpers::get_category_icon_handle($type), "inline-block align-middle text-brand size-5 mr-1"); ?>
 						<?php echo $type; ?>
 					</span>
 				</p>

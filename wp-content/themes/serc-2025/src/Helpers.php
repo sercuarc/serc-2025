@@ -10,7 +10,7 @@ use DateTime;
 
 class Helpers
 {
-	public static function getCategoryIconHandle(string $category = ''): string
+	public static function get_category_icon_handle(string $category = ''): string
 	{
 		switch (strtolower(trim($category))) {
 			case 'presentation':
