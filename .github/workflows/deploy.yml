@@ -27,4 +27,10 @@ jobs:
         -e "ssh -o StrictHostKeyChecking=no" \
         ./ $EC2_USER@$EC2_HOST:/var/www/serc_dev
 
+    - name: Sync uploads with S3 via SSH
+      run: |
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
+          #  Sync FROM S3 to EC2 (if you want to restore files)
+          aws s3 sync s3://serc-wp-content/dev/Uploads /var/www/serc_dev/wp-content/uploads
+
   
