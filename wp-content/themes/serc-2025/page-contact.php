@@ -22,7 +22,7 @@
 			</div>
 			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mt:12 lg:mt-20">
 				<div>
-					<?php get_template_part("components/contact-form") ?>
+					<?php get_template_part("components/gravity-form", null, ["id" => 1]) ?>
 				</div>
 				<div>
 					<p class="text-h5">Systems Engineering Research Center</p>

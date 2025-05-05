@@ -14,6 +14,8 @@
 @import "./components/tabs.css";
 @import "./components/wysiwyg.css";
 
+@import "./gravity-forms.css";
+
 @layer base {
   * {
     @apply focus:focus-ring;

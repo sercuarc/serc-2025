@@ -1,0 +1,26 @@
+.serc-form_wrapper {
+  .gform_required_legend,
+  .gfield_required,
+  .gfield--type-honeypot {
+    @apply hidden;
+  }
+}
+
+.serc-form {
+  @apply flex flex-col gap-4 md:gap-6 md:gap-x-10;
+}
+
+.gform_fields {
+  @apply grid grid-cols-2 gap-4 md:gap-6 md:gap-x-10;
+}
+
+.gfield {
+  @apply col-span-2;
+  &.gfield--width-half {
+    @apply col-span-1;
+  }
+}
+
+.gform-grid-row {
+  @apply grid grid-cols-2 gap-4 md:gap-x-10;
+}
