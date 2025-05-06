@@ -24,8 +24,8 @@ $menus = [
 						<img src="<?php echo get_template_directory_uri() . "/assets/images/logo-horz-white.svg"; ?>" alt="SERC Logo" width="276" height="74" class="w-full h-full object-contain">
 					</a>
 					<div class="flex items-center gap-4">
-						<a href="#youtube" title="YouTube" class="p-2 outline-0 text-dark-surface-subtle hover:text-white focus:text-white border border-dark-tertiary hover:border-white focus:border-white transition-all"><?php echo serc_svg('youtube', 'block size-4') ?><span class="sr-only">YouTube</span></a>
-						<a href="#linkedin" title="LinkedIn" class="p-2 outline-0 text-dark-surface-subtle hover:text-white focus:text-white border border-dark-tertiary hover:border-white focus:border-white transition-all"><?php echo serc_svg('linkedin', 'block size-4') ?><span class="sr-only">LinkedIn</span></a>
+						<a href="https://www.youtube.com/channel/UCj4FvYXhmNOtjin_ToD3NWw" target="_blank" rel="noopener noreferrer" title="YouTube" class="p-2 outline-0 text-dark-surface-subtle hover:text-white focus:text-white border border-dark-tertiary hover:border-white focus:border-white transition-all"><?php echo serc_svg('youtube', 'block size-4') ?><span class="sr-only">YouTube</span></a>
+						<a href="https://www.linkedin.com/company/systemsengineeringresearchcenter/" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="p-2 outline-0 text-dark-surface-subtle hover:text-white focus:text-white border border-dark-tertiary hover:border-white focus:border-white transition-all"><?php echo serc_svg('linkedin', 'block size-4') ?><span class="sr-only">LinkedIn</span></a>
 					</div>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 xl:gap-18 xl:ml-auto">
@@ -51,7 +51,7 @@ $menus = [
 				<div class="text-3xl font-bold">
 					<img src="<?php echo get_template_directory_uri() . "/assets/images/airc-white.png"; ?>" alt="AIRC Logo" width="72" height="24" class="inline-block object-contain">
 				</div>
-				<p class="text-sm text-white mt-1">Visit our sister research center at <a href="https://acqirc.org/" class="hover:text-brand transition-colors focus:outline-white"><strong>acqirc.org</strong></a></p>
+				<p class="text-sm text-white mt-1">Visit our sister research center at <a href="https://acqirc.org/" target="_blank" rel="noopener noreferrer" class="hover:text-brand transition-colors focus:outline-white"><strong>acqirc.org</strong></a></p>
 			</div>
 			<hr class="my-8">
 			<div class="flex flex-col md:flex-row gap-4 md:gap-16 text-sm xl:text-base">
