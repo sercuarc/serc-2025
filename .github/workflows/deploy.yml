@@ -1,38 +1,68 @@
-name: Deploy WordPress to EC2
+name: Build and Deploy WordPress Theme
 
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
-  deploy:
+  build-deploy:
     runs-on: ubuntu-latest
+
     env:
       EC2_HOST: ${{ secrets.EC2_HOST }}
       EC2_USER: ${{ secrets.EC2_USER }}
 
     steps:
-    - name: Checkout Code
+    - name: 📦 Checkout Repository
       uses: actions/checkout@v3
 
-    - name: Set up SSH
+    - name: 🔧 Set up PHP 8.2
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.2
+
+    - name: 🧰 Install Composer Dependencies
+      run: |
+        composer install --no-dev --optimize-autoloader
+
+    - name: 🧱 Set up Node (from .nvmrc)
+      uses: actions/setup-node@v3
+      with:
+        node-version-file: '.nvmrc'
+
+    - name: 📥 Install Node Dependencies & Build Assets
+      run: |
+        npm install
+        npm run build
+
+    - name: 🔐 Set up SSH Agent
       uses: webfactory/ssh-agent@v0.7.0
       with:
         ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-    - name: Rsync code to EC2 (excluding wp-config and uploads)
+    - name: 🚀 Deploy to EC2 via rsync
       run: |
-        rsync -avz --no-times --no-perms --exclude='wp-config.php' --exclude='wp-content/uploads' \
-        -e "ssh -o StrictHostKeyChecking=no" \
-        ./ $EC2_USER@$EC2_HOST:/var/www/serc_dev
+        rsync -avz --no-perms --no-times \
+          --exclude='wp-content/uploads' \
+          --exclude='wp-content/plugins' \
+          -e "ssh -o StrictHostKeyChecking=no" \
+          ./ $EC2_USER@$EC2_HOST:/var/www/serc_dev
 
-    - name: Sync uploads with S3 via SSH
+    - name: ☁️ Sync uploads & plugins from S3 (optional)
       run: |
         ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
-          #  Sync FROM S3 to EC2 (if you want to restore files)
-          aws s3 sync s3://serc-wp-content/dev/Uploads /var/www/serc_dev/wp-content/uploads 
-          aws s3 sync s3://serc-wp-content/dev/plugins /var/www/serc_dev/wp-content/plugins 
+          echo "🔄 Syncing plugins and uploads from S3..."
+          aws s3 sync s3://serc-wp-content/dev/plugins /var/www/serc_dev/wp-content/plugins
+          aws s3 sync s3://serc-wp-content/dev/uploads /var/www/serc_dev/wp-content/uploads
+          echo "✅ S3 sync complete."
+        EOF
 
-
-  
+    - name: 🧹 Fix Permissions on EC2
+      run: |
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
+          sudo chown -R www-data:www-data /var/www/serc_dev/wp-content
+          sudo find /var/www/serc_dev/wp-content -type d -exec chmod 755 {} \;
+          sudo find /var/www/serc_dev/wp-content -type f -exec chmod 644 {} \;
+          echo "✅ Permissions fixed."
+        EOF
