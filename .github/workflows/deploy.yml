@@ -1,9 +1,9 @@
-name: Build and Deploy WordPress Theme
+name: Build and Deploy WordPress Theme (via ZIP + SCP)
 
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build-deploy:
@@ -14,7 +14,7 @@ jobs:
       EC2_USER: ${{ secrets.EC2_USER }}
 
     steps:
-    - name: 📦 Checkout Repository
+    - name: 📦 Checkout Code
       uses: actions/checkout@v3
 
     - name: 🔧 Set up PHP 8.2
@@ -23,15 +23,14 @@ jobs:
         php-version: 8.2
 
     - name: 🧰 Install Composer Dependencies
-      run: |
-        composer install --no-dev --optimize-autoloader
+      run: composer install --no-dev --optimize-autoloader
 
-    - name: 🧱 Set up Node (from .nvmrc)
+    - name: 🧱 Set up Node from .nvmrc
       uses: actions/setup-node@v3
       with:
         node-version-file: '.nvmrc'
 
-    - name: 📥 Install Node Dependencies & Build Assets
+    - name: 📥 Install Node Modules & Build
       run: |
         npm install
         npm run build
@@ -41,20 +40,25 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-    - name: 🚀 Deploy to EC2 via rsync
+    - name: 📦 Zip Build for Deployment
       run: |
-        rsync -avz --no-perms --no-times \
-          --exclude='wp-content/uploads' \
-          --exclude='wp-content/plugins' \
-          -e "ssh -o StrictHostKeyChecking=no" \
-          ./ $EC2_USER@$EC2_HOST:/var/www/serc_dev
+        zip -r build.zip wp-content composer.json composer.lock -x "wp-content/uploads/*" -x "wp-content/plugins/*"
 
-    - name: ☁️ Sync uploads & plugins from S3 (optional)
+    - name: 🚀 SCP Zip to EC2 and Unpack
+      run: |
+        scp -o StrictHostKeyChecking=no build.zip $EC2_USER@$EC2_HOST:/tmp/
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
+          unzip -o /tmp/build.zip -d /var/www/serc_dev
+          rm /tmp/build.zip
+          echo "✅ Zip deployed and extracted."
+        EOF
+
+    - name: ☁️ Sync uploads and plugins from S3
       run: |
         ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
           echo "🔄 Syncing plugins and uploads from S3..."
           aws s3 sync s3://serc-wp-content/dev/plugins /var/www/serc_dev/wp-content/plugins
-          aws s3 sync s3://serc-wp-content/dev/Uploads /var/www/serc_dev/wp-content/uploads
+          aws s3 sync s3://serc-wp-content/dev/uploads /var/www/serc_dev/wp-content/uploads
           echo "✅ S3 sync complete."
         EOF
 
