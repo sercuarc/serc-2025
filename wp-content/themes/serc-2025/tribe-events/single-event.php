@@ -59,7 +59,7 @@ ob_start(); ?>
 		'custom_html' => $hero_html
 	]); ?>
 	<section data-event-bar-threshold class="relative py-12 lg:py-20 overflow-y-hidden">
-		<div data-event-bar class="absolute z-40 top-0 left-0 w-full bg-white py-6 shadow-lg -translate-y-full transition-transform duration-300 ease-in-out" aria-hidden="true" tabindex="-1">
+		<div data-event-bar class="absolute z-40 top-0 left-0 w-full bg-white py-6 shadow-lg -translate-y-full opacity-0 transition-all duration-300 ease-in-out" aria-hidden="true" tabindex="-1">
 			<div class="container flex items-center">
 				<div>
 					<p class="text-h5"><?php the_title(); ?></p>
@@ -280,15 +280,15 @@ ob_start(); ?>
 			if (window.innerWidth < minScreenWidth) return;
 			if (window.scrollY > m.threshold - m.fixedOffset) {
 				if (!fixed) {
-					eventBar.classList.remove('-translate-y-full', 'absolute');
-					eventBar.classList.add('translate-y-0', 'fixed');
+					eventBar.classList.remove('-translate-y-full', 'opacity-0', 'absolute');
+					eventBar.classList.add('translate-y-0', 'opacity-100', 'fixed');
 					eventBar.style.top = `${m.fixedOffset}px`;
 					fixed = true;
 				}
 			} else {
 				if (fixed) {
-					eventBar.classList.add('-translate-y-full', 'absolute');
-					eventBar.classList.remove('translate-y-0', 'fixed');
+					eventBar.classList.add('-translate-y-full', 'opacity-0', 'absolute');
+					eventBar.classList.remove('translate-y-0', 'opacity-100', 'fixed');
 					eventBar.style.top = '';
 					fixed = false;
 				}
