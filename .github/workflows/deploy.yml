@@ -54,7 +54,7 @@ jobs:
         ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
           echo "🔄 Syncing plugins and uploads from S3..."
           aws s3 sync s3://serc-wp-content/dev/plugins /var/www/serc_dev/wp-content/plugins
-          aws s3 sync s3://serc-wp-content/dev/uploads /var/www/serc_dev/wp-content/uploads
+          aws s3 sync s3://serc-wp-content/dev/Uploads /var/www/serc_dev/wp-content/uploads
           echo "✅ S3 sync complete."
         EOF
 
