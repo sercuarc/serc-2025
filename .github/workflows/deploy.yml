@@ -3,7 +3,7 @@ name: Build and Deploy WordPress Theme (via ZIP + SCP)
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build-deploy:
