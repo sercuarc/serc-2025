@@ -31,7 +31,7 @@
 						5 Marine View Plaza, Suite 501A
 						<br>Hoboken, NJ 07030
 					</address>
-					<iframe class="w-full h-auto aspect-video lg:aspect-[3/4] mt-4" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3022.838966177997!2d-74.0295889!3d40.7435688!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259dc202aab67%3A0xf1be525024cc2fe1!2sSystems%20Engineering%20Research%20Center!5e0!3m2!1sen!2spa!4v1743111316950!5m2!1sen!2spa" width="600" height="800" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+					<iframe class="w-full h-auto aspect-video lg:aspect-[3/4] mt-4" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1511.541432859508!2d-74.0306016!3d40.7382021!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259e1f9780bf1%3A0x4f312f35c9b2f7fd!2s5%20Marine%20View%20Plaza!5e0!3m2!1sen!2spa!4v1746496437340!5m2!1sen!2spa" width="600" height="800" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 				</div>
 			</div>
 		</div>
