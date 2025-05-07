@@ -1,0 +1,72 @@
+name: Build and Deploy WordPress Theme (via ZIP + SCP)
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      EC2_HOST: ${{ secrets.EC2_HOST }}
+      EC2_USER: ${{ secrets.EC2_USER }}
+
+    steps:
+    - name: 📦 Checkout Code
+      uses: actions/checkout@v3
+
+    - name: 🔧 Set up PHP 8.2
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.2
+
+    - name: 🧰 Install Composer Dependencies
+      run: composer install --no-dev --optimize-autoloader
+
+    - name: 🧱 Set up Node from .nvmrc
+      uses: actions/setup-node@v3
+      with:
+        node-version-file: '.nvmrc'
+
+    - name: 📥 Install Node Modules & Build
+      run: |
+        npm install
+        npm run build
+
+    - name: 🔐 Set up SSH Agent
+      uses: webfactory/ssh-agent@v0.7.0
+      with:
+        ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+    - name: 📦 Zip Build for Deployment
+      run: |
+        zip -r build.zip wp-content composer.json composer.lock -x "wp-content/uploads/*" -x "wp-content/plugins/*"
+
+    - name: 🚀 SCP Zip to EC2 and Unpack
+      run: |
+        scp -o StrictHostKeyChecking=no build.zip $EC2_USER@$EC2_HOST:/tmp/
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
+          unzip -o /tmp/build.zip -d /var/www/serc_dev
+          rm /tmp/build.zip
+          echo "✅ Zip deployed and extracted."
+        EOF
+
+    - name: ☁️ Sync uploads and plugins from S3
+      run: |
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
+          echo "🔄 Syncing plugins and uploads from S3..."
+          aws s3 sync s3://serc-wp-content/dev/plugins /var/www/serc_dev/wp-content/plugins
+          aws s3 sync s3://serc-wp-content/dev/uploads /var/www/serc_dev/wp-content/uploads
+          echo "✅ S3 sync complete."
+        EOF
+
+    - name: 🧹 Fix Permissions on EC2
+      run: |
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
+          sudo chown -R www-data:www-data /var/www/serc_dev/wp-content
+          sudo find /var/www/serc_dev/wp-content -type d -exec chmod 755 {} \;
+          sudo find /var/www/serc_dev/wp-content -type f -exec chmod 644 {} \;
+          echo "✅ Permissions fixed."
+        EOF
