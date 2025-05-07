@@ -9,6 +9,7 @@
 ?>
 
 <?php
+define('EMAIL_NEWSLETTER_ENDPOINT', 'https://app.e2ma.net/app2/audience/signup/1730920/1719796.1377361396/');
 
 // !! Autoloaders must come first
 require_once dirname(__DIR__, 3) . '/vendor/autoload.php';

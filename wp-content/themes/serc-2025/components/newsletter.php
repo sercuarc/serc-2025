@@ -14,7 +14,8 @@ $description = $args['description'] ?? '';
 				<?php echo $description; ?>
 			</div>
 		<?php endif; ?>
-		<form class="w-full max-w-[450px] mx-auto flex flex-col md:flex-row md:items-center gap-4 md:gap-1">
+		<form data-newsletter-signup action="<?php echo EMAIL_NEWSLETTER_ENDPOINT; ?>" target="_blank" ref="noreferrer noopener" class="w-full max-w-[450px] mx-auto flex flex-col md:flex-row md:items-center gap-4 md:gap-1">
+			<input type="hidden" name="plaintext_preferred" value="False" class="hidden" />
 			<div class="field field-text field-text-sm w-full">
 				<input type="email" name="email" placeholder="Your email Address" class="text-center md:text-left" />
 			</div>
