@@ -33,17 +33,33 @@ $pin = serc_svg("location", "inline-block size-5 mr-1");
 $details = Helpers::get_event_details(get_the_ID());
 
 ob_start(); ?>
+<div class="flex gap-4 items-center">
+	<?php if ($event_website) : ?>
+		<a href="<?php echo $event_website; ?>" class="btn btn-primary"><?php echo serc_svg("external-link", "size-4"); ?>Register</a>
+	<?php endif; ?>
+	<sl-dropdown data-dropdown class="z-10">
+		<sl-button slot="trigger" caret class="btn btn-outline"><?php echo serc_svg("calendar-add", "size-4"); ?> Add to Calendar</sl-button>
+		<sl-menu class="bg-white flex flex-col border border-dark-main -mt-[1px]">
+			<sl-menu-item class="block border-b border-dark-main">
+				<a href="<?php echo tribe_get_gcal_link(); ?>" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-5 py-3 w-full h-full text-sm hover:bg-dark-main/5 hover:text-brand transition-all"><?php echo serc_svg("calendar-add", "size-4"); ?> Google Calendar</a>
+			</sl-menu-item>
+			<sl-menu-item class="block">
+				<a href="<?php echo tribe_get_single_ical_link(); ?>" class="flex items-center gap-2 px-5 py-3 w-full h-full text-sm hover:bg-dark-main/5 hover:text-brand transition-all"><?php echo serc_svg("download", "size-4"); ?> Download invite (ics)</a>
+			</sl-menu-item>
+		</sl-menu>
+	</sl-dropdown>
+</div>
+<?php
+$event_buttons = ob_get_clean();
+
+ob_start(); ?>
 <p class="flex flex-col sm:flex-row gap-1 sm:gap-4 mt-3">
 	<span class="flex items-center"><?php echo $calendar . ' ' . $details['schedule']; ?></span>
 	<span class="flex items-center"><?php echo $details['location'] ? $pin . ' ' . $details['location'] : ''; ?></span>
 </p>
 <?php if ($isUpcoming) : ?>
-	<div class="flex items-center gap-4 mt-4 lg:mt-8">
-		<?php if ($event_website) : ?>
-			<a href="<?php echo $event_website; ?>" class="btn btn-primary"><?php echo serc_svg("external-link", "size-4"); ?>Register</a>
-		<?php endif; ?>
-		<a href="<?php echo tribe_get_gcal_link(); ?>" class="btn <?php echo $bg_image ? 'btn-inverted-outline' : 'btn-outline' ?>"><?php echo serc_svg("calendar-add", "size-4"); ?>Add to Calendar</a>
-		<!-- <a href="<?php echo tribe_get_single_ical_link(); ?>" class="btn <?php echo $bg_image ? 'btn-inverted-outline' : 'btn-outline' ?>"><?php echo serc_svg("download", "size-4"); ?>Download invite (.ics)</a> -->
+	<div class="mt-4 lg:mt-8">
+		<?php echo $event_buttons; ?>
 	</div>
 <?php endif; ?>
 <?php $hero_html = ob_get_clean(); ?>
@@ -69,12 +85,8 @@ ob_start(); ?>
 					</p>
 				</div>
 				<?php if ($isUpcoming) : ?>
-					<div class="shrink-0 ml-auto flex items-center gap-4">
-						<?php if ($event_website) : ?>
-							<a href="<?php echo $event_website; ?>" class="btn btn-primary"><?php echo serc_svg("external-link", "size-4"); ?>Register</a>
-						<?php endif; ?>
-						<a href="<?php echo tribe_get_gcal_link(); ?>" class="btn btn-secondary"><?php echo serc_svg("calendar-add", "size-4"); ?>Add to Calendar</a>
-						<!-- <a href="<?php echo tribe_get_single_ical_link(); ?>" class="btn btn-secondary"><?php echo serc_svg("download", "size-4"); ?>Download invite (.ics)</a> -->
+					<div class="shrink-0 ml-auto">
+						<?php echo $event_buttons; ?>
 					</div>
 				<?php endif; ?>
 			</div>
@@ -249,6 +261,20 @@ ob_start(); ?>
 	</section>
 </main>
 
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/dropdown/dropdown.js"></script>
+<script type="text/javascript">
+	window.addEventListener('DOMContentLoaded', function() {
+		const dropdowns = document.querySelectorAll('sl-dropdown');
+		dropdowns.forEach(dropdown => {
+			const choices = dropdown.querySelectorAll('sl-menu-item');
+			choices.forEach(choice => {
+				choice.addEventListener('click', (e) => {
+					dropdown.hide();
+				});
+			});
+		});
+	});
+</script>
 <script type="text/javascript" defer>
 	window.addEventListener('DOMContentLoaded', function() {
 		const minScreenWidth = 1024;
@@ -275,8 +301,6 @@ ob_start(); ?>
 		let fixed = false;
 		// on scroll...
 		window.addEventListener('scroll', () => {
-			console.log(window.scrollY, m.threshold, m.fixedOffset);
-
 			if (window.innerWidth < minScreenWidth) return;
 			if (window.scrollY > m.threshold - m.fixedOffset) {
 				if (!fixed) {
