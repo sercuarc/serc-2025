@@ -10,6 +10,54 @@ use DateTime;
 
 class Helpers
 {
+	public static function get_publications(array $publication_ids, array $technical_report_ids, array $order = []): array
+	{
+		$publications_response = wp_remote_get('https://web.sercuarc.org/api/collection?publications=' . implode(',', $publication_ids) . '&technical-reports=' . implode(',', $technical_report_ids));
+		if (is_wp_error($publications_response)) {
+			return ['error' => $publications_response->get_error_message()];
+		}
+
+		$publications_json = json_decode($publications_response['body'], true);
+		$publications_merged_raw = array_merge($publications_json['publications'] ?? [], $publications_json['technicalReports'] ?? []);
+		$publications = array_map(function ($pub) {
+			$is_tech_report = isset($pub['tr']);
+			$data_key = $is_tech_report ? 'tr' : 'pub';
+			$data = $pub[$data_key];
+			$category = $is_tech_report ? 'Technical Report' : $data['category'];
+			$namespace = $is_tech_report ? 'technical-reports' : 'publications';
+			$data['namespace'] = $namespace;
+			$data['category'] = $category;
+			$data['icon'] = self::get_category_icon_handle($category);
+			$data['url'] = home_url('/documents/' . $namespace . '/' . $data['id']);
+			return $data;
+		}, $publications_merged_raw);
+
+		// Order publications according to the order array
+		if (! empty($order)) {
+			$publications = array_filter($publications, function ($pub) use ($order) {
+				return in_array(self::get_publication_namespaced_id($pub), $order);
+			});
+			usort($publications, function ($a, $b) use ($order) {
+				$pos_a = array_search(self::get_publication_namespaced_id($a), $order);
+				$pos_b = array_search(self::get_publication_namespaced_id($b), $order);
+				return $pos_a - $pos_b;
+			});
+		}
+
+		return $publications;
+	}
+
+	public static function get_publication_namespaced_id(array $publication): string
+	{
+		if (empty($publication['namespace'])) {
+			throw new \Exception("Cannot form a namespaced ID. Publication missing key 'namespace'.");
+		}
+		if (empty($publication['id'])) {
+			throw new \Exception("Cannot form a namespaced ID. Publication missing key 'id'.");
+		}
+		return $publication['namespace'] . '-' . $publication['id'];
+	}
+
 	public static function get_category_icon_handle(string $category = ''): string
 	{
 		switch (strtolower(trim($category))) {
