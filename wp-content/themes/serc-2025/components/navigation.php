@@ -111,7 +111,7 @@ $featured_event = tribe_get_events([
 					"icon" => "",
 					"text" => "Discover how we can help your research efforts with our national network of experts."
 				],
-				"cta" => ["label" => "Learn More About What We Do", "url" => "#"],
+				"cta" => ["label" => "Learn More About What We Do", "url" => home_url('about')],
 			],
 			[
 				"id" => "research",
@@ -122,7 +122,7 @@ $featured_event = tribe_get_events([
 					"icon" => "",
 					"text" => "Discover how our Research Roadmaps for our mission areas of Velocity, Security, and AI/Autonomy can impact the success or your organization's campaigns."
 				],
-				"cta" => ["label" => "View Our Research Roadmaps", "url" => "#"],
+				"cta" => ["label" => "View Our Research Roadmaps", "url" => home_url('research')],
 			],
 			[
 				"id" => "events-news",
@@ -163,7 +163,7 @@ $featured_event = tribe_get_events([
 					<?php endforeach; ?>
 				</div>
 				<div class="border-subtle lg:w-0 lg:h-full lg:border-l"></div>
-				<div class="flex flex-col gap-8 lg:pt-2 lg:max-w-[630px]">
+				<a href="<?php echo $menu["cta"]["url"]; ?>" class="group flex flex-col gap-8 lg:pt-2 lg:max-w-[630px]">
 					<?php if ($menu["headline"]["label"]) : ?>
 						<div class="flex gap-1 items-center">
 							<?php if ($menu["headline"]["icon"]) : ?>
@@ -172,14 +172,14 @@ $featured_event = tribe_get_events([
 							<span class="uppercase text-light-surface-muted"><?php echo $menu["headline"]["label"] ?></span>
 						</div>
 					<?php endif; ?>
-					<p class="text-xl lg:text-h4"><?php echo $menu["headline"]["text"] ?></p>
+					<p class="text-xl lg:text-h4 group-hover:text-brand group-focus:text-brand"><?php echo $menu["headline"]["text"] ?></p>
 					<p class="font-medium lg:text-xl">
-						<a href="<?php echo $menu["cta"]["url"]; ?>" class="group hover:text-brand transition-colors">
-							<?php echo $menu["cta"]["label"]; ?>
-							<?php echo serc_svg("arrow-right", "group-hover:translate-x-2 transition-transform inline text-brand size-4 ml-2") ?>
-						</a>
+						<div class="group-hover:text-brand group-focus:text-brand transition-colors inline-flex items-center gap-2 font-medium">
+							<span><?php echo $menu["cta"]["label"]; ?></span>
+							<?php echo serc_svg("arrow-right", "group-hover:translate-x-2 transition-transform text-brand size-5") ?>
+						</div>
 					</p>
-				</div>
+				</a>
 			</nav>
 		<?php endforeach; ?>
 	</div>

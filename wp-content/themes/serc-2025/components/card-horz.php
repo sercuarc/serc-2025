@@ -42,9 +42,9 @@ $image_order = $reversed ? 'order-1' : 'order-1 md:order-2';
 				<?php if ($cta_style === 'button') : ?>
 					<a href="<?php echo $cta['url']; ?>" class="btn btn-primary inline-block"><?php echo $cta['text']; ?></a>
 				<?php else : ?>
-					<a href="<?php echo $cta['url']; ?>" class="font-medium hover:text-brand focus:text-brand outline-0">
-						<?php echo $cta['text']; ?>
-						<?php echo serc_svg("arrow-right", "inline text-brand size-4 ml-2") ?>
+					<a href="<?php echo $cta['url']; ?>" class="group font-medium hover:text-brand focus:text-brand outline-0 inline-flex items-center gap-2">
+						<span><?php echo $cta['text']; ?></span>
+						<?php echo serc_svg("arrow-right", "inline text-brand size-5 transition-transform group-hover:translate-x-2") ?>
 					</a>
 				<?php endif; ?>
 			</p>

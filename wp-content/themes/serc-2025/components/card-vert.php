@@ -13,7 +13,7 @@ $container_class = $contained ? 'bg-white border border-[#d9d9d9] hover:shadow-l
 $content_class = $contained ? 'border-brand border-t-4 border-solid px-7 py-6' : 'py-4';
 ?>
 
-<a href="<?php echo $url; ?>" class="group/card w-full h-full outline-0 transition-all flex flex-col <?php echo $container_class . ' ' . $class; ?>">
+<a href="<?php echo $url; ?>" class="group w-full h-full outline-0 transition-all flex flex-col <?php echo $container_class . ' ' . $class; ?>">
 	<?php if ($image) : ?>
 		<div class="shrink-0">
 			<?php echo $image; ?>
@@ -24,7 +24,7 @@ $content_class = $contained ? 'border-brand border-t-4 border-solid px-7 py-6' :
 			<div class="text-light-surface-strong"><?php echo $label_above; ?></div>
 		<?php endif; ?>
 		<?php if ($title) : ?>
-			<h3 class="text-h5 transition-colors text-light-surface-strong group-hover/card:text-brand"><?php echo $title; ?></h3>
+			<h3 class="text-h5 transition-colors text-light-surface-strong group-hover:text-brand"><?php echo $title; ?></h3>
 		<?php endif; ?>
 		<?php if ($label_below) : ?>
 			<div class="text-light-surface-strong"><?php echo $label_below; ?></div>
@@ -33,8 +33,9 @@ $content_class = $contained ? 'border-brand border-t-4 border-solid px-7 py-6' :
 			<div class="body-sm text-light-surface-muted"><?php echo $text; ?></div>
 		<?php endif; ?>
 		<?php if ($cta) : ?>
-			<div class="font-medium mt-auto text-light-surface-strong group-hover/card:text-brand flex items-center gap-1">
-				<?php echo $cta . serc_svg('arrow-right', 'inline text-brand size-5 ml-1 transition-transform group-hover/card:translate-x-2'); ?>
+			<div class="font-medium mt-auto text-light-surface-strong group-hover:text-brand flex items-center gap-2">
+				<span><?php echo $cta; ?></span>
+				<?php echo serc_svg('arrow-right', 'text-brand size-5 transition-transform group-hover:translate-x-2'); ?>
 			</div>
 		<?php endif; ?>
 	</div>
