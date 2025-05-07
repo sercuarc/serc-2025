@@ -137,9 +137,9 @@ const methods = {
       case "People":
         return doc.url;
       case "Technical Report":
-        return `/technical-reports/${doc.id}`;
+        return `/documents/technical-reports/${doc.id}`;
       default:
-        return `/publications/${doc.id}`;
+        return `/documents/publications/${doc.id}`;
     }
   },
 
