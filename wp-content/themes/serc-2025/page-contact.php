@@ -21,7 +21,7 @@
 				<?php the_content(); ?>
 			</div>
 			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mt:12 lg:mt-20">
-				<div>
+				<div id="contact-form">
 					<?php get_template_part("components/gravity-form", null, ["id" => 1]) ?>
 				</div>
 				<div>

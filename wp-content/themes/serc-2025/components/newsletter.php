@@ -14,12 +14,8 @@ $description = $args['description'] ?? '';
 				<?php echo $description; ?>
 			</div>
 		<?php endif; ?>
-		<form data-newsletter-signup action="<?php echo EMAIL_NEWSLETTER_ENDPOINT; ?>" target="_blank" ref="noreferrer noopener" class="w-full max-w-[450px] mx-auto flex flex-col md:flex-row md:items-center gap-4 md:gap-1">
-			<input type="hidden" name="plaintext_preferred" value="False" class="hidden" />
-			<div class="field field-text field-text-sm w-full">
-				<input type="email" name="email" placeholder="Your email Address" class="text-center md:text-left" />
-			</div>
-			<button type="submit" class="btn btn-primary w-full md:max-w-28 focus:outline-white"><?php echo __('Sign Up', 'serc-2025'); ?></button>
-		</form>
+		<div id="newsletter-signup" class="is-featured w-full max-w-[450px] mx-auto">
+			<?php get_template_part("components/gravity-form", null, ["id" => 2]) ?>
+		</div>
 	</div>
 </div>

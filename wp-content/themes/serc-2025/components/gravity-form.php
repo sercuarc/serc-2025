@@ -15,6 +15,6 @@ $display_title = false;
 $display_description = false;
 $display_inactive = false;
 $field_values = null;
-$ajax = false;
+$ajax = true;
 
 gravity_form($id, $display_title, $display_description, $display_inactive, $field_values, $ajax);

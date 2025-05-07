@@ -33,10 +33,53 @@
   @apply flex flex-col gap-2;
 }
 
-.gform_confirmation_message {
+.gform_button {
+  @apply w-full md:w-auto;
+}
+
+/*
+ * Contact Form
+ */
+#contact-form button {
+  @apply text-xl;
+}
+#contact-form .gform_confirmation_message {
   @apply bg-light-secondary p-4 lg:p-8 border-t-4 border-brand body-lg;
 }
 
-.gform_button {
-  @apply w-full md:w-auto;
+/*
+ * Newsletter Sign up
+ */
+
+#newsletter-signup form {
+  @apply flex flex-col md:flex-row md:items-center gap-4 md:gap-1;
+}
+#newsletter-signup .gform-field-label {
+  display: none;
+}
+#newsletter-signup .gform-body {
+  @apply w-full;
+}
+#newsletter-signup .gform-footer {
+  @apply w-full md:max-w-28 focus:outline-white;
+}
+#newsletter-signup input:not([type="submit"]) {
+  @apply py-[0.47em];
+}
+#newsletter-signup button {
+  @apply w-full;
+}
+
+/*
+ * Newsletter Sign up - Featured
+ */
+#newsletter-signup.is-featured .gform_confirmation_message {
+  @apply p-4 lg:p-8 border-t-4 border-brand body-lg text-center;
+}
+
+/*
+ * Newsletter Sign up - Basic
+ */
+#newsletter-signup.is-basic .gform_confirmation_message {
+  @apply text-h4 bg-dark-secondary p-4;
 }

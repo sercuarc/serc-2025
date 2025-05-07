@@ -53,5 +53,5 @@ add_filter('gform_field_content', function ($content, $field, $value, $lead_id, 
 
 // Customize Submit
 add_filter('gform_submit_button', function ($button, $form) {
-	return "<button class='gform_button btn btn-primary btn-lg' id='gform_submit_button_{$form['id']}'>{$form['button']['text']}</button>";
+	return "<button class='gform_button btn btn-primary' id='gform_submit_button_{$form['id']}'>{$form['button']['text']}</button>";
 }, 10, 2);
