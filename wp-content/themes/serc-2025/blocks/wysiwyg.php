@@ -12,7 +12,7 @@ $button = get_field('wysiwyg_button') ?: (is_admin() ? ['title' => 'Add a Button
 			</h2>
 		<?php endif; ?>
 		<?php if ($content) : ?>
-			<div class="wysiwyg w-full max-w-[780px] mx-auto">
+			<div class="wysiwyg w-full max-w-[825px] mx-auto">
 				<?php echo apply_filters('the_content', $content); ?>
 			</div>
 		<?php endif; ?>

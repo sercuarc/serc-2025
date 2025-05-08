@@ -53,7 +53,7 @@ $member_roles = [
 	]); ?>
 	<section class="bg-white pt-12 lg:pt-16">
 
-		<div data-tabs>
+		<div data-tabs='{"pushState": true}'>
 			<div class="container">
 				<nav class="tab-menu">
 					<?php $count = 0;

@@ -55,6 +55,16 @@ add_action('acf/init', function () {
 			'keywords'        => ['text', 'wysiwyg', 'editor', 'rich text'],
 		));
 		acf_register_block_type(array(
+			'name'            => 'tabs',
+			'title'           => __('Tabs'),
+			'description'     => __('Create tabbed content.'),
+			'render_template' => 'blocks/tabs.php',
+			'category'        => 'serc-blocks',
+			'icon'            => '<svg fill="#000000" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <rect x="19" y="4" width="5" height="5"></rect> <path d="M26,9h5V7c0-1.7-1.3-3-3-3h-2V9z"></path> <rect x="12" y="4" width="5" height="5"></rect> </g> <path d="M11,11c-0.6,0-1-0.4-1-1V4H4C2.3,4,1,5.3,1,7v18c0,1.7,1.3,3,3,3h24c1.7,0,3-1.3,3-3V11H11z M7,9H4C3.4,9,3,8.6,3,8 s0.4-1,1-1h3c0.6,0,1,0.4,1,1S7.6,9,7,9z"></path> </g></svg>',
+			'mode'            => 'auto',
+			'keywords'        => ['text', 'tabs', 'editor', 'rich text'],
+		));
+		acf_register_block_type(array(
 			'name'            => 'text-image',
 			'title'           => __('Text & Image(s)'),
 			'description'     => __('Text and image pairing. Multiple images can be added.'),
