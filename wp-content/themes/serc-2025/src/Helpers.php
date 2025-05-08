@@ -10,16 +10,54 @@ use DateTime;
 
 class Helpers
 {
-	public static function get_publications(array $publication_ids, array $technical_report_ids, array $order = []): array
+	public static function component(string $name): string
 	{
-		$publications_response = wp_remote_get('https://web.sercuarc.org/api/collection?publications=' . implode(',', $publication_ids) . '&technical-reports=' . implode(',', $technical_report_ids));
-		if (is_wp_error($publications_response)) {
-			return ['error' => $publications_response->get_error_message()];
+		switch ($name) {
+			case 'placeholder-serc-star':
+				return '<div class="relative bg-light-tertiary aspect-[11/5] overflow-hidden">' . serc_svg("serc-star", "absolute text-brand w-3/4 aspect-square left-1/4 bottom-0 translate-y-1/2 opacity-10") . '</div>';
+				break;
+			default:
+				return '';
+				break;
 		}
+	}
 
-		$publications_json = json_decode($publications_response['body'], true);
-		$publications_merged_raw = array_merge($publications_json['publications'] ?? [], $publications_json['technicalReports'] ?? []);
-		$publications = array_map(function ($pub) {
+	public static function get_publications_from_field(string|array $field_name_or_data): array
+	{
+		if (! function_exists('get_field')) {
+			return ['error' => 'Function "get_field()" not found. Please install Advanced Custom Fields plugin.'];
+		}
+		if (is_string($field_name_or_data)) {
+			$publications_field_data = get_field($field_name_or_data);
+			if (empty($publications_field_data) || ! is_array($publications_field_data)) {
+				return [];
+			}
+		} else {
+			$publications_field_data = $field_name_or_data;
+		}
+		$publication_ids = [];
+		$technical_report_ids = [];
+		$publications_image_ids = [];
+		$publications_order = [];
+		foreach ($publications_field_data as $pub) {
+			$pub_id = $pub['publication_id'];
+			$pub_namespace = $pub['publication_type'];
+			$namespaced_id = self::get_publication_namespaced_id(['namespace' => $pub_namespace, 'id' => $pub_id]);
+			if ($pub_namespace === 'technical-reports') {
+				$technical_report_ids[] = $pub_id;
+			} else {
+				$publication_ids[] = $pub_id;
+			}
+			if ($pub['publication_image']) {
+				$publications_image_ids[$namespaced_id] = $pub['publication_image'];
+			}
+			$publications_order[] = $namespaced_id;
+		}
+		$publications_merged_raw = self::fetch_publications($publication_ids, $technical_report_ids);
+		if (isset($publications_merged_raw['error'])) {
+			return ['error' => $publications_merged_raw['error']];
+		}
+		$publications = array_map(function ($pub) use ($publications_image_ids) {
 			$is_tech_report = isset($pub['tr']);
 			$data_key = $is_tech_report ? 'tr' : 'pub';
 			$data = $pub[$data_key];
@@ -29,22 +67,31 @@ class Helpers
 			$data['category'] = $category;
 			$data['icon'] = self::get_category_icon_handle($category);
 			$data['url'] = home_url('/documents/' . $namespace . '/' . $data['id']);
+			$data['image_id'] = $publications_image_ids[self::get_publication_namespaced_id($data)] ?? null;
+			$data['date'] = $data['publication_date'] ?? $data['start_date'] ?? date('F j, Y', strtotime($data['created_at'] ?? 'now'));
 			return $data;
 		}, $publications_merged_raw);
 
 		// Order publications according to the order array
-		if (! empty($order)) {
-			$publications = array_filter($publications, function ($pub) use ($order) {
-				return in_array(self::get_publication_namespaced_id($pub), $order);
-			});
-			usort($publications, function ($a, $b) use ($order) {
-				$pos_a = array_search(self::get_publication_namespaced_id($a), $order);
-				$pos_b = array_search(self::get_publication_namespaced_id($b), $order);
-				return $pos_a - $pos_b;
-			});
-		}
+		usort($publications, function ($a, $b) use ($publications_order) {
+			$pos_a = array_search(self::get_publication_namespaced_id($a), $publications_order);
+			$pos_b = array_search(self::get_publication_namespaced_id($b), $publications_order);
+			return $pos_a - $pos_b;
+		});
 
 		return $publications;
+	}
+
+	public static function fetch_publications(array $publication_ids, array $technical_report_ids): array
+	{
+		$publications_response = wp_remote_get('https://web.sercuarc.org/api/collection?publications=' . implode(',', $publication_ids) . '&technical-reports=' . implode(',', $technical_report_ids));
+		if (is_wp_error($publications_response)) {
+			return ['error' => $publications_response->get_error_message()];
+		}
+		if (! $publications_json = json_decode($publications_response['body'], true)) {
+			return ['error' => 'Invalid JSON response'];
+		}
+		return array_merge($publications_json['publications'] ?? [], $publications_json['technicalReports'] ?? []);
 	}
 
 	public static function get_publication_namespaced_id(array $publication): string

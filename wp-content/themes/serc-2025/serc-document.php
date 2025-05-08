@@ -48,7 +48,7 @@ get_header(); ?>
 		<div class="container">
 			<?php get_template_part('components/breadcrumbs', '', [
 				'breadcrumbs' => [
-					'Research' => home_url('/publications'),
+					'Research' => home_url('/research'),
 					'Publications' => home_url('/search?doc_types=publications')
 				]
 			]); ?>
