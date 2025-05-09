@@ -96,13 +96,9 @@ class Helpers
 
 	public static function get_publication_namespaced_id(array $publication): string
 	{
-		if (empty($publication['namespace'])) {
-			throw new \Exception("Cannot form a namespaced ID. Publication missing key 'namespace'.");
-		}
-		if (empty($publication['id'])) {
-			throw new \Exception("Cannot form a namespaced ID. Publication missing key 'id'.");
-		}
-		return $publication['namespace'] . '-' . $publication['id'];
+		$namespace = $publication['namespace'] ?? "unknown-namespace";
+		$id = $publication['id'] ?? "unknown-id";
+		return $namespace . '-' . $id;
 	}
 
 	public static function get_category_icon_handle(string $category = ''): string
