@@ -248,17 +248,19 @@ if (! is_user_logged_in()) {
 			<div class="flex flex-col gap-4">
 				<?php
 				$colorRows = [
-					['--color-brand', '--color-brand-light', '--color-brand-hover', '--color-brand-dark'],
-					['--color-success', '--color-success-light', '--color-error', '--color-error-light', '--color-alert', '--color-alert-light', '--color-info', '--color-info-light'],
-					['--color-light-main', '--color-light-secondary', '--color-light-tertiary', '--color-dark-main', '--color-dark-secondary', '--color-dark-tertiary'],
-					['--color-light-surface-strong', '--color-light-surface-muted', '--color-light-surface-normal', '--color-light-surface-subtle', '--color-light-surface-disabled'],
+					['--color-brand-light', '--color-brand', '--color-brand-hover', '--color-brand-dark'],
+					['--color-light-main', '--color-light-secondary', '--color-light-tertiary'],
 					['--color-dark-surface-strong', '--color-dark-surface-muted', '--color-dark-surface-normal', '--color-dark-surface-subtle', '--color-dark-surface-disabled'],
+					['--color-dark-main', '--color-dark-secondary', '--color-dark-tertiary'],
+					['--color-light-surface-strong', '--color-light-surface-muted', '--color-light-surface-normal', '--color-light-surface-subtle', '--color-light-surface-disabled'],
+					['--color-success-light', '--color-success-medium', '--color-success', '--color-error-light', '--color-error-medium', '--color-error'],
+					['--color-alert-light', '--color-alert-medium', '--color-alert', '--color-info-light', '--color-info-medium', '--color-info'],
 				];
 				foreach ($colorRows as $colors) : ?>
 					<div class="flex gap-4">
 						<?php foreach ($colors as $color) : ?>
 							<div class="w-40 overflow-hidden">
-								<div class="aspect-square border-subtle rounded-lg" style="background-color: var(<?php echo $color; ?>);"></div>
+								<div class="aspect-square border border-subtle rounded-lg" style="background-color: var(<?php echo $color; ?>);"></div>
 								<small class="whitespace-nowrap text-xs"><code><?php echo substr($color, 8); ?></code></small>
 							</div>
 						<?php endforeach; ?>
@@ -268,36 +270,6 @@ if (! is_user_logged_in()) {
 
 		</section>
 
-		<section id="primitive-colors" class="flex flex-col gap-8">
-
-			<h1 class="text-title-2 text-warm-neutral-300">Primitive Colors</h1>
-
-			<div class="flex flex-col gap-4">
-				<?php
-				$colorRows = [
-					['--color-red-50', '--color-red-100', '--color-red-200', '--color-red-300', '--color-red-400', '--color-red-500', '--color-red-600', '--color-red-700', '--color-red-800', '--color-red-900', '--color-red-950'],
-					['--color-orange-50', '--color-orange-100', '--color-orange-200', '--color-orange-300', '--color-orange-400', '--color-orange-500', '--color-orange-600', '--color-orange-700', '--color-orange-800', '--color-orange-900', '--color-orange-950'],
-					['--color-yellow-50', '--color-yellow-100', '--color-yellow-200', '--color-yellow-300', '--color-yellow-400', '--color-yellow-500', '--color-yellow-600', '--color-yellow-700', '--color-yellow-800', '--color-yellow-900', '--color-yellow-950'],
-					['--color-mint-50', '--color-mint-100', '--color-mint-200', '--color-mint-300', '--color-mint-400', '--color-mint-500', '--color-mint-600', '--color-mint-700', '--color-mint-800', '--color-mint-900', '--color-mint-950'],
-					['--color-blue-50', '--color-blue-100', '--color-blue-200', '--color-blue-300', '--color-blue-400', '--color-blue-500', '--color-blue-600', '--color-blue-700', '--color-blue-800', '--color-blue-900', '--color-blue-950'],
-					['--color-sand-50', '--color-sand-100', '--color-sand-200', '--color-sand-300', '--color-sand-400', '--color-sand-500', '--color-sand-600', '--color-sand-700', '--color-sand-800', '--color-sand-900', '--color-sand-950'],
-					['--color-gray-50', '--color-gray-100', '--color-gray-200', '--color-gray-300', '--color-gray-400', '--color-gray-500', '--color-gray-600', '--color-gray-700', '--color-gray-800', '--color-gray-900', '--color-gray-950'],
-					['--color-neutral-50', '--color-neutral-100', '--color-neutral-200', '--color-neutral-300', '--color-neutral-400', '--color-neutral-500', '--color-neutral-600', '--color-neutral-700', '--color-neutral-800', '--color-neutral-900', '--color-neutral-950'],
-					['--color-warm-neutral-50', '--color-warm-neutral-100', '--color-warm-neutral-200', '--color-warm-neutral-300', '--color-warm-neutral-400', '--color-warm-neutral-500', '--color-warm-neutral-600', '--color-warm-neutral-700', '--color-warm-neutral-800', '--color-warm-neutral-900', '--color-warm-neutral-950'],
-				];
-				foreach ($colorRows as $colors) : ?>
-					<div class="flex gap-4">
-						<?php foreach ($colors as $color) : ?>
-							<div class="w-full overflow-hidden">
-								<div class="aspect-square w-full border-subtle rounded-lg" style="background-color: var(<?php echo $color; ?>);"></div>
-								<small class="whitespace-nowrap text-xs"><code><?php echo substr($color, 8); ?></code></small>
-							</div>
-						<?php endforeach; ?>
-					</div>
-				<?php endforeach; ?>
-			</div>
-
-		</section>
 	</div>
 
 </main>

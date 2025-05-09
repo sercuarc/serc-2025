@@ -97,7 +97,7 @@
       background-position: right 0.75rem top 50%;
     }
     .hint {
-      @apply block w-full text-neutral-600 text-xs;
+      @apply block w-full text-light-surface-subtle text-xs;
     }
     .icon {
       @apply hidden absolute text-dark-main size-4 right-2 top-5;

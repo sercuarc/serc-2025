@@ -23,10 +23,10 @@
     @apply text-h6;
   }
   blockquote {
-    @apply font-normal text-h5 mx-8 border-l-4 border-warm-neutral-300 pl-4;
+    @apply font-normal text-h5 mx-8 border-l-4 border-normal pl-4;
   }
   code {
-    @apply bg-warm-neutral-200 rounded inline-block px-2 py-1;
+    @apply bg-light-tertiary rounded inline-block px-2 py-1;
   }
   ul,
   ol {

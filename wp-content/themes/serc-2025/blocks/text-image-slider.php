@@ -10,7 +10,7 @@ $link = get_field('text_image_slider_link');
 		--swiper-pagination-bullet-size: 14px;
 		--swiper-pagination-bullet-horizontal-gap: 7px;
 		--swiper-pagination-color: #A0A1A1;
-		--swiper-pagination-bullet-inactive-color: var(--color-sand-400);
+		--swiper-pagination-bullet-inactive-color: var(--color-sand);
 	}
 
 	swiper-container {
