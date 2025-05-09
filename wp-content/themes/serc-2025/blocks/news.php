@@ -43,7 +43,7 @@ $posts = array_map(function ($post) {
 				</div>
 			<?php endif; ?>
 		</div>
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-4">
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-4 content-start">
 			<?php foreach ($posts as $post) : ?>
 				<?php get_template_part('components/card-vert', null, $post); ?>
 			<?php endforeach; ?>

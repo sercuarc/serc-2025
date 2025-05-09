@@ -24,7 +24,7 @@ $publications = Helpers::get_publications_from_field('publications_publications'
 				</div>
 			<?php endif; ?>
 		</div>
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 content-start">
 			<?php foreach ($publications as $pub) : ?>
 				<?php
 				$image = wp_get_attachment_image($pub['image_id'], 'medium', false, ['class' => 'w-full aspect-[11/5] object-cover']);
