@@ -3,7 +3,7 @@
 use SERC2025\Helpers;
 
 $title = get_field('featured_event_title') ?: 'Upcoming Event';
-$event = get_field('featured_event_event');
+$event_id = get_field('featured_event_event');
 $button = get_field('featured_event_button') ?: (is_admin() ? ['title' => 'Add a Button (optional)', 'url' => '#', 'target' => '_self'] : null);
 ?>
 
@@ -14,12 +14,12 @@ $button = get_field('featured_event_button') ?: (is_admin() ? ['title' => 'Add a
 				<?php echo $title; ?>
 			</h2>
 		<?php endif; ?>
-		<?php if ($event) : ?>
+		<?php if ($event_id) : $event = get_post($event_id); ?>
 			<div class="bg-light-secondary px-8 lg:px-14 py-12 lg:py-20 border-t-4 border-brand">
 				<?php
 				$calendar = serc_svg("calendar", "inline-block text-brand size-4 mr-2");
 				$pin = serc_svg("location", "inline-block text-brand size-4 mr-1");
-				$details = Helpers::get_event_details($event->ID);
+				$details = Helpers::get_event_details($event_id);
 				ob_start(); ?>
 				<div class="flex flex-col sm:flex-row gap-1 sm:gap-4">
 					<span class="flex items-center"><?php echo $calendar . ' ' . $details['schedule']; ?></span>
