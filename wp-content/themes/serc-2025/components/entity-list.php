@@ -20,7 +20,11 @@ $entities = $args['entities'] ?? [];
 		?>
 			<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 items-start gap-8 lg:gap-14 py-10 lg:py-16 px-8 lg:px-14 border-t border-subtle">
 				<?php if ($image) : ?>
-					<?php echo $image; ?>
+					<?php if ($url) : ?>
+						<a href="<?php echo $url; ?>" target="_blank" rel="noopener noreferrer" class="border border-transparent hover:border-brand focus:border-brand"><?php echo $image; ?></a>
+					<?php else : ?>
+						<?php echo $image; ?>
+					<?php endif; ?>
 				<?php endif; ?>
 				<div class="flex flex-col gap-4 md:col-span-2 lg:col-span-4 pr-8 lg:pr-14">
 					<?php if ($title) : ?>
