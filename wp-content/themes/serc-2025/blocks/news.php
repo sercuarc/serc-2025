@@ -24,7 +24,7 @@ $posts = array_map(function ($post) {
 		'text' 				=> '<span class="uppercase">' . get_the_date('M j, Y', $post) . '</span> – ' . wp_trim_words($post->post_excerpt ?: $post->post_content, 15),
 		'cta' 				=> 'Read More',
 		'contained'   => false,
-		'class'				=> 'pt-4 md:pt-0 md:px-4 not-first:border-t md:not-first:border-t-0 md:even:border-l lg:not-first:border-l border-subtle',
+		'class'				=> 'pt-4 md:pt-0 md:px-8 lg:px-4 not-first:border-t md:not-first:border-t-0 md:even:border-l lg:not-first:border-l border-subtle',
 	];
 }, $posts);
 ?>
@@ -43,7 +43,7 @@ $posts = array_map(function ($post) {
 				</div>
 			<?php endif; ?>
 		</div>
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-4 content-start">
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-12 lg:gap-y-4 content-start">
 			<?php foreach ($posts as $post) : ?>
 				<?php get_template_part('components/card-vert', null, $post); ?>
 			<?php endforeach; ?>
