@@ -119,7 +119,12 @@ ob_start(); ?>
 						$url = get_the_permalink($person);
 					?>
 						<a href="<?php echo $url; ?>" class="group/person flex items-start gap-4">
-							<?php echo $image; ?>
+							<?php
+							if ($image) {
+								echo $image;
+							} else {
+								get_template_part("components/avatar-placeholder", null, ["class" => "border-2 border-subtle size-[7rem]"]);
+							} ?>
 							<div class="flex flex-col gap-2">
 								<h3 class="text-h5 group-hover/person:text-brand group-focus/person:text-brand"><?php echo $name; ?></h3>
 								<p class="text-sm text-light-surface-subtle"><?php echo $job_title; ?></p>
