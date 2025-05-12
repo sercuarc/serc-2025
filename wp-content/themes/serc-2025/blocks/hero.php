@@ -20,7 +20,9 @@ if ($right_column_content == 'event') {
 		'title' => get_the_title($event),
 		'text' => $date,
 		'url' => get_permalink($event),
-		'cta' => 'Read More'
+		'cta' => 'Read More',
+		'contained' => false,
+		'class' => 'bg-white hover:shadow-lg border-brand border-t-4 border-solid px-7 py-3'
 	]);
 	$hide_right_column_on_mobile = true;
 	$right_column_html = ob_get_clean();
@@ -42,7 +44,9 @@ if ($right_column_content == 'event') {
 				'title' => $feat_report['title'],
 				'text' => $feat_report['publication_date'] ?? $feat_report['start_date'],
 				'url' => home_url('documents/' . $feat_report_type . '/' . $feat_report['id']),
-				'cta' => 'Read More'
+				'cta' => 'Read More',
+				'contained' => false,
+				'class' => 'bg-white hover:shadow-lg border-brand border-t-4 border-solid px-7 py-3'
 			]);
 			$hide_right_column_on_mobile = true;
 			$right_column_html = ob_get_clean();
