@@ -25,14 +25,18 @@ add_filter('register_post_type_args', function ($args, $post_type) {
  */
 add_action('init', function () {
 	register_post_type('people', [
-		'label' => 'People',
-		'public' => true,
 		'has_archive' => false,
+		'label' => 'People',
+		'menu_icon' => 'dashicons-groups',
+		'public' => true,
+		'rewrite' => [
+			'slug' => 'people', // This controls the URL structure
+			'with_front' => false,
+		],
+		'show_in_rest' => true,
+		'singular_name' => 'Person',
 		'supports' => ['title', 'editor', 'thumbnail'],
 		'taxonomies' => ['member_roles'],
-		'show_in_rest' => true,
-		'menu_icon' => 'dashicons-groups',
-		'singular_name' => 'Person',
 	]);
 });
 
