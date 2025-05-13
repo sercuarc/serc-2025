@@ -117,8 +117,9 @@ ob_start(); ?>
 						$name = get_the_title($person);
 						$job_title = get_field("job_title", $person);
 						$url = get_the_permalink($person);
+						$target = strpos($url, home_url()) !== false ? '_self' : '_blank';
 					?>
-						<a href="<?php echo $url; ?>" class="group/person flex items-start gap-4">
+						<a href="<?php echo $url; ?>" target="<?php echo $target; ?>" rel="noreferrer noopener" class="group/person flex items-start gap-4">
 							<?php
 							if ($image) {
 								echo $image;
