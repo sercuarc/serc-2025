@@ -92,7 +92,9 @@ $featured_event = tribe_get_events([
 			id="menu-mobile"
 			class="navigation-menu pt-16">
 			<?php foreach ($menu_items as $id => $item) : ?>
-				<a data-navigation-menu-toggle href="#menu-<?php echo $id; ?>" class="flex items-center gap-2 text-lg w-full leading-none p-5 cursor-pointer ">
+				<a <?php if ($item["has_children"]) : ?>data-navigation-menu-toggle<?php endif; ?>
+					href="<?php echo $item["has_children"] ? '#menu-' . $id : home_url($id); ?>"
+					class="flex items-center gap-2 text-lg w-full leading-none p-5 cursor-pointer ">
 					<?php echo $item["label"]; ?>
 					<?php if ($item["has_children"]) : ?>
 						<?php echo serc_svg("chevron-down", "inline text-brand size-4 -rotate-90 ml-auto") ?>
@@ -273,17 +275,14 @@ $featured_event = tribe_get_events([
 						this.activeMenu = selector;
 						const menu = this.__getMenu(selector);
 						this.openNav(menu.offsetHeight + 'px');
-						setTimeout(() => {
-							this.openMenu(menu);
-						}, 500)
+						this.openMenu(menu);
 					});
 
 					hoverToggle.addEventListener('mouseleave', e => {
 						hoverToggle.blur();
 						this.menuActionTimeout = setTimeout(() => {
-							this.closeMenu(this.activeMenu);
 							this.closeNav();
-						}, 500)
+						}, 300)
 					});
 
 				})
@@ -327,7 +326,6 @@ $featured_event = tribe_get_events([
 				this.navigation.classList.add('is-open');
 			}
 			closeNav() {
-				this.activeMenu = '';
 				this.navigation.classList.remove('is-open');
 				if (window.innerWidth >= BREAKPOINT_LG) {
 					this.navMenuContainer.style.height = '0px';
