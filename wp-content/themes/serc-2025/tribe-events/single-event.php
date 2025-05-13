@@ -129,7 +129,7 @@ ob_start(); ?>
 							<div class="flex flex-col gap-2">
 								<h3 class="text-h5 group-hover/person:text-brand group-focus/person:text-brand"><?php echo $name; ?></h3>
 								<p class="text-sm text-light-surface-subtle"><?php echo $job_title; ?></p>
-								<p class="font-medium group-hover/person:text-brand group-focus/person:text-brand transition-colors">View Bio <?php echo serc_svg("arrow-right", "text-brand group-hover/person:translate-x-2 transition-transform inline-block size-5 ml-1"); ?></p>
+								<p class="font-medium group-hover/person:text-brand group-focus/person:text-brand transition-colors">View Bio <?php echo serc_svg($target == "_self" ? "arrow-right" : "external-link", "text-brand group-hover/person:translate-x-2 transition-transform inline-block size-5 ml-1"); ?></p>
 							</div>
 						</a>
 					<?php endforeach; ?>
