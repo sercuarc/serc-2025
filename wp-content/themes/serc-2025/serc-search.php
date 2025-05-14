@@ -21,10 +21,10 @@ get_header(); ?>
 	</script>
 	<div id="app-search">
 
-		<div class="hero hero--center-y bg-light-tertiary py-12 lg:py-16">
+		<div class="hero hero--center-y bg-light-tertiary py-6 md:py-12 lg:py-16">
 			<form class="container flex flex-col gap-6" @submit.prevent="handleSearchSubmit">
 				<h1 class="text-title-1">Search</h1>
-				<div class="flex gap-2 mt-4">
+				<div class="flex flex-col md:flex-row gap-2 md:mt-4">
 					<div class="field field-text field-text-lg w-full">
 						<label for="query" class="sr-only">Search for topics, publications, and more</label>
 						<input ref="queryInput" type="text" id="query" name="query" v-model="query" placeholder="Search for topics, publications, and more">
@@ -40,10 +40,10 @@ get_header(); ?>
 					</div>
 					<button type="submit" class="btn btn-primary btn-lg">Search</button>
 				</div>
-				<div class="grid grid-cols-1 lg:grid-cols-3">
+				<div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 					<div class="lg:col-span-2">
 						<p class="text-sm font-medium text-dark-secondary">Filter by Content Type</p>
-						<div class="flex flex-wrap gap-2 mt-4">
+						<div class="flex overflow-x-auto gap-2 mt-4">
 							<div v-for="(label, id) in doc_type_options" class="field field-toggle">
 								<input type="checkbox"
 									:checked="doc_types.includes(id)"
@@ -54,7 +54,7 @@ get_header(); ?>
 							</div>
 						</div>
 					</div>
-					<div class="col-span-1 flex flex-col md:flex-row gap-4 lg:gap-10">
+					<div class="col-span-1 flex gap-4 lg:gap-10">
 						<div class="field field-select field-select-sm w-full gap-y-4">
 							<label class="label" for="year">Year</label>
 							<select v-model="year" name="year" id="year">
