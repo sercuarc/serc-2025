@@ -17,8 +17,8 @@ $button = get_field('featured_event_button') ?: (is_admin() ? ['title' => 'Add a
 		<?php if ($event_id) : $event = get_post($event_id); ?>
 			<div class="bg-light-secondary px-8 lg:px-14 py-12 lg:py-20 border-t-4 border-brand">
 				<?php
-				$calendar = serc_svg("calendar", "inline-block text-brand size-4 mr-2");
-				$pin = serc_svg("location", "inline-block text-brand size-4 mr-1");
+				$calendar = serc_svg("calendar", "inline-block text-brand size-5 mr-2");
+				$pin = serc_svg("location", "inline-block text-brand size-5 mr-1");
 				$details = Helpers::get_event_details($event_id);
 				ob_start(); ?>
 				<div class="flex flex-col sm:flex-row gap-1 sm:gap-4">
@@ -26,7 +26,7 @@ $button = get_field('featured_event_button') ?: (is_admin() ? ['title' => 'Add a
 					<span class="flex items-center"><?php echo $details['location'] ? $pin . ' ' . $details['location'] : ''; ?></span>
 				</div>
 				<?php $event_details = ob_get_clean();
-				get_template_part('components/card-horz', null, [
+				get_template_part('components/card-horz-alt', null, [
 					'title' => get_the_title($event),
 					'label_below' => $event_details,
 					'text' => get_the_excerpt($event),

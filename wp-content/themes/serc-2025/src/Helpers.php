@@ -132,6 +132,7 @@ class Helpers
 
 		$city = tribe_get_city($post_id);
 		$state = tribe_get_stateprovince($post_id);
+		$state = array_key_exists($state, self::$us_states) ? self::$us_states[$state] : $state;
 		$country = tribe_get_country($post_id);
 		$location = implode(', ', array_filter([$city, $state, $country]));
 
@@ -148,20 +149,73 @@ class Helpers
 
 		if ($start->format('Y-m-d') === $end->format('Y-m-d')) {
 			return $isAllDay
-				? $start->format('F j, Y')
-				: $start->format('F j, Y g:ia') . ' - ' . $end->format('g:ia');
+				? $start->format('M j, Y')
+				: $start->format('M j, Y g:ia') . ' - ' . $end->format('g:ia');
 		}
 
 		if ($isAllDay) {
 			return $start->format('Y-m') === $end->format('Y-m')
-				? $start->format('F j') . '-' . $end->format('j, Y')
+				? $start->format('M j') . '-' . $end->format('j, Y')
 				: ($start->format('Y') === $end->format('Y')
-					? $start->format('F j') . ' - ' . $end->format('F j, Y')
-					: $start->format('F j, Y') . ' - ' . $end->format('F j, Y'));
+					? $start->format('M j') . ' - ' . $end->format('M j, Y')
+					: $start->format('M j, Y') . ' - ' . $end->format('M j, Y'));
 		}
 
 		return $start->format('Y') === $end->format('Y')
-			? $start->format('F j, g:ia') . ' - ' . $end->format('F j, g:ia, Y')
-			: $start->format('F j, Y') . ' - ' . $end->format('F j, Y');
+			? $start->format('M j, g:ia') . ' - ' . $end->format('M j, g:ia, Y')
+			: $start->format('M j, Y') . ' - ' . $end->format('M j, Y');
 	}
+
+	public static $us_states = [
+		'Alabama' => 'AL',
+		'Alaska' => 'AK',
+		'Arizona' => 'AZ',
+		'Arkansas' => 'AR',
+		'California' => 'CA',
+		'Colorado' => 'CO',
+		'Connecticut' => 'CT',
+		'Delaware' => 'DE',
+		'Florida' => 'FL',
+		'Georgia' => 'GA',
+		'Hawaii' => 'HI',
+		'Idaho' => 'ID',
+		'Illinois' => 'IL',
+		'Indiana' => 'IN',
+		'Iowa' => 'IA',
+		'Kansas' => 'KS',
+		'Kentucky' => 'KY',
+		'Louisiana' => 'LA',
+		'Maine' => 'ME',
+		'Maryland' => 'MD',
+		'Massachusetts' => 'MA',
+		'Michigan' => 'MI',
+		'Minnesota' => 'MN',
+		'Mississippi' => 'MS',
+		'Missouri' => 'MO',
+		'Montana' => 'MT',
+		'Nebraska' => 'NE',
+		'Nevada' => 'NV',
+		'New Hampshire' => 'NH',
+		'New Jersey' => 'NJ',
+		'New Mexico' => 'NM',
+		'New York' => 'NY',
+		'North Carolina' => 'NC',
+		'North Dakota' => 'ND',
+		'Ohio' => 'OH',
+		'Oklahoma' => 'OK',
+		'Oregon' => 'OR',
+		'Pennsylvania' => 'PA',
+		'Rhode Island' => 'RI',
+		'South Carolina' => 'SC',
+		'South Dakota' => 'SD',
+		'Tennessee' => 'TN',
+		'Texas' => 'TX',
+		'Utah' => 'UT',
+		'Vermont' => 'VT',
+		'Virginia' => 'VA',
+		'Washington' => 'WA',
+		'West Virginia' => 'WV',
+		'Wisconsin' => 'WI',
+		'Wyoming' => 'WY',
+	];
 }

@@ -47,7 +47,7 @@
   @apply text-base leading-[1.5];
 }
 @utility body-sm {
-  @apply text-sm leading-[1.5];
+  @apply text-sm leading-6;
 }
 @utility label-lg {
   @apply text-lg lg:text-xl font-medium leading-[1.6];
