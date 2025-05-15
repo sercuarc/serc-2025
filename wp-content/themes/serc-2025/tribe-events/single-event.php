@@ -38,8 +38,8 @@ ob_start(); ?>
 		<a href="<?php echo $event_website; ?>" class="btn btn-primary"><?php echo serc_svg("external-link", "size-4"); ?>Register</a>
 	<?php endif; ?>
 	<sl-dropdown data-dropdown class="z-10">
-		<sl-button slot="trigger" caret class="btn btn-outline"><?php echo serc_svg("calendar-add", "size-4"); ?> Add to Calendar</sl-button>
-		<sl-menu class="bg-white flex flex-col border border-dark-main -mt-[1px]">
+		<sl-button slot="trigger" caret class="btn <?php echo $bg_image ? 'btn-inverted-outline' : 'btn-outline' ?>"><?php echo serc_svg("calendar-add", "size-4"); ?> Add to Calendar</sl-button>
+		<sl-menu class="bg-white text-dark-main flex flex-col border border-dark-main -mt-[1px]">
 			<sl-menu-item class="block border-b border-dark-main">
 				<a href="<?php echo tribe_get_gcal_link(); ?>" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-5 py-3 w-full h-full text-sm hover:bg-dark-main/5 hover:text-brand transition-all"><?php echo serc_svg("calendar-add", "size-4"); ?> Google Calendar</a>
 			</sl-menu-item>
