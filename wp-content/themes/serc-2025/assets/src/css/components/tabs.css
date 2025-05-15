@@ -1,15 +1,44 @@
 .tab-menu {
-  @apply flex gap-0 overflow-y-hidden overflow-x-auto;
+  @apply relative z-[1];
+}
+
+.tab-menu-toggle {
+  @apply block w-full bg-white relative z-[1] md:hidden font-medium border border-normal focus:border-info outline-0 text-left px-3 py-3;
+
+  .icon {
+    @apply absolute top-[calc(50%-0.5em)] right-4 z-[1] text-dark-main size-[14px] transition-transform;
+    .tab-menu.is-open & {
+      @apply rotate-180;
+    }
+  }
+}
+
+.tab-menu-inner {
+  @apply absolute md:relative top-[calc(100%+2px)] md:top-auto
+  w-full md:w-auto 
+  bg-white md:bg-none
+  flex flex-col md:flex-row gap-0 
+  overflow-y-hidden overflow-x-auto 
+  border border-normal md:border-0
+  transition-all
+  opacity-0 md:opacity-100
+  -translate-y-4 md:translate-y-0
+  pointer-events-none md:pointer-events-auto;
+
+  .tab-menu.is-open & {
+    @apply border-info opacity-100 translate-y-0 md:border-0 pointer-events-auto;
+  }
 }
 
 .tab {
   @apply text-light-surface-normal hover:bg-light-secondary focus:bg-light-secondary outline-0
   text-base lg:text-lg font-normal 
-  px-4 lg:px-12 py-3 lg:py-4 border-b-2 border-subtle whitespace-nowrap
+  px-4 lg:px-12 py-3 lg:py-4 
+  md:border-b-2 md:border-subtle whitespace-nowrap
   transition-all cursor-pointer;
 
   &.is-active {
-    @apply text-light-surface-strong font-semibold border-b-4 border-brand;
+    @apply text-info md:text-light-surface-strong font-semibold md:border-b-4 md:border-brand;
   }
 }
 

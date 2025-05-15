@@ -9,13 +9,10 @@ if (!$tabs && is_admin()) {
 
 <div class="container py-20 lg:py-30">
 	<div data-tabs class="w-full max-w-[825px] mx-auto flex flex-col gap-8 lg:gap-12">
-		<nav class="tab-menu">
-			<?php $count = 0;
-			foreach ($tabs as $tab) : $slug = sanitize_title($tab['tab_name']) ?>
-				<a data-tab href="#<?php echo $slug ?>" class="tab <?php echo $count === 0 ? "is-active" : "" ?>"><?php echo $tab['tab_name'] ?></a>
-			<?php $count++;
-			endforeach; ?>
-		</nav>
+		<?php get_template_part("components/tab-menu", null, [
+			'active_id' => sanitize_title($tabs[0]['tab_name']),
+			'items' => array_map(fn($tab) => ['id' => sanitize_title($tab['tab_name']), 'text' => $tab['tab_name']], $tabs)
+		]); ?>
 		<div class="tab-content-wrapper">
 			<?php $count = 0;
 			foreach ($tabs as $tab) : $slug = sanitize_title($tab['tab_name']) ?>

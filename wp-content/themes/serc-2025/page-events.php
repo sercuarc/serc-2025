@@ -71,10 +71,17 @@ $events = get_posts([
 	]); ?>
 	<div class="container py-12 lg:py-16">
 		<div class="flex sm:items-end flex-col sm:flex-row gap-4 sm:gap-8 lg:gap-24 <?php echo $view === 'past' ? 'pb-8 lg:pb-12' : 'pb-16 lg:pb-24' ?>">
-			<nav class="tab-menu lg:pt-3">
-				<a href="<?php echo $eventsUrl; ?>" class="tab <?php echo $view === 'upcoming' ? "is-active" : "" ?>">Upcoming Events</a>
-				<a href="<?php echo $eventsPastUrl; ?>" class="tab <?php echo $view === 'past' ? "is-active" : "" ?>">Past Events</a>
-			</nav>
+
+			<div data-tabs class="lg:pt-3">
+				<p class="md:hidden text-sm font-medium mb-2" style="color:#414243">View:</p>
+				<?php get_template_part("components/tab-menu", null, [
+					'active_id' => $view,
+					'items' => [
+						['id' => 'upcoming', 'url' => $eventsUrl, 'text' => 'Upcoming Events'],
+						['id' => 'past', 'url' => $eventsPastUrl, 'text' => 'Past Events']
+					]
+				]); ?>
+			</div>
 			<?php if ($view === 'past') : ?>
 				<?php
 				$years = [];

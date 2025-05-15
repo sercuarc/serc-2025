@@ -33,18 +33,14 @@ if ($active_focus_area) {
 		'center_y' => true
 	]); ?>
 	<div class="container py-12 lg:py-16">
-		<div class="flex sm:items-end flex-col sm:flex-row gap-4 sm:gap-8 lg:gap-24 pb-8 lg:pb-12">
-			<nav class="tab-menu lg:pt-3">
-				<?php if ($focus_areas) : ?>
-					<?php foreach ($focus_areas as $focus_area) : ?>
-						<?php if ($view === $focus_area['slug']) : ?>
-							<span class="tab is-active"><?php echo $focus_area['focus_area_title']; ?></span>
-						<?php else : ?>
-							<a href="<?php echo get_permalink() . '?publications-view=' . $focus_area['slug']; ?>" class="tab"><?php echo $focus_area['focus_area_title']; ?></a>
-						<?php endif; ?>
-					<?php endforeach; ?>
-				<?php endif; ?>
-			</nav>
+		<div data-tabs class="md:pb-8 lg:pb-12">
+			<p class="md:hidden text-sm font-medium mb-2" style="color:#414243">Showing Publications for:</p>
+			<?php
+			get_template_part("components/tab-menu", null, [
+				'active_id' => $active_focus_area['slug'],
+				'items' => array_map(fn($item) => ['id' => $item['slug'], 'url' => get_permalink() . '?publications-view=' . $item['slug'], 'text' => $item['focus_area_title']], $focus_areas)
+			]);
+			?>
 		</div>
 		<?php if ($active_focus_area) : ?>
 			<div class="max-w-[806px] mx-auto pt-16 lg:pt-24 flex flex-col items-center gap-7 lg:gap-14">

@@ -13,6 +13,11 @@ class Tabs {
         console.error(e);
       }
     }
+    this.tabMenu = this.container.querySelector("[data-tab-menu]");
+    this.tabMenuToggle = this.container.querySelector("[data-tab-menu-toggle]");
+    this.tabMenuToggleText = this.container.querySelector(
+      "[data-tab-menu-toggle-text]"
+    );
     this.tabs = this.container.querySelectorAll("[data-tab]");
     this.tabsContent = this.container.querySelectorAll("[data-tab-content]");
     this.init();
@@ -28,15 +33,29 @@ class Tabs {
       }
     }
 
+    this.tabMenuToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.tabMenu.classList.toggle("is-open");
+    });
+
     this.tabs.forEach((tab) => {
       tab.addEventListener("click", (e) => {
+        if (tab.getAttribute("href").indexOf("#") !== 0) return;
         e.preventDefault();
         this.openTab(tab);
       });
     });
+
+    document.addEventListener("click", (e) => {
+      if (!this.tabMenu.contains(e.target)) {
+        this.tabMenu.classList.remove("is-open");
+      }
+    });
   }
 
   openTab(tab) {
+    this.tabMenu.classList.remove("is-open");
+    this.tabMenuToggleText.textContent = tab.textContent;
     this.tabs.forEach((tab) => tab.classList.remove("is-active"));
     tab.classList.add("is-active");
     this.tabsContent.forEach((content) => {

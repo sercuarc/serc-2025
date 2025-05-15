@@ -55,13 +55,10 @@ $member_roles = [
 
 		<div data-tabs='{"pushState": true}'>
 			<div class="container">
-				<nav class="tab-menu">
-					<?php $count = 0;
-					foreach ($member_roles as $member_role) : ?>
-						<a data-tab href="#<?php echo $member_role["slug"] ?>" class="tab <?php echo $count === 0 ? "is-active" : "" ?>"><?php echo $member_role["label"] !== "Leadership" ? $member_role["label"] : "Operations"; ?></a>
-					<?php $count++;
-					endforeach; ?>
-				</nav>
+				<?php get_template_part("components/tab-menu", null, [
+					'active_id' => "leadership",
+					'items' => array_map(fn($item) => ['id' => $item['slug'], 'url' => '#' . $item['slug'], 'text' => $item['label'] === "Leadership" ? "Operations" : $item['label']], $member_roles)
+				]); ?>
 			</div>
 			<div class="tab-content-wrapper">
 				<?php $count = 0;
@@ -85,7 +82,7 @@ $member_roles = [
 												<p class="label-base text-light-surface-strong mt-1"><?php the_field("job_title", $person->ID) ?></p>
 												<?php $organizations = wp_get_post_terms($person->ID, "organizations"); ?>
 												<?php if (!empty($organizations)) : ?>
-													<p class="flex items-center gap-2 text-xs uppercase text-light-surface-normal mt-3">
+													<p class="flex items-center justify-center sm:justify-start gap-2 text-xs uppercase text-light-surface-normal mt-3">
 														<?php echo serc_svg("institution", "inline text-brand size-4 mr-1"); ?>
 														<?php echo $organizations[0]->name; ?>
 													</p>
