@@ -23,9 +23,9 @@ $breadcrumbs = [
 	'Events' => home_url('/events')
 ];
 if ($isUpcoming) {
-	$breadcrumbs['Upcoming Events'] = home_url('/events/?view=upcoming');
+	$breadcrumbs['Upcoming Events'] = home_url('/events/?events-view=upcoming');
 } else {
-	$breadcrumbs['Past Events'] = home_url('/events/?view=past');
+	$breadcrumbs['Past Events'] = home_url('/events/?events-view=past');
 }
 
 $calendar = serc_svg("calendar", "inline-block size-5 mr-2");
