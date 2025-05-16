@@ -8,19 +8,6 @@
 			<div id="newsletter-signup" class="is-basic">
 				<?php get_template_part("components/gravity-form", null, ["id" => 2]) ?>
 			</div>
-			<!-- <form data-newsletter-signup action="<?php echo EMAIL_NEWSLETTER_ENDPOINT; ?>" target="_blank" ref="noreferrer noopener" class="transition-all flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-1">
-				<div data-onsubmit="hide" class="field field-text field-text-sm w-full">
-					<input type="hidden" name="plaintext_preferred" value="False" class="hidden" />
-					<input type="email" name="email" placeholder="Your email Address" class="shadow-[inset_0px_0px_0px_1px_#ffffff]" />
-				</div>
-				<button data-onsubmit="hide" type="submit" class="btn btn-primary w-full focus:outline-white lg:max-w-28">Sign Up</button>
-				<div data-onsuccess="show" class="w-full" style="display: none;">
-					<p class="text-h4 bg-dark-secondary p-4">Thank you for signing up!</p>
-				</div>
-				<div data-onerror="show" class="w-full" style="display: none;">
-					<p class="text-h4 bg-dark-secondary p-4">There was an error with the request. Please try again.</p>
-				</div>
-			</form> -->
 		</div>
 	</div>
 </div>
