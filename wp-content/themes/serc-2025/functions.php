@@ -6,9 +6,7 @@
  * Author: Kirk Pettinga (Studio Lekker)
  * Since: 0.1.0
  */
-?>
 
-<?php
 // !! Autoloaders must come first
 require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 require_once get_template_directory() . '/inc/autoloader.php';
