@@ -1,6 +1,5 @@
 <?php
-global $post;
-$post->post_name;
+$post_name = get_post_field('post_name', get_queried_object_id());
 $button_style = "gap-2 items-center font-medium hover:text-brand focus:text-brand whitespace-nowrap cursor-pointer transition-colors";
 $menu_item_style = "border-b-4 border-transparent hover:border-brand focus:border-brand focus:text-brand pt-2 pb-6 focus:outline-0";
 $menu_items = [
@@ -43,7 +42,7 @@ $featured_event = tribe_get_events([
 						class="
 							group/menu-item hidden lg:flex 
 							<?php echo $button_style . ' ' . $menu_item_style; ?>
-							<?php if (strpos($id, $post->post_name) !== false) : ?>
+							<?php if ($post_name == $id) : ?>
 								!border-brand !text-brand
 							<?php endif; ?>
 						">
