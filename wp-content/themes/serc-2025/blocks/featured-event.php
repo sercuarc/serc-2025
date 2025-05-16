@@ -1,6 +1,6 @@
 <?php
 
-use SERC2025\Helpers;
+use Serc2025\Helpers;
 
 $title = get_field('featured_event_title') ?: 'Upcoming Event';
 $event_id = get_field('featured_event_event');
