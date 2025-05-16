@@ -3,9 +3,6 @@
 /**
  * SERC 2025 Default API
  */
-?>
-
-<?php
 
 use Serc2025\Helpers;
 use Serc2025\OpenSearch;

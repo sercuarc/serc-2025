@@ -3,9 +3,6 @@
 /**
  * Assets
  */
-?>
-
-<?php
 
 define('THEME_URI', get_template_directory_uri());
 define('DIST_URI', THEME_URI . '/assets/dist');
