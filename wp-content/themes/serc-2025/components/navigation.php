@@ -2,17 +2,11 @@
 $post_name = get_post_field('post_name', get_queried_object_id());
 $button_style = "gap-2 items-center font-medium hover:text-brand focus:text-brand whitespace-nowrap cursor-pointer transition-colors";
 $menu_item_style = "border-b-4 border-transparent hover:border-brand focus:border-brand focus:text-brand pt-2 pb-6 focus:outline-0";
-$menu_items = [
-	"about" => ["label" => "About", "has_children" => "chevron-down"],
-	"research" => ["label" => "Research", "has_children" => "chevron-down"],
-	"events-news" => ["label" => "Events & News", "has_children" => "chevron-down"],
-	"resources-partners" => ["label" => "Resources & Partners", "has_children" => false],
-	"contact" => ["label" => "Contact", "has_children" => false],
-];
 $featured_event = tribe_get_events([
 	"posts_per_page" => 1,
 	'start_date' => date('Y-m-d'),
-])
+]);
+$menu_items = get_field('header_menus', 'options');
 ?>
 
 <div data-navigation class="group/navigation fixed z-50 top-0 left-0 w-full">
@@ -32,27 +26,23 @@ $featured_event = tribe_get_events([
 				<img src="<?php echo get_template_directory_uri() . "/assets/images/logo-horz-color.svg"; ?>" alt="SERC Logo" width="231" height="62" class="w-full h-full object-contain">
 			</a>
 			<nav class="w-full flex items-start gap-6 xl:gap-16">
-				<?php foreach ($menu_items as $id => $item) : ?>
-					<a <?php if ($item["has_children"]) : ?>data-navigation-menu-hover-toggle<?php endif; ?>
-						href="<?php if ($item["has_children"]) {
-										echo "#menu-$id";
-									} else {
-										echo home_url($id);
-									} ?>"
-						class="
-							group/menu-item hidden lg:flex 
-							<?php echo $button_style . ' ' . $menu_item_style; ?>
-							<?php if ($post_name == $id) : ?>
-								!border-brand !text-brand
+				<?php if ($menu_items) : ?>
+					<?php foreach ($menu_items as $item) :
+						$has_children = $item['display_as'] === 'parent';
+						$slug = sanitize_title($item['label']);
+						$class = ['group/menu-item hidden lg:flex', $button_style, $menu_item_style, $post_name == $slug ? '!border-brand !text-brand' : ''];
+					?>
+						<a <?php echo $has_children ? 'data-navigation-menu-hover-toggle' : '' ?>
+							href="<?php echo $has_children ? "#menu-$slug" : $item['link'] ?>"
+							class="<?php echo implode(' ', $class); ?>">
+							<?php echo $item['label']; ?>
+							<?php if ($has_children) : ?>
+								<?php echo serc_svg("chevron-down", "size-4 transition-all group-[.is-active]/menu-item:rotate-180") ?>
 							<?php endif; ?>
-						">
-						<?php echo $item["label"]; ?>
-						<?php if ($item["has_children"]) : ?>
-							<?php echo serc_svg("chevron-down", "size-4 transition-all group-[.is-active]/menu-item:rotate-180") ?>
-						<?php endif; ?>
-					</a>
-				<?php endforeach; ?>
-				<button data-navigation-search-toggle class="<?php echo $button_style; ?> ml-auto flex gap-4">
+						</a>
+					<?php endforeach; ?>
+				<?php endif; ?>
+				<button data-navigation-search-toggle class="<?php echo $button_style; ?> ml-auto flex gap-4 lg:pt-2 lg:pb-7">
 					<span class="hidden lg:inline">Search</span>
 					<?php echo serc_svg("search", "inline size-6 lg:size-5") ?>
 				</button>
@@ -90,99 +80,92 @@ $featured_event = tribe_get_events([
 		<nav data-navigation-menu
 			id="menu-mobile"
 			class="navigation-menu pt-16">
-			<?php foreach ($menu_items as $id => $item) : ?>
-				<a <?php if ($item["has_children"]) : ?>data-navigation-menu-toggle<?php endif; ?>
-					href="<?php echo $item["has_children"] ? '#menu-' . $id : home_url($id); ?>"
-					class="flex items-center gap-2 text-lg w-full leading-none p-5 cursor-pointer ">
-					<?php echo $item["label"]; ?>
-					<?php if ($item["has_children"]) : ?>
-						<?php echo serc_svg("chevron-down", "inline text-brand size-4 -rotate-90 ml-auto") ?>
-					<?php endif; ?>
-				</a>
-			<?php endforeach; ?>
-		</nav>
-		<?php
-		$menus = [
-			[
-				"id" => "about",
-				"label" => "About",
-				"items" => [['label' => 'About SERC', 'url' => home_url('about')], ['label' => 'People', 'url' => home_url('people')]],
-				"headline" => [
-					"label" => "",
-					"icon" => "",
-					"text" => "Discover how we can help your research efforts with our national network of experts."
-				],
-				"cta" => ["label" => "Learn More About What We Do", "url" => home_url('about')],
-			],
-			[
-				"id" => "research",
-				"label" => "Research",
-				"items" => [['label' => 'Our Research', 'url' => home_url('research')], ['label' => 'Publications', 'url' => home_url('publications')]],
-				"headline" => [
-					"label" => "",
-					"icon" => "",
-					"text" => "Discover how our Research Roadmaps for our mission areas of Velocity, Security, and AI/Autonomy can impact the success or your organization's campaigns."
-				],
-				"cta" => ["label" => "View Our Research Roadmaps", "url" => home_url('research')],
-			],
-			[
-				"id" => "events-news",
-				"label" => "Events & News",
-				"items" => [['label' => 'Events', 'url' => home_url('events')], ['label' => 'SERC Research Review', 'url' => '#'], ['label' => 'AI4SE & SE4AI Workshop', 'url' => '#'], ['label' => 'News', 'url' => home_url('news')]],
-				"headline" => [
-					"label" => "Featured Event",
-					"icon" => "calendar",
-					"text" => get_the_title($featured_event[0]->ID)
-				],
-				"cta" => ["label" => "View Event", "url" => get_permalink($featured_event[0]->ID)],
-			],
-		]; ?>
-		<?php foreach ($menus as $menu) : ?>
-			<nav data-navigation-menu
-				id="menu-<?php echo $menu["id"]; ?>"
-				class="navigation-menu sub-menu">
-				<div class="lg:min-w-80 shrink-0">
-					<a data-navigation-menu-toggle href="#menu-mobile" class="relative flex items-center gap-4 text-h4 leading-none p-5 cursor-pointer lg:hidden">
-						<?php echo serc_svg("chevron-left", "absolute top-1/2 -left-1 -translate-y-1/2 size-4"); ?>
-						<?php echo $menu["label"]; ?>
+			<?php if ($menu_items) : ?>
+				<?php foreach ($menu_items as $item) :
+					$has_children = $item['display_as'] === 'parent';
+					$slug = sanitize_title($item['label']);
+				?>
+					<a <?php echo $has_children ? 'data-navigation-menu-toggle' : '' ?>
+						href="<?php echo $has_children ? '#menu-' . $slug : $item['link']; ?>"
+						class="flex items-center gap-2 text-lg w-full leading-none p-5 cursor-pointer ">
+						<?php echo $item['label']; ?>
+						<?php if ($has_children) : ?>
+							<?php echo serc_svg("chevron-down", "inline text-brand size-4 -rotate-90 ml-auto") ?>
+						<?php endif; ?>
 					</a>
-					<div class="hidden lg:block text-h6 leading-none text-light-surface-subtle mt-2 mb-6">In This Section:</div>
-					<?php
-					foreach ($menu["items"] as $item) : ?>
-						<a
-							href="<?php echo $item["url"]; ?>"
-							class="
+				<?php endforeach; ?>
+			<?php endif; ?>
+		</nav>
+		<?php if ($menu_items) : ?>
+			<?php
+			$menus = array_filter($menu_items, fn($menu) => $menu["display_as"] === 'parent');
+			$menus = array_map(function ($menu) {
+				if ($menu["feature_display"] === "post") {
+					$post_type = get_post_type_object(get_post_type($menu["featured_post"]));
+					$label = "Featured " . $post_type->labels->singular_name;
+					$icon = $post_type->labels->singular_name === "Event" ? "calendar" : "pin";
+					$headline = ["text" => get_the_title($menu["featured_post"]), "label" => $label, "icon" => $icon];
+					$cta = ["label" => "View " . $post_type->labels->singular_name, "url" => get_permalink($menu["featured_post"])];
+				} else {
+					$headline = ["text" => $menu["featured_text"], "label" => "", "icon" => ""];
+					$cta = !empty($menu["featured_cta"]) ? ["label" => $menu["featured_cta"]["title"], "url" => $menu["featured_cta"]["url"]] : ["label" => "[Add a CTA]", "url" => "#"];
+				}
+				$items = array_map(fn($item) => ["label" => $item["link"]["title"], "url" => $item["link"]["url"]], $menu["items"]);
+				return [
+					"id" => sanitize_title($menu["label"]),
+					"label" => $menu["label"],
+					"items" => $items,
+					"headline" => $headline,
+					"cta" => $cta,
+				];
+			}, $menus); ?>
+			<?php foreach ($menus as $menu) : ?>
+				<nav data-navigation-menu
+					id="menu-<?php echo $menu["id"]; ?>"
+					class="navigation-menu sub-menu">
+					<div class="lg:min-w-80 shrink-0">
+						<a data-navigation-menu-toggle href="#menu-mobile" class="relative flex items-center gap-4 text-h4 leading-none p-5 cursor-pointer lg:hidden">
+							<?php echo serc_svg("chevron-left", "absolute top-1/2 -left-1 -translate-y-1/2 size-4"); ?>
+							<?php echo $menu["label"]; ?>
+						</a>
+						<div class="hidden lg:block text-h6 leading-none text-light-surface-subtle mt-2 mb-6">In This Section:</div>
+						<?php
+						foreach ($menu["items"] as $item) : ?>
+							<a
+								href="<?php echo $item["url"]; ?>"
+								class="
 							flex items-center gap-2 text-lg w-full leading-none p-5 cursor-pointer transition-colors outline-0
 							lg:border-l-2 lg:border-transparent hover:border-brand focus:border-brand
 							hover:text-brand focus:text-brand
 							hover:font-semibold focus:font-semibold
 							hover:bg-light-secondary focus:bg-light-secondary
 						">
-							<?php echo $item["label"]; ?>
-							<?php echo serc_svg("arrow-right", "inline text-brand size-4 lg:hidden") ?>
-						</a>
-					<?php endforeach; ?>
-				</div>
-				<div class="border-subtle lg:w-0 lg:h-full lg:border-l"></div>
-				<a href="<?php echo $menu["cta"]["url"]; ?>" class="group flex flex-col gap-8 lg:pt-2 lg:max-w-[630px]">
-					<?php if ($menu["headline"]["label"]) : ?>
-						<div class="flex gap-1 items-center">
-							<?php if ($menu["headline"]["icon"]) : ?>
-								<?php echo serc_svg("calendar", "text-brand size-5") ?>
-							<?php endif; ?>
-							<span class="uppercase text-light-surface-muted"><?php echo $menu["headline"]["label"] ?></span>
-						</div>
-					<?php endif; ?>
-					<p class="text-xl lg:text-h4 group-hover:text-brand group-focus:text-brand"><?php echo $menu["headline"]["text"] ?></p>
-					<p class="font-medium lg:text-xl">
-						<div class="group-hover:text-brand group-focus:text-brand transition-colors inline-flex items-center gap-2 font-medium">
-							<span><?php echo $menu["cta"]["label"]; ?></span>
-							<?php echo serc_svg("arrow-right", "group-hover:translate-x-2 transition-transform text-brand size-5") ?>
-						</div>
-					</p>
-				</a>
-			</nav>
-		<?php endforeach; ?>
+								<?php echo $item["label"]; ?>
+								<?php echo serc_svg("arrow-right", "inline text-brand size-4 lg:hidden") ?>
+							</a>
+						<?php endforeach; ?>
+					</div>
+					<div class="border-subtle lg:w-0 lg:h-full lg:border-l"></div>
+					<a href="<?php echo $menu["cta"]["url"]; ?>" class="group flex flex-col gap-8 lg:pt-2 lg:max-w-[630px]">
+						<?php if ($menu["headline"]["label"]) : ?>
+							<div class="flex gap-1 items-center">
+								<?php if ($menu["headline"]["icon"]) : ?>
+									<?php echo serc_svg("calendar", "text-brand size-5") ?>
+								<?php endif; ?>
+								<span class="uppercase text-light-surface-muted"><?php echo $menu["headline"]["label"] ?></span>
+							</div>
+						<?php endif; ?>
+						<p class="text-xl lg:text-h4 group-hover:text-brand group-focus:text-brand"><?php echo $menu["headline"]["text"] ?></p>
+						<p class="font-medium lg:text-xl">
+							<div class="group-hover:text-brand group-focus:text-brand transition-colors inline-flex items-center gap-2 font-medium">
+								<span><?php echo $menu["cta"]["label"]; ?></span>
+								<?php echo serc_svg("arrow-right", "group-hover:translate-x-2 transition-transform text-brand size-5") ?>
+							</div>
+						</p>
+					</a>
+				</nav>
+			<?php endforeach; ?>
+		<?php endif; ?>
 	</div>
 </div>
 
@@ -233,6 +216,7 @@ $featured_event = tribe_get_events([
 				}, {
 					set: (target, prop, value) => {
 						if (prop === "activeMenu") {
+							console.log('setting active menu', value)
 							this.onActiveMenuChange(value);
 						}
 						target[prop] = value;
@@ -306,6 +290,7 @@ $featured_event = tribe_get_events([
 
 			}
 			onActiveMenuChange(activeMenuHash) {
+				console.log('onActiveMenuChange', activeMenuHash)
 				const currentActive = this.navigation.querySelectorAll('[data-navigation-menu-hover-toggle].is-active');
 				const current = this.navigation.querySelector('[data-navigation-menu-hover-toggle][href="' + activeMenuHash + '"]');
 				if (!activeMenuHash || currentActive.length) {
@@ -325,6 +310,8 @@ $featured_event = tribe_get_events([
 				this.navigation.classList.add('is-open');
 			}
 			closeNav() {
+				console.log('closeNav')
+				this.activeMenu = '';
 				this.navigation.classList.remove('is-open');
 				if (window.innerWidth >= BREAKPOINT_LG) {
 					this.navMenuContainer.style.height = '0px';
@@ -337,6 +324,7 @@ $featured_event = tribe_get_events([
 			}
 			closeMenu(menu) {
 				if (!menu) return
+				console.log('closeMenu', menu)
 				menu = this.__getMenu(menu);
 				if (!menu) return
 				menu.classList.remove('is-active');
