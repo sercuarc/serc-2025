@@ -42,6 +42,17 @@ function serc_get_search(WP_REST_Request $request)
 
 function serc_get_people(WP_REST_Request $request)
 {
+	$people = get_posts([
+		'numberposts' => -1,
+		'post_type' => 'people',
+		'tax_query' => [
+			[
+				'taxonomy' => 'member_roles',
+				'field'    => 'slug', // or 'term_id' or 'name'
+				'terms'    => ['advisory-board', 'leadership', 'research-council'], // Replace with your actual slugs or IDs
+			],
+		]
+	]);
 	$posts = array_map(function ($post) {
 		$thumbnail = get_the_post_thumbnail_url($post->ID);
 		return [
@@ -55,7 +66,7 @@ function serc_get_people(WP_REST_Request $request)
 			'type' => "People",
 			'url' => get_permalink($post->ID),
 		];
-	}, get_posts(['numberposts' => -1, 'post_type' => 'people']));
+	}, $people);
 
 	return new WP_REST_Response($posts, 200);
 }
