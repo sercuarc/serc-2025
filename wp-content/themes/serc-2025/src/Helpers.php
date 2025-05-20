@@ -68,7 +68,7 @@ class Helpers
 			$data['icon'] = self::get_category_icon_handle($category);
 			$data['url'] = home_url('/documents/' . $namespace . '/' . $data['id']);
 			$data['image_id'] = $publications_image_ids[self::get_publication_namespaced_id($data)] ?? null;
-			$data['date'] = $data['publication_date'] ?? $data['start_date'] ?? date('F j, Y', strtotime($data['created_at'] ?? 'now'));
+			$data['date'] = $data['publication_date'] ?? $data['start_date'] ?? date('M j, Y', strtotime($data['created_at'] ?? 'now'));
 			return $data;
 		}, $publications_merged_raw);
 

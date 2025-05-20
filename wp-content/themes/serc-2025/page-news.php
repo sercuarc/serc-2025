@@ -38,7 +38,7 @@ $pagination = paginate_links([
 				<?php get_template_part('components/card-vert', null, [
 					'title' => get_the_title(),
 					'url' => get_the_permalink(),
-					'label_below' => get_the_date('F j, Y'),
+					'label_below' => get_the_date('M j, Y'),
 					'text' => get_the_excerpt(),
 					'cta' => 'Read more',
 					'image' => get_the_post_thumbnail(get_the_ID(), 'small', ['class' => 'block w-full'])

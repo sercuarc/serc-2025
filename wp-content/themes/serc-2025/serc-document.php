@@ -27,7 +27,7 @@ add_filter('document_title_parts', function ($title) use ($content) {
 $has_publication_date = isset($content['publication_date']) && $content['publication_date'];
 $has_start_date = isset($content['start_date']) && $content['start_date'];
 $date_string = $has_publication_date ? $content['publication_date'] : ($has_start_date ? $content['start_date'] : $content['created_at']);
-$date_formatted = date_format(new DateTime($date_string), 'F j, Y');
+$date_formatted = date_format(new DateTime($date_string), 'M j, Y');
 $has_authors = isset($content['authors']) && count($content['authors']) > 0;
 $has_authors2 = isset($content['authors2']) && count($content['authors2']) > 0;
 $has_event = isset($content['event_name']) && $content['event_name'];

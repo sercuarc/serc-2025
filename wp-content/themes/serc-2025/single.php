@@ -17,7 +17,7 @@ $bg_image = get_field('background_image');
 		'blur_bg' => $image ? true : false,
 		'right_column' => $image,
 		'title' => get_the_title(),
-		'description' => get_the_date('F j, Y'),
+		'description' => get_the_date('M j, Y'),
 		'breadcrumbs' => [
 			'News' => home_url('/news')
 		]

@@ -46,7 +46,7 @@ function serc_get_people(WP_REST_Request $request)
 		$thumbnail = get_the_post_thumbnail_url($post->ID);
 		return [
 			'content' => str_replace(["\n", "\r"], '', strip_tags($post->post_content)),
-			'created_at' => get_the_date('F j, Y', $post->ID),
+			'created_at' => get_the_date('M j, Y', $post->ID),
 			'id' => $post->ID,
 			'title' => $post->post_title,
 			'organization' => '[Organization]',
@@ -66,7 +66,7 @@ function serc_get_posts(WP_REST_Request $request)
 		$thumbnail = get_the_post_thumbnail_url($post->ID);
 		return [
 			'content' => str_replace(["\n", "\r"], '', strip_tags($post->post_content)),
-			'date_formatted' => get_the_date('F j, Y', $post->ID),
+			'date_formatted' => get_the_date('M j, Y', $post->ID),
 			'excerpt' => $post->post_excerpt,
 			'id' => $post->ID,
 			'thumbnail' => $thumbnail ? $thumbnail : '',
@@ -93,7 +93,7 @@ function serc_get_events(WP_REST_Request $request)
 		return [
 			'content' => str_replace(["\n", "\r"], '', strip_tags($post->post_content)),
 			'date_formatted' => $date_formatted,
-			'end_date' => date('F j, Y', strtotime($end_date)),
+			'end_date' => date('M j, Y', strtotime($end_date)),
 			'excerpt' => $post->post_excerpt,
 			'id' => $post->ID,
 			'venue_details' => [
@@ -104,7 +104,7 @@ function serc_get_events(WP_REST_Request $request)
 				'stateprovince' => tribe_get_stateprovince($post->ID),
 				'zip' => tribe_get_zip($post->ID),
 			],
-			'start_date' => date('F j, Y', strtotime($start_date)),
+			'start_date' => date('M j, Y', strtotime($start_date)),
 			'thumbnail' => $thumbnail ? $thumbnail : '',
 			'title' => $post->post_title,
 			'type' => "Event",
