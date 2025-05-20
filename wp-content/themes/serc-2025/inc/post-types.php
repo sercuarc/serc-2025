@@ -46,6 +46,9 @@ add_filter('use_block_editor_for_post_type', function ($use_block_editor, $post_
 	if ($post_type === 'people') {
 		return false;
 	}
+	if ($post_type === 'post') {
+		return false;
+	}
 	return $use_block_editor;
 }, 10, 2);
 
