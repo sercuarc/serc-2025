@@ -1,11 +1,7 @@
 <?php
 $newsletter_display = get_field('newsletter_display');
-$menus = [
-	["id" => "menu-1", "label" => "About", "items" => [["label" => "About SERC", "url" => "#"], ["label" => "People", "url" => "#"]]],
-	["id" => "menu-2", "label" => "Research", "items" => [["label" => "Our Research", "url" => "#"], ["label" => "Research Publications", "url" => "#"]]],
-	["id" => "menu-3", "label" => "Events & News", "items" => [['label' => 'Events', 'url' => '#'], ['label' => 'SERC Research Review', 'url' => '#'], ['label' => 'AI4SE & SE4AI Workshop', 'url' => '#'], ['label' => 'News', 'url' => '#']],],
-	["id" => "menu-4", "label" => "", "items" => [['label' => 'Resources & Partners', 'url' => '#'], ['label' => 'Search', 'url' => '#'], ['label' => 'Contact', 'url' => '#'], ['label' => 'SEBoK', 'url' => '#']],],
-]; ?>
+$footer_menus = get_field('footer_menus', 'options');
+?>
 
 <footer>
 	<?php if ($newsletter_display === "featured") : ?>
@@ -29,22 +25,26 @@ $menus = [
 					</div>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 xl:gap-18 xl:ml-auto">
-					<?php foreach ($menus as $menu) : ?>
-						<nav
-							class="flex flex-col gap-4 w-1/2 md:w-full">
-							<?php if ($menu["label"]) : ?>
-								<div class="font-bold"><?php echo $menu["label"]; ?></div>
-							<?php else : ?>
-								<div class="hidden md:block">&nbsp;</div>
-							<?php endif; ?>
-							<hr class="border-t-2 border-brand">
-							<ul class="flex flex-col gap-4">
-								<?php foreach ($menu["items"] as $item) : ?>
-									<li><a href="<?php echo $item["url"]; ?>" class="block leading-snug text-sm xl:text-base text-white hover:text-brand transition-all focus:outline-white"><?php echo $item["label"]; ?></a></li>
-								<?php endforeach; ?>
-							</ul>
-						</nav>
-					<?php endforeach; ?>
+					<?php if ($footer_menus) : ?>
+						<?php foreach ($footer_menus as $menu) : ?>
+							<nav
+								class="flex flex-col gap-4 w-1/2 md:w-full">
+								<?php if ($menu["label"]) : ?>
+									<div class="font-bold"><?php echo $menu["label"]; ?></div>
+								<?php else : ?>
+									<div class="hidden md:block">&nbsp;</div>
+								<?php endif; ?>
+								<hr class="border-t-2 border-brand">
+								<?php if ($menu['items']) : ?>
+									<ul class="flex flex-col gap-4">
+										<?php foreach ($menu["items"] as $item) : ?>
+											<li><a href="<?php echo $item["link"]["url"]; ?>" class="block leading-snug text-sm xl:text-base text-white hover:text-brand transition-all focus:outline-white"><?php echo $item["link"]["title"]; ?></a></li>
+										<?php endforeach; ?>
+									</ul>
+								<?php endif; ?>
+							</nav>
+						<?php endforeach; ?>
+					<?php endif; ?>
 				</div>
 			</div>
 			<div class="mt-12">
