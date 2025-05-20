@@ -101,7 +101,7 @@ class Helpers
 		return $namespace . '-' . $id;
 	}
 
-	public static function get_category_icon_handle(string $category = ''): string
+	public static function get_category_icon_handle(string|null $category = ''): string
 	{
 		switch (strtolower(trim($category))) {
 			case 'presentation':
