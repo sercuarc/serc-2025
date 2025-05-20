@@ -34,7 +34,7 @@ if ($right_column_content == 'event') {
 		$right_column_html = 'Error fetching featured report #' . $feat_report_id;
 	} else {
 		$feat_report_json = json_decode($feat_report_response['body'], true);
-		$feat_report = $feat_report_json['pub'] ?? null;
+		$feat_report = $feat_report_json['pub'] ?? $feat_report_json['tr'] ?? null;
 		if (! $feat_report) {
 			$right_column_html = 'Featured report #' . $feat_report_id . ' not found.';
 		} else {
