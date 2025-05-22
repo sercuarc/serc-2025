@@ -18,10 +18,18 @@ class NavigationSearch {
     this.toggles.forEach((toggle) => {
       toggle.addEventListener(SELECTION_EVENT, (e) => {
         e.preventDefault();
-        this.header.classList.toggle("is-searching");
-        setTimeout(() => {
-          this.searchInput.focus();
-        }, 500);
+        if (this.header.classList.contains("is-searching")) {
+          this.header.classList.remove("is-searching");
+          this.searchInput.value = "";
+          setTimeout(() => {
+            this.searchInput.blur();
+          }, 500);
+        } else {
+          this.header.classList.add("is-searching");
+          setTimeout(() => {
+            this.searchInput.focus();
+          }, 500);
+        }
       });
     });
   }
