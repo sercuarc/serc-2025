@@ -33,9 +33,9 @@ class OpenSearch
 	public function __construct()
 	{
 		$this->client = (new \OpenSearch\GuzzleClientFactory())->create([
-			'base_uri' => 'https://search-sercuarc-oa47557h4iqkm5pivmt4n3xc2y.us-east-2.es.amazonaws.com',
-			'auth' => ['kirk', 'SERCSearch2025!'],
-			'verify' => false, // Disables SSL verification for local development.
+			'base_uri' => getenv('OPENSEARCH_BASE_URI'),
+			'auth' => [getenv('OPENSEARCH_AUTH_USER'), getenv('OPENSEARCH_AUTH_PASS')],
+			'verify' => getenv('ENVIRONMENT') != 'dev', // Disables SSL verification for local development.
 		]);
 	}
 
