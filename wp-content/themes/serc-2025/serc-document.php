@@ -2,11 +2,12 @@
 
 use Serc2025\Helpers;
 
-$type = get_query_var('serc_document_type');
-$id   = get_query_var('serc_document_id');
+$document_type = get_query_var('serc_document_type');
+$id = get_query_var('serc_document_id');
+$document_path = "{$document_type}/{$id}";
 
 // Example remote fetch
-$response = wp_remote_get("https://web.sercuarc.org/api/{$type}/{$id}");
+$response = wp_remote_get("https://web.sercuarc.org/api/{$document_path}");
 
 if (is_wp_error($response)) {
 	wp_redirect('/404', 301, '');
@@ -167,8 +168,8 @@ get_header(); ?>
 			<div class="lg:col-span-1">
 				<h3 class="text-h5">Share</h3>
 				<?php get_template_part('components/share', null, [
-					'title' => get_the_title(),
-					'url' => get_the_permalink()
+					'title' => $content['title'],
+					'url' => home_url("documents/$document_path")
 				]); ?>
 				<?php if ($has_file) : ?>
 					<h3 class="text-h5 mt-12">Downloads</h3>
