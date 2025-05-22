@@ -1,2 +1,3 @@
 // JS
-import "./_tabs.js";
+import "./main/tabs.js";
+import "./main/navigation.js";
