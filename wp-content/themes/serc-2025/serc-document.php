@@ -166,11 +166,10 @@ get_header(); ?>
 
 			<div class="lg:col-span-1">
 				<h3 class="text-h5">Share</h3>
-				<div class="flex items-center gap-4 mt-8">
-					<button title="Copy URL" class="p-2 outline-0 hover:bg-[#00000008] text-light-surface-subtle hover:text-light-surface-normal focus:text-light-surface-normal border border-subtle hover:border-normal focus:border-normal transition-all"><?php echo serc_svg('link', 'block size-7') ?><span class="sr-only">Copy link</span></button>
-					<a href="#linkedin" title="LinkedIn" class="p-2 outline-0 hover:bg-[#00000008] text-light-surface-subtle hover:text-light-surface-normal focus:text-light-surface-normal border border-subtle hover:border-normal focus:border-normal transition-all"><?php echo serc_svg('linkedin', 'block size-7') ?><span class="sr-only">LinkedIn</span></a>
-					<a href="#facebook" title="YouTube" class="p-2 outline-0 hover:bg-[#00000008] text-light-surface-subtle hover:text-light-surface-normal focus:text-light-surface-normal border border-subtle hover:border-normal focus:border-normal transition-all"><?php echo serc_svg('facebook', 'block size-7') ?><span class="sr-only">Facebook</span></a>
-				</div>
+				<?php get_template_part('components/share', null, [
+					'title' => get_the_title(),
+					'url' => get_the_permalink()
+				]); ?>
 				<?php if ($has_file) : ?>
 					<h3 class="text-h5 mt-12">Downloads</h3>
 					<div class="flex flex-col gap-4 mt-8">
