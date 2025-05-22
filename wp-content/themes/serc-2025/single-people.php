@@ -27,7 +27,7 @@ get_header();
 		'breadcrumbs' => $breadcrumbs,
 		'title' => get_the_title(),
 		'subtitle' => get_field("job_title"),
-		'description' => serc_svg("institution", "inline text-brand size-5 mr-1") . '<span class="uppercase">' . $organizations[0]->name . '</span>'
+		'description' => empty($organizations) ? '' : serc_svg("institution", "inline text-brand size-5 mr-1") . '<span class="uppercase">' . $organizations[0]->name . '</span>'
 	]); ?>
 	<section class="py-12 lg:py-20">
 		<div class="container grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 items-start">
