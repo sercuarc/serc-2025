@@ -33,6 +33,9 @@
     font-style: normal;
     color: inherit;
   }
+  abbr {
+    text-decoration: none;
+  }
 }
 
 #wpadminbar {
