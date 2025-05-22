@@ -216,7 +216,6 @@ $menu_items = get_field('header_menus', 'options');
 				}, {
 					set: (target, prop, value) => {
 						if (prop === "activeMenu") {
-							console.log('setting active menu', value)
 							this.onActiveMenuChange(value);
 						}
 						target[prop] = value;
@@ -290,7 +289,6 @@ $menu_items = get_field('header_menus', 'options');
 
 			}
 			onActiveMenuChange(activeMenuHash) {
-				console.log('onActiveMenuChange', activeMenuHash)
 				const currentActive = this.navigation.querySelectorAll('[data-navigation-menu-hover-toggle].is-active');
 				const current = this.navigation.querySelector('[data-navigation-menu-hover-toggle][href="' + activeMenuHash + '"]');
 				if (!activeMenuHash || currentActive.length) {
@@ -310,7 +308,6 @@ $menu_items = get_field('header_menus', 'options');
 				this.navigation.classList.add('is-open');
 			}
 			closeNav() {
-				console.log('closeNav')
 				this.activeMenu = '';
 				this.navigation.classList.remove('is-open');
 				if (window.innerWidth >= BREAKPOINT_LG) {
@@ -324,7 +321,6 @@ $menu_items = get_field('header_menus', 'options');
 			}
 			closeMenu(menu) {
 				if (!menu) return
-				console.log('closeMenu', menu)
 				menu = this.__getMenu(menu);
 				if (!menu) return
 				menu.classList.remove('is-active');
