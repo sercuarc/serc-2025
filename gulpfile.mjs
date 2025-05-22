@@ -1,4 +1,5 @@
 import { src, dest, parallel, series } from "gulp";
+import postcssNesting from "postcss-nesting";
 import postcss from "gulp-postcss";
 import autoprefixer from "autoprefixer";
 import cssnano from "cssnano";
@@ -24,7 +25,7 @@ export function clean() {
 
 export function css() {
   return src(`${paths.srcCss}/main.css`)
-    .pipe(postcss([tailwindcss(), autoprefixer(), cssnano()]))
+    .pipe(postcss([postcssNesting(), tailwindcss(), autoprefixer(), cssnano()]))
     .pipe(dest(`${paths.dist}/css`));
 }
 
