@@ -194,11 +194,14 @@ get_header(); ?>
 
 </main>
 
-<?php if (getenv('ENVIRONMENT') == 'dev') : ?>
-	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<?php else : ?>
-	<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-<?php endif; ?>
+<?php //if (getenv('ENVIRONMENT') == 'dev') : 
+?>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<?php //else : 
+?>
+<!-- <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script> -->
+<?php //endif; 
+?>
 <script type="module" src="<?php echo get_template_directory_uri() . "/assets/dist/js/app.search.js"; ?>"></script>
 
 <?php get_footer(); ?>
