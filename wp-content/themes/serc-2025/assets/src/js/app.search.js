@@ -49,7 +49,7 @@ function data() {
     page: getQueryParam("page") || 1,
     pages: { total: 1, current: 1 },
     totalDocs: 0,
-    maxPages: 4,
+    maxVisiblePages: 3,
     docsQuery: "",
     docs: [],
   };
@@ -58,8 +58,8 @@ function data() {
 const computed = {
   pagingLinks() {
     const links = [];
-    const start = Math.max(1, this.page - this.maxPages);
-    const end = Math.min(this.pages.total, this.page + this.maxPages);
+    const start = Math.max(1, this.page - this.maxVisiblePages);
+    const end = Math.min(this.pages.total, this.page + this.maxVisiblePages);
     for (let i = start; i <= end; i++) {
       links.push(i);
     }

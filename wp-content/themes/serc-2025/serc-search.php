@@ -142,50 +142,54 @@ get_header(); ?>
 				</div>
 			</template>
 
-			<div v-if="status !== 'loading' && pages.total > 1" class="my-10 flex items-center justify-center gap-7 text-lg font-medium">
-				<a href="#" @click.prevent="setPage(1)"
-					:class="{ 'grayscale-100 opacity-50 pointer-events-none': pages.current < 2 }"
-					class="flex items-center gap-3 hover:text-brand">
-					<svg width="16" height="17" viewBox="0 0 16 17" fill="none" class="text-brand" xmlns="http://www.w3.org/2000/svg">
-						<path d="M14.9393 1.4043L7.88153 8.4621L14.9393 15.5199" stroke="currentColor" stroke-width="1.76445" />
-						<path d="M9.05774 1.4043L1.99994 8.4621L9.05774 15.5199" stroke="currentColor" stroke-width="1.76445" />
-					</svg>
-					First
-				</a>
-				<a href="#" @click.prevent="setPage(pages.current - 1)"
-					:class="{ 'grayscale-100 opacity-50 pointer-events-none': pages.current < 2 }"
-					class="flex items-center gap-3 hover:text-brand">
-					<svg width="10" height="17" viewBox="0 0 10 17" fill="none" class="text-brand" xmlns="http://www.w3.org/2000/svg">
-						<path d="M8.51453 1.4043L1.45672 8.4621L8.51453 15.5199" stroke="currentColor" stroke-width="1.76445" />
-					</svg>
-					Previous
-				</a>
-				<span class="flex items-center gap-3">
-					<span v-if="pagingLinks[0] > 1" class="flex items-center justify-center size-9 text-2xl text-dark-main/50">...</span>
+			<div v-if="status !== 'loading' && pages.total > 1" class="my-10 flex flex-col md:flex-row items-center justify-center gap-7 lg:text-lg font-medium">
+				<div class="flex gap-3 lg:gap-7">
+					<a href="#" @click.prevent="setPage(1)"
+						:class="{ 'grayscale-100 opacity-50 pointer-events-none': pages.current < 2 }"
+						class="flex items-center gap-3 hover:text-brand">
+						<svg width="16" height="17" viewBox="0 0 16 17" fill="none" class="text-brand" xmlns="http://www.w3.org/2000/svg">
+							<path d="M14.9393 1.4043L7.88153 8.4621L14.9393 15.5199" stroke="currentColor" stroke-width="1.76445" />
+							<path d="M9.05774 1.4043L1.99994 8.4621L9.05774 15.5199" stroke="currentColor" stroke-width="1.76445" />
+						</svg>
+						First
+					</a>
+					<a href="#" @click.prevent="setPage(pages.current - 1)"
+						:class="{ 'grayscale-100 opacity-50 pointer-events-none': pages.current < 2 }"
+						class="flex items-center gap-3 hover:text-brand">
+						<svg width="10" height="17" viewBox="0 0 10 17" fill="none" class="text-brand" xmlns="http://www.w3.org/2000/svg">
+							<path d="M8.51453 1.4043L1.45672 8.4621L8.51453 15.5199" stroke="currentColor" stroke-width="1.76445" />
+						</svg>
+						Previous
+					</a>
+				</div>
+				<span class="flex items-center gap-1 lg:gap-3">
+					<span v-if="pagingLinks[0] > 1" class="flex items-center justify-center size-9 text-lg lg:text-2xl text-dark-main/50">...</span>
 					<a v-for="p in pagingLinks" :key="p" :href="`?page=${p}`" @click.prevent="setPage(p)"
 						:class="{ 'bg-brand text-white hover:bg-brand hover:text-white' : p === pages.current }"
-						class="flex items-center justify-center size-9 text-2xl text-dark-main/50 hover:text-brand">
+						class="flex items-center justify-center size-9 text-lg lg:text-2xl text-dark-main/50 hover:text-brand">
 						{{ p }}
 					</a>
-					<span v-if="pages.total > pagingLinks[pagingLinks.length - 1]" class="flex items-center justify-center size-9 text-2xl text-dark-main/50">...</span>
+					<span v-if="pages.total > pagingLinks[pagingLinks.length - 1]" class="flex items-center justify-center size-9 text-lg lg:text-2xl text-dark-main/50">...</span>
 				</span>
-				<a href="#" @click.prevent="setPage(pages.current + 1)"
-					:class="{ 'grayscale-100 opacity-50 pointer-events-none': pages.current == pages.total }"
-					class="flex items-center gap-3 hover:text-brand">
-					Next
-					<svg width="10" height="17" viewBox="0 0 10 17" fill="none" class="text-brand" xmlns="http://www.w3.org/2000/svg">
-						<path d="M1.49133 1.4043L8.54914 8.4621L1.49133 15.5199" stroke="currentColor" stroke-width="1.76445" />
-					</svg>
-				</a>
-				<a href="#" @click.prevent="setPage(pages.total)"
-					:class="{ 'grayscale-100 opacity-50 pointer-events-none': pages.current == pages.total }"
-					class="flex items-center gap-3 hover:text-brand">
-					Last
-					<svg width="16" height="17" viewBox="0 0 16 17" fill="none" class="text-brand" xmlns="http://www.w3.org/2000/svg">
-						<path d="M1.2428 1.4043L8.3006 8.4621L1.2428 15.5199" stroke="currentColor" stroke-width="1.76445" />
-						<path d="M7.12445 1.4043L14.1823 8.4621L7.12445 15.5199" stroke="currentColor" stroke-width="1.76445" />
-					</svg>
-				</a>
+				<div class="flex gap-3 lg:gap-7">
+					<a href="#" @click.prevent="setPage(pages.current + 1)"
+						:class="{ 'grayscale-100 opacity-50 pointer-events-none': pages.current == pages.total }"
+						class="flex items-center gap-3 hover:text-brand">
+						Next
+						<svg width="10" height="17" viewBox="0 0 10 17" fill="none" class="text-brand" xmlns="http://www.w3.org/2000/svg">
+							<path d="M1.49133 1.4043L8.54914 8.4621L1.49133 15.5199" stroke="currentColor" stroke-width="1.76445" />
+						</svg>
+					</a>
+					<a href="#" @click.prevent="setPage(pages.total)"
+						:class="{ 'grayscale-100 opacity-50 pointer-events-none': pages.current == pages.total }"
+						class="flex items-center gap-3 hover:text-brand">
+						Last
+						<svg width="16" height="17" viewBox="0 0 16 17" fill="none" class="text-brand" xmlns="http://www.w3.org/2000/svg">
+							<path d="M1.2428 1.4043L8.3006 8.4621L1.2428 15.5199" stroke="currentColor" stroke-width="1.76445" />
+							<path d="M7.12445 1.4043L14.1823 8.4621L7.12445 15.5199" stroke="currentColor" stroke-width="1.76445" />
+						</svg>
+					</a>
+				</div>
 			</div>
 
 		</div>
