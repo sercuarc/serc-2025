@@ -185,7 +185,7 @@ ob_start(); ?>
 											<div class="wysiwyg wysiwyg-tight mt-5">
 												<?php while (have_rows("right_column_links")) : the_row(); ?>
 													<?php if ($link = get_sub_field("link")) : ?>
-														<a href="<?php echo $link["url"]; ?>" target="<?php echo $link["target"]; ?>"><?php echo $link["title"]; ?></a>
+														<p><a href="<?php echo $link["url"]; ?>" target="<?php echo $link["target"]; ?>"><?php echo $link["title"]; ?></a></p>
 													<?php endif; ?>
 												<?php endwhile; ?>
 											</div>
