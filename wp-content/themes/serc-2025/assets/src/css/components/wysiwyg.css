@@ -63,6 +63,9 @@
   .aligncenter {
     @apply block w-auto mx-auto;
   }
+  .wp-caption-text {
+    @apply body-sm mt-2;
+  }
 }
 
 .wysiwyg-tight {
