@@ -35,7 +35,7 @@ $details = Helpers::get_event_details(get_the_ID());
 ob_start(); ?>
 <div class="flex gap-4 items-center">
 	<?php if ($event_website) : ?>
-		<a href="<?php echo $event_website; ?>" class="btn btn-primary"><?php echo serc_svg("external-link", "size-4"); ?>Register</a>
+		<a href="<?php echo $event_website; ?>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?php echo serc_svg("external-link", "size-4"); ?>Register</a>
 	<?php endif; ?>
 	<sl-dropdown data-dropdown class="z-10">
 		<sl-button slot="trigger" caret class="btn <?php echo $bg_image ? 'btn-inverted-outline' : 'btn-outline' ?>"><?php echo serc_svg("calendar-add", "size-4"); ?> Add to Calendar</sl-button>
