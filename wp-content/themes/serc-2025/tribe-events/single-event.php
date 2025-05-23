@@ -114,7 +114,7 @@ ob_start(); ?>
 				<div class="max-w-[64rem] grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-y-16 lg:gap-x-24">
 					<?php foreach ($people as $person) :
 						$image = get_the_post_thumbnail($person, 'small', ['class' => 'aspect-square size-[7rem] object-cover']);
-						$name = get_the_title($person);
+						$name = get_formatted_name($person);
 						$job_title = get_field("job_title", $person);
 						$url = get_the_permalink($person);
 						$target = strpos($url, home_url()) !== false ? '_self' : '_blank';
