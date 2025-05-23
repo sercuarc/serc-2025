@@ -4,9 +4,7 @@
  * Default Post
  */
 
-
 get_header();
-the_post();
 $image = get_the_post_thumbnail($post, 'medium', ['class' => 'hero-image']);
 $bg_image = get_field('background_image');
 ?>
