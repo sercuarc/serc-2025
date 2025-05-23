@@ -88,7 +88,7 @@
     input,
     textarea,
     select {
-      @apply w-full border-0 outline-0 focus:outline-offset-4 py-[1.1em] px-[0.5em] shadow-[0_0_0_1px_var(--border-normal)] focus:shadow-[0_0_0_2px_var(--border-strong)] bg-white hover:bg-light-secondary text-dark-main font-normal transition-all;
+      @apply appearance-none w-full border-0 outline-0 focus:outline-offset-4 py-[1.1em] px-[0.5em] shadow-[0_0_0_1px_var(--border-normal)] focus:shadow-[0_0_0_2px_var(--border-strong)] bg-white hover:bg-light-secondary text-dark-main font-normal transition-all;
     }
     select {
       @apply appearance-none cursor-pointer bg-no-repeat pr-10;
