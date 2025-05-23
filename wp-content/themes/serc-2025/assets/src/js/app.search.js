@@ -155,14 +155,19 @@ const methods = {
       default:
         dateString = doc.publication_date || doc.start_date || doc.created_at;
     }
-    if (!dateString) return "";
-    // add an empty space at the end to parse the date with time interpreted as the server time, not GMT
-    const date = new Date(dateString + " ");
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
+    if (!dateString) {
+      return "";
+    }
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      return dateString;
+    } else {
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+    }
   },
 
   formateDocTypesString(doc_type_ids) {
