@@ -14,11 +14,11 @@ $menu_items = get_field('header_menus', 'options');
 		<div class="flex items-center lg:items-end gap-6 lg:gap-16 px-6 xl:pr-12">
 			<div class="relative lg:hidden my-5">
 				<button data-navigation-close
-					class="<?php echo $button_style; ?> translate-center opacity-0 scale-0 group-[.is-open]/navigation:opacity-100 group-[.is-open]/navigation:scale-100 transition-all text-light-surface-normal">
+					class="<?php echo $button_style; ?> hidden group-[.is-open]/navigation:inline-block text-light-surface-normal">
 					<?php echo serc_svg("close", "size-6") ?>
 				</button>
 				<a data-navigation-menu-toggle href="#menu-mobile"
-					class="<?php echo $button_style; ?> group-[.is-open]/navigation:opacity-0 group-[.is-open]/navigation:scale-0 group-[.is-open]/navigation:pointer-events-none transition-all text-light-surface-subtle">
+					class="<?php echo $button_style; ?> group-[.is-open]/navigation:hidden text-light-surface-subtle">
 					<?php echo serc_svg("menu", "size-6") ?>
 				</a>
 			</div>
