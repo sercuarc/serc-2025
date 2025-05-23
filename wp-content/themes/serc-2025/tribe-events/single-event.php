@@ -92,7 +92,7 @@ ob_start(); ?>
 			</div>
 		</div>
 		<div class="container grid grid-cols-1 lg:grid-cols-4 gap-9 lg:gap-18 items-start">
-			<div class="lg:col-span-3 flex flex-col gap-10 lg:gap-20 order-2 lg:order-1 wysiwyg wysiwyg-lg">
+			<div class="lg:col-span-3 order-2 lg:order-1 wysiwyg wysiwyg-lg">
 				<?php the_content(); ?>
 			</div>
 			<div class="lg:col-span-1 order-1 lg:order-2">
