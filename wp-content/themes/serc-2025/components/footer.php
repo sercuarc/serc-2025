@@ -38,6 +38,7 @@ $footer_menus = get_field('footer_menus', 'options');
 								<?php if ($menu['items']) : ?>
 									<ul class="flex flex-col gap-4">
 										<?php foreach ($menu["items"] as $item) : ?>
+											<?php if (empty($item["link"]["url"]) || empty($item["link"]["title"])) continue; ?>
 											<li><a href="<?php echo $item["link"]["url"]; ?>" class="block leading-snug text-sm xl:text-base text-white hover:text-brand transition-all focus:outline-white"><?php echo $item["link"]["title"]; ?></a></li>
 										<?php endforeach; ?>
 									</ul>
