@@ -1,4 +1,4 @@
-const SELECTION_EVENT = navigator.maxTouchPoints > 0 ? "touchend" : "click";
+const SELECTION_EVENT = "click";
 const BREAKPOINT_LG = 1024;
 
 class NavigationSearch {
