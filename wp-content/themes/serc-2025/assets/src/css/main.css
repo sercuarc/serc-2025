@@ -39,5 +39,5 @@
 }
 
 #wpadminbar {
-  @apply opacity-0 transition-opacity hover:opacity-100;
+  @apply hidden lg:block opacity-0 transition-opacity hover:opacity-100;
 }
