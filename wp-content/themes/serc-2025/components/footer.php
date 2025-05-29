@@ -52,7 +52,7 @@ $footer_menus = get_field('footer_menus', 'options');
 				<div class="text-3xl font-bold">
 					<img src="<?php echo get_template_directory_uri() . "/assets/images/airc-white.png"; ?>" alt="AIRC Logo" width="72" height="24" class="inline-block object-contain">
 				</div>
-				<p class="text-sm text-white mt-1">Visit our sister research center at <a href="https://acqirc.org/" target="_blank" rel="noopener noreferrer" class="hover:text-brand transition-colors focus:outline-white"><strong>acqirc.org</strong></a></p>
+				<p class="text-sm text-white mt-1">Visit SERC's research center for defense acquisition at <a href="https://acqirc.org/" target="_blank" rel="noopener noreferrer" class="hover:text-brand transition-colors focus:outline-white"><strong>acqirc.org</strong></a></p>
 			</div>
 			<hr class="my-8">
 			<div class="flex flex-col md:flex-row gap-4 md:gap-16 text-sm xl:text-base">
