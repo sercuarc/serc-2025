@@ -106,7 +106,7 @@ get_header(); ?>
 							<p v-if="doc.authors && doc.authors.length" class="relative text-h6 text-light-surface-subtle max-w-[var(--breakpoint-lg)] ">
 								By {{ doc.authors.join(", ") }}
 							</p>
-							<div v-if="doc.abstract || doc.description || doc.content" class="relative body-base max-w-[var(--breakpoint-lg)] ">{{(doc.abstract || doc.description || doc.content)}}</div>
+							<div v-if="doc.abstract || doc.description || doc.excerpt" class="relative body-base max-w-[var(--breakpoint-lg)] ">{{(doc.abstract || doc.description || doc.excerpt)}}</div>
 							<p class="relative uppercase font-light">
 								{{doc.type}}
 								<template v-if="doc.type !== 'People'">

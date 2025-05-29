@@ -39,7 +39,7 @@ $pagination = paginate_links([
 					'title' => get_the_title(),
 					'url' => get_the_permalink(),
 					'label_below' => get_the_date('M j, Y'),
-					'text' => get_the_excerpt(),
+					'text' => wp_trim_words($post->post_excerpt, 30, '...'),
 					'cta' => 'Read more',
 					'image' => get_the_post_thumbnail(get_the_ID(), 'small', ['class' => 'block w-full'])
 				]); ?>

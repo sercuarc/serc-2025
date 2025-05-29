@@ -28,7 +28,7 @@ $events = $args['events'] ?? [];
 				'title' => get_the_title($event->ID),
 				'url' => get_the_permalink($event->ID),
 				'label_below' => $event_details,
-				'text' => get_the_excerpt($event->ID),
+				'text' => wp_trim_words($event->post_excerpt, 30, '...'),
 				'cta' => 'Read More',
 				'image' => get_the_post_thumbnail($event->ID, 'small', ['class' => 'block w-full', 'loading' => 'lazy'])
 			]); ?>
