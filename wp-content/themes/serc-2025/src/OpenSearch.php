@@ -12,22 +12,23 @@ class OpenSearch
 {
 	private $client;
 	private $sourceFields = [
-		'id',
-		'os_id',
-		'title',
-		'type',
-		'content',
-		'date_formatted',
-		'url',
-		'venue_details',
 		'abstract',
-		'authors.prefix',
 		'authors.first_name',
 		'authors.last_name',
+		'authors.prefix',
+		'content',
 		'created_at',
+		'date_formatted',
 		'description',
+		'excerpt',
+		'id',
+		'os_id',
 		'publication_date',
 		'start_date',
+		'title',
+		'type',
+		'url',
+		'venue_details',
 	];
 
 	public function __construct()
