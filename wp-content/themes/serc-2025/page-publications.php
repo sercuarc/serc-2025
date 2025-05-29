@@ -33,15 +33,17 @@ if ($active_focus_area) {
 		'center_y' => true
 	]); ?>
 	<div class="container py-12 lg:py-16">
-		<div data-tabs class="md:pb-8 lg:pb-12">
-			<p class="md:hidden text-sm font-medium mb-2" style="color:#414243">Showing Publications for:</p>
-			<?php
-			get_template_part("components/tab-menu", null, [
-				'active_id' => $active_focus_area['slug'],
-				'items' => array_map(fn($item) => ['id' => $item['slug'], 'url' => get_permalink() . '?publications-view=' . $item['slug'], 'text' => $item['focus_area_title']], $focus_areas)
-			]);
-			?>
-		</div>
+		<?php if ($focus_areas) : ?>
+			<div data-tabs class="md:pb-8 lg:pb-12">
+				<p class="md:hidden text-sm font-medium mb-2" style="color:#414243">Showing Publications for:</p>
+				<?php
+				get_template_part("components/tab-menu", null, [
+					'active_id' => $active_focus_area['slug'],
+					'items' => array_map(fn($item) => ['id' => $item['slug'], 'url' => get_permalink() . '?publications-view=' . $item['slug'], 'text' => $item['focus_area_title']], $focus_areas)
+				]);
+				?>
+			</div>
+		<?php endif; ?>
 		<?php if ($active_focus_area) : ?>
 			<div class="max-w-[806px] mx-auto pt-16 lg:pt-24 flex flex-col items-center gap-7 lg:gap-14">
 				<h2 class="text-title-1"><?php echo $active_focus_area['focus_area_title']; ?></h2>

@@ -3,7 +3,6 @@ $items = $args['items'] ?? [];
 $active_id = $args['active_id'] ?? null;
 if (empty($active_id)) {
 	$active_item = $items[0];
-	var_dump('empty($active_id)');
 } else {
 	$active_item = array_find($items, function ($item) use ($active_id) {
 		return $item['id'] === $active_id;
