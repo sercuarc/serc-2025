@@ -35,9 +35,9 @@ $link = get_field('text_image_slider_link');
 	<div class="container grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-18 items-center">
 		<div class="relative">
 			<?php if ($images) : ?>
-				<swiper-container pagination="true">
+				<swiper-container pagination='{"clickable": true}' autoplay='<?php if (is_admin()) : ?>false<?php else : ?>{"delay": 5000}<?php endif; ?>' loop="true">
 					<?php foreach ($images as $imageId) : $image = wp_get_attachment_image($imageId, 'medium', false, ['loading' => 'lazy']); ?>
-						<swiper-slide>
+						<swiper-slide lazy="true">
 							<?php echo $image; ?>
 						</swiper-slide>
 					<?php endforeach; ?>
