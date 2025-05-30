@@ -34,9 +34,9 @@ class OpenSearch
 	public function __construct()
 	{
 		$this->client = (new \OpenSearch\GuzzleClientFactory())->create([
-			'base_uri' => getenv('OPENSEARCH_BASE_URI'),
-			'auth' => [getenv('OPENSEARCH_AUTH_USER'), getenv('OPENSEARCH_AUTH_PASS')],
-			'verify' => getenv('ENVIRONMENT') != 'dev', // Disables SSL verification for local development.
+			'base_uri' => OPENSEARCH_BASE_URI,
+			'auth' => [OPENSEARCH_AUTH_USER, OPENSEARCH_AUTH_PASS],
+			'verify' => ENVIRONMENT != 'dev', // Disables SSL verification for local development.
 		]);
 	}
 

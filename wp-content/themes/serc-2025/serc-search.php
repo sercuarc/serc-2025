@@ -198,7 +198,7 @@ get_header(); ?>
 
 </main>
 
-<?php if (getenv('ENVIRONMENT') == 'dev') : ?>
+<?php if (ENVIRONMENT == 'dev') : ?>
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <?php else : ?>
 	<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
