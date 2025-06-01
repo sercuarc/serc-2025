@@ -65,8 +65,8 @@ jobs:
     - name: 🧹 Fix Permissions on EC2
       run: |
         ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
-          sudo chown -R www-data:www-data /var/www/serc_dev/wp-content
-          sudo find /var/www/serc_dev/wp-content -type d -exec chmod 755 {} \;
-          sudo find /var/www/serc_dev/wp-content -type f -exec chmod 644 {} \;
+          sudo chown -R www-data:www-data /var/www/serc_dev/
+          sudo find /var/www/serc_dev/ -type d -exec chmod 755 {} \;
+          sudo find /var/www/serc_dev/ -type f -exec chmod 644 {} \;
           echo "✅ Permissions fixed."
         EOF
